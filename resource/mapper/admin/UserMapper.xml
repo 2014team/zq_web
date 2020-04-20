@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.admin.dao.UserDao">
+
+	<resultMap type="com.zq.admin.entity.User" id="result">
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="password" column="password" />
+		<result property="roleId" column="role_id" />
+		<result property="validFlag" column="valid_Flag" />
+		<result property="sortId" column="sort_id" />
+		<result property="createDate" column="create_date" />
+		<result property="updateDate" column="update_date" />
+	</resultMap>
+
+	<!--保存 -->
+	<insert id="save" parameterType="com.zq.admin.entity.User">
+		insert into
+		`t_admin_user`(user_name,password,role_id,valid_Flag,sort_id)
+		values(#{userName},#{password},#{isAdmin},#{validFlag},#{sortId})
+	</insert>
+
+	<!--删除 -->
+	<delete id="delete" parameterType="Integer">
+		delete from
+		`t_admin_user`
+		where user_id=#{userId}
+	</delete>
+
+
+	<!-- 批量删除 -->
+	<delete id="deleteByBatch" parameterType="String">
+		delete from
+		`t_admin_user`
+		where
+		FIND_IN_SET (user_id,#{userId})
+	</delete>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.zq.admin.entity.User">
+		update `t_admin_user`
+		set
+		user_name=#{userName}
+		,password=#{password}
+		,role_id=#{roleId}
+		,valid_flag=#{validFlag}
+		,sort_id=#{sortId}
+		where
+		user_id=#{userId}
+	</update>
+
+	<!-- 单个查找 -->
+	<select id="get" parameterType="Integer" resultMap="result">
+		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from
+		`t_admin_user`
+		where user_id = #{userId}
+		order by sort_id limit 1
+	</select>
+	
+	<!-- 通过Map单个查找-->
+	<select id="getOneByMap" parameterType="Map" resultMap="result">
+		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from
+		`t_admin_user`
+		<where>
+			<if test="null != userId and '' != userId">
+				user_id = #{userId}
+			</if>
+			<if test="null != userName and '' != userName">
+				and user_name = #{userName}
+			</if>
+			<if test="null != password and '' != password">
+				and password = #{password}
+			</if>
+			<if test="null != validFlag and '' != validFlag">
+				and valid_Flag = #{validFlag}
+			</if>
+		</where>
+		order by sort_id limit 1
+	</select>
+
+	<!-- 列表查询 -->
+	<select id="select" parameterType="Map" resultMap="result">
+		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from
+		`t_admin_user`
+		<where>
+			<if test="null != userId and '' != userId">
+				user_id = #{userId}
+			</if>
+			<if test="null != userName and '' != userName">
+				and user_name = #{userName}
+			</if>
+		</where>
+		order by sort_id
+	</select>
+
+
+	<!-- 分页查找 -->
+	<select id="findByPage" parameterType="Map" resultMap="result">
+		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from `t_admin_user`
+		<if test="entity.userName != null and '' != entity.userName">
+			user_name=#{entity.userName}
+		</if>
+		order by sort_id,update_date desc  limit ${page.begin},${page.limit} ;
+	</select>
+	
+	<!-- 分页查找数量 -->
+	<select id="findByPageCount" parameterType="Map" resultType="Integer">
+		select count(1) from `t_admin_user`
+		<where>
+			<if test="entity.userName != null and '' != entity.userName">
+				user_name=#{entity.userName}
+			</if>
+		</where>
+	</select>
+
+</mapper> 
