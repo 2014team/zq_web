@@ -1,32 +1,34 @@
-﻿/*列表*/
+﻿/*列表数据*/
 const USER_LIST = getAminUrl('admin/USER/LIST')
-/*状态修改*/
+/*列表状态修改*/
 const USER_VALIDFLAG = getAminUrl('admin/USER/VALIDFLAG');
-/*删除*/
+/*列表删除*/
 const USER_DELETE = getAminUrl('admin/USER/DELETE');
 /*编辑*/
 const USER_EDIT = getAminUrl('admin/USER/EDIT');
-
+/*批量删除*/
+const USER_BATCH_DELETE = getAminUrl('admin/USER/BATCH/DELETE');
 //行对象
 var rowObj = "";
 
-
+/*初始化layui*/
 layui.use([ 'table', 'form', 'laydate' ], function() {
-	var table = layui.table,
+	    var table  = layui.table,
 		form = layui.form,
 		laydate = layui.laydate;
 
 	/*日历选择器*/
 	laydate.render({
-		elem : '#start',
+		elem : '#startDate',
 		done : function(value, date) { //监听日期被切换
-
+			$("#startDate").val(value)
 		}
 	});
-
 	laydate.render({
-		elem : '#end', //指定元素
-		done : function(value, date, endDate) {}
+		elem : '#endDate', //指定元素
+		done : function(value, date, endDate) {
+			$("#endDate").val(value)
+		}
 	});
 
 	table.render({
@@ -62,10 +64,10 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 				field : 'password',
 				title : '密码'
 			}, {
-				field : 'updateDate',
+				field : 'createDate',
 				title : '创建日期',
 				templet : function(d) {
-					return date.toDateString(d.updateDate, 'yyyy-MM-dd');
+					return date.toDateString(d.createDate, 'yyyy-MM-dd');
 				}
 			}, {
 				field : 'validFlag',
@@ -73,7 +75,8 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 				templet : '#validFlagTpl'
 			}, {
 				field : 'sortId',
-				title : '排序'
+				title : '排序',
+				sort : true
 			}
 
 			, {
@@ -83,6 +86,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 			}
 
 		] ]
+		  ,id: 'tableId'
 	});
 	
 	//监听行工具条 
@@ -93,32 +97,31 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 		if (layEvent === 'updateValidFlag') { //修改有效标识
 			userValidFlag(obj);
 		} else if (layEvent === 'edit') {
-			edit(obj)
+			edit(obj)//列表编辑
 		} else if (layEvent === 'del') {
-			del(obj);
+			del(obj);//列表删除
 		}
 	});
 	
-	
-	//监听Bar
-	$('.toolbar .layui-btn').on('click', function(){
-	    var type = $(this).data('type');
-	    active[type] ? active[type].call(this) : '';
-	  });
-	
-	var active = {
-			batchDdel: function(){ //获取选中数据
-		    	debugger
-		      var checkStatus = table.checkStatus('table_list')
-		      ,data = checkStatus.data;
-		      layer.alert(JSON.stringify(data));
-		    }
-		    ,add: function(){ 
-		    	edit()
-		    }
-		  };
-	
-
+	/*搜索*/
+	$('#search_id').on('click', function(){
+        var userName = $('#search_input').val();
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		      //执行重载
+		      table.reload( 'tableId',{
+		      	method:"post",
+		        page: {
+		          curr: 1 //重新从第 1 页开始
+		        }
+		        ,where: {
+		            userName: userName,
+		            startDate: startDate,
+		            endDate: endDate
+		        }
+		      }, 'data');
+   
+     }); 
 });
 
 /*状态修改*/
@@ -144,16 +147,9 @@ function userValidFlag(obj) {
 					icon : 1,
 					time : 1000
 				});
-
-				var reqData = result.data;
-				obj.update({
-					userId : reqData.userId,
-					userName : reqData.userName,
-					password : reqData.password,
-					isAdmin : reqData.isAdmin,
-					validFlag : reqData.validFlag,
-					sortId : reqData.sortId,
-				});
+				
+				//更新行数据
+				updateRowData(result);
 			} else {
 				layer.msg(result.msg, {
 					icon : 2,
@@ -170,7 +166,7 @@ function userValidFlag(obj) {
 /*删除*/
 function del(obj) {
 	var userId = obj.data.userId;
-	layer.confirm("删除行吗", function(index) {
+	layer.confirm("确认要删除吗？", function(index) {
 		reqPostHasParameter(USER_DELETE, {
 			"userId" : userId
 		}, function(result) {
@@ -180,7 +176,7 @@ function del(obj) {
 					time : 1000
 				},function(){
 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-					x_admin_close();	
+					layer.close(index);		
 				});
 				
 			} else {
@@ -195,8 +191,9 @@ function del(obj) {
 	});
 };
 
-/*修改*/
+/*编辑*/
 function edit(obj) {
+	 
 	var url = USER_EDIT;
 	var title = '新增用户';
 	if(obj){
@@ -206,6 +203,38 @@ function edit(obj) {
 	}	
 	x_admin_show(title, url);
 };
+
+/*批量删除*/
+function batchDel() {
+	var selectData =layui.table.checkStatus('tableId').data;
+	if(selectData.length < 1){	
+		layer.msg('请选择要删除的数据！', {icon: 2});
+		return false;
+	}
+	layer.confirm('确认要删除吗？', function(index) {
+		var array = new Array();
+		$.each(selectData,function(i,e){
+			array.push(e.userId);
+		 })
+		reqPostHasParameter(USER_BATCH_DELETE, {"userIdArr":array},function(result) {
+			if (result.code == 200) { //这个是从后台取回来的状态值
+				layer.msg(result.msg, {
+					icon : 1,
+					time : 1000
+				},function(){
+					layui.table.reload('tableId');
+					layer.close(index);	
+				});
+			}
+			
+		}, function(e) {
+			console.log(e);
+		}) 
+		
+	});
+		
+   }	
+
 
 /*更新行数据*/
 function updateRowData(obj){
@@ -218,5 +247,14 @@ function updateRowData(obj){
 		validFlag : reqData.validFlag,
 		sortId : reqData.sortId,
 	});
+}
+
+/*表格重载*/
+function updateTableData(){
+	layui.table.reload('tableId', {
+	       page: {
+	         curr:1 //重新从第 1 页开始
+	       }
+	     }, 'data'); 
 }
 

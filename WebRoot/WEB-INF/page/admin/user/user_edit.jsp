@@ -2,11 +2,12 @@
 <!DOCTYPE html>
   <head>
   	<%@include file="/WEB-INF/page/admin/common/head_layui.jsp" %>
+  	<script type="text/javascript" src="/admin/js/user_edit.js?t=<%=new java.util.Date().getTime() %>"></script>
   </head>
    <body>
     <div class="x-body">
         <form class="layui-form">
-          <input type="hidden" name="userId"  value="${entity.userId}" /> 
+          <input type="hidden" name="userId" id="userId" value="${entity.userId}" /> 
         
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
@@ -26,7 +27,7 @@
                   <span class="x-red">*</span>密码
               </label>
               <div class="layui-input-inline">
-                  <input type="password" name=password value="${entity.password }" lay-verify="required|password"
+                  <input type="text" name="password" value="${entity.password }" lay-verify="required|password"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -39,9 +40,9 @@
                   <span class="x-red">*</span>状态
               </label>
                <div class="layui-input-inline">
-                 <select name="validFlag" lay-verify="required">
-				  <option value="0"  ${entity.validFlag eq 0 ? 'selected' :''}>启用</option>
-				  <option value="1" ${entity.validFlag eq 1? 'selected' :''}>停用</option>
+                 <select name="validFlag" id="validFlag" value="${entity.validFlag}" lay-verify="required">
+				  <option value="0" >启用</option>
+				  <option value="1" >停用</option>
 				 </select>  
 			  </div>
 		  </div>	
@@ -51,10 +52,13 @@
                   <span class="x-red">*</span>角色
               </label>
                <div class="layui-input-inline">
-                 <select name="roleId" lay-verify="required">
-				  <option value="0" >超级管理员</option>
-				  <option value="1" >普通管理员</option>
-				 </select>  
+				 <div class="layui-col-md6">
+		              <select name="roleId" id="roleId" value="${entity.roleId}" lay-verify="required"  lay-search>
+		                 <option value="" >请选择角色</option>
+		                 <option value="0" >超级管理员</option>
+				 		 <option value="1" >普通管理员</option>
+		              </select>
+		          </div>
 			  </div>
 		  </div>	
 		  
@@ -71,70 +75,13 @@
 				<div class="layui-form-mid layui-word-aux">数字(越小越靠前)</div>
 		  </div>
 			  
-			  
-			  
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
                <button class="layui-btn" lay-submit lay-filter="editSave"> 保存</button>
           </div>
-          
       </form>
     </div>
-    <script>
-        /*更新*/
-		const USER_UPDATE = getAminUrl('admin/USER/UPDATE');
-        layui.use(['form','layer'], function(){
-           $ = layui.jquery;
-           var form = layui.form
-          ,layer = layui.layer
-          //自定义验证规则
-          form.verify({
-             userName: function(value){
-              if(value.length > 25){
-                return '不能超过25个字符';
-              }
-            },
-            password: function(value){
-              if(value.length > 25){
-                return '不能超过25个字符';
-              }
-            }
-            ,integer: [
-               /^[1-9]\d*$/
-               , '只能输入正整数'
-            ]
-          });
-    
-    		//保存
-    		form.on('submit(editSave)', function(obj) {
-    		debugger
-    			   var reqData = obj.field;
-    				reqGetHasParameter(USER_UPDATE, reqData, function(result) {
-    					if (result.code == 200) {
-    						layer.msg(result.msg, {
-    							icon : 1,
-    							time : 1000
-    						}, function() {
-    							x_admin_close();
-    							//更新行数据
-    							window.parent.updateRowData(obj)
-    						});
-    
-    					} else {
-    						layer.msg(result.msg, {
-    							icon : 2,
-    							time : 1000
-    						});
-    					}
-    				}, function(e) {
-    					console.log(e);
-    				})
-    
-    				return false;
-    			});
-    	});
-    </script>
   </body>
-
+  
 </html>

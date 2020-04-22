@@ -197,12 +197,32 @@ function x_admin_show(title,url,w,h){
         title: title,
         content: url
     });
-}
+};
 
 /*关闭弹出框口*/
 function x_admin_close(){
     var index = parent.layer.getFrameIndex(window.name);
     parent.layer.close(index);
+};
+
+
+/***
+ * selectId:select标识ID
+ * echoValue：回显值
+ * 
+ */
+function echoSelectData(selectId,echoValue){
+	$("#"+selectId).each(function() {
+        // this代表的是<option></option>，对option再进行遍历
+        $(this).children("option").each(function() {
+            // 判断需要对那个选项进行回显
+            if (this.value == echoValue) {
+                console.log($(this).text());
+                // 进行回显
+                $(this).attr("selected","selected");
+            }
+        });
+    })
 }
 
 

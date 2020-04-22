@@ -19,7 +19,7 @@
 	<insert id="save" parameterType="com.zq.admin.entity.User">
 		insert into
 		`t_admin_user`(user_name,password,role_id,valid_Flag,sort_id)
-		values(#{userName},#{password},#{isAdmin},#{validFlag},#{sortId})
+		values(#{userName},#{password},#{roleId},#{validFlag},#{sortId})
 	</insert>
 
 	<!--删除 -->
@@ -29,13 +29,14 @@
 		where user_id=#{userId}
 	</delete>
 
-
 	<!-- 批量删除 -->
-	<delete id="deleteByBatch" parameterType="String">
+	<delete id="deleteByBatch"  parameterType="java.util.List">
 		delete from
 		`t_admin_user`
-		where
-		FIND_IN_SET (user_id,#{userId})
+		where user_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
 	</delete>
 
 	<!-- 修改 -->
@@ -99,9 +100,14 @@
 	<!-- 分页查找 -->
 	<select id="findByPage" parameterType="Map" resultMap="result">
 		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from `t_admin_user`
-		<if test="entity.userName != null and '' != entity.userName">
-			user_name=#{entity.userName}
-		</if>
+		<where>
+			<if test="entity.userName != null and '' != entity.userName">
+				user_name=#{entity.userName}
+			</if>
+			<if test="entity.startDate != null and '' != entity.startDate and entity.endDate != null and '' != entity.endDate">
+				<![CDATA[and create_date >= #{entity.startDate} and create_date <= #{entity.endDate}]]>
+			</if>
+		</where>
 		order by sort_id,update_date desc  limit ${page.begin},${page.limit} ;
 	</select>
 	
@@ -111,6 +117,9 @@
 		<where>
 			<if test="entity.userName != null and '' != entity.userName">
 				user_name=#{entity.userName}
+			</if>
+			<if test="entity.startDate != null and '' != entity.startDate and entity.endDate != null and '' != entity.endDate">
+				<![CDATA[and create_date >= #{entity.startDate} and create_date <= #{entity.endDate}]]>
 			</if>
 		</where>
 	</select>

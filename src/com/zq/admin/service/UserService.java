@@ -94,4 +94,14 @@ public interface UserService extends BaseService<User, Integer> {
 	*/
 	public String checkUnique(User user);
 
+	/**
+	* @Title: deleteByBatch
+	* @Description: 批量删除
+	* @author zhuzq
+	* @date  2020年4月21日 上午11:21:14
+	* @param userIdArr
+	* @return
+	*/
+	public int deleteByBatch(Integer[] userIdArr);
+
 }

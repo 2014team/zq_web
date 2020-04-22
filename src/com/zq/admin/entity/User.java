@@ -31,6 +31,15 @@ public class User extends BaseEntity {
 	 * 排序ID
 	 */
 	private Integer sortId;
+	
+	/**
+	 * 开始日期
+	 */
+	private String startDate;
+	/**
+	 * 结束日期
+	 * */
+	private String endDate;
 
 	public Integer getUserId() {
 		return userId;
@@ -80,4 +89,20 @@ public class User extends BaseEntity {
 		this.sortId = sortId;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	
 }

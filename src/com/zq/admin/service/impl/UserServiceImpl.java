@@ -1,6 +1,7 @@
 
 package com.zq.admin.service.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -216,5 +217,19 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 		}
 		return null;
 		
+	}
+
+	/**
+	* @Title: deleteByBatch
+	* @Description: 批量删除
+	* @author zhuzq
+	* @date  2020年4月21日 上午11:21:14
+	* @param userIdArr
+	* @return
+	*/
+	@Override
+	public int deleteByBatch(Integer[] userIdArr) {
+		List<Integer> userIdList = Arrays.asList(userIdArr);
+		return userDao.deleteByBatch(userIdList);
 	}
 }

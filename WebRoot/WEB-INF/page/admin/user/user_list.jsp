@@ -5,28 +5,27 @@
   	<%@include file="/WEB-INF/page/admin/common/head_layui.jsp" %>
   	<link rel="stylesheet" href="/admin/css/user_list.css?t=<%=new java.util.Date().getTime() %>">
   	<script type="text/javascript" src="/admin/js/user_list.js?t=<%=new java.util.Date().getTime() %>"></script>
-  	
   </head>
   
    <body>
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
+        <a href="/admin/user/list/ui">管理员管理</a>
         <a>
-          <cite>导航元素</cite></a>
+          <cite>管理员列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        </form>
+        <div class="layui-form layui-col-md12 x-so">
+          <input class="layui-input" placeholder="开始日" name="startDate" id="startDate">
+          <input class="layui-input" placeholder="截止日" name="endDate" id="endDate">
+          <input type="text" id="search_input" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+          <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
+        </div>
       </div>
       
        <!-- 列表 -->	
@@ -36,8 +35,8 @@
     
     <script type="text/html" id="toolbar">
       <div class="layui-btn-container toolbar">
-         <button class="layui-btn layui-btn-sm layui-btn-danger" data-type="batchDdel" >批量删除</button>
-         <button class="layui-btn layui-btn-sm"  data-type="add" ><i class="layui-icon"></i>增加</button>
+         <button class="layui-btn layui-btn-sm layui-btn-danger" onclick="batchDel()" >批量删除</button>
+         <button class="layui-btn layui-btn-sm"  onclick="edit()" ><i class="layui-icon"></i>增加</button>
      </div>
 	</script>
    
@@ -69,33 +68,5 @@
 			</div>			
 		{{#  }	}}
 	</script>
-    
-    <script>
-    
-   
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
-          });
-      }
-
-
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
-    </script>
   </body>
-
 </html>

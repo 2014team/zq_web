@@ -1,6 +1,7 @@
 
 package com.zq.admin.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,15 @@ public interface UserDao extends BaseDao<User, Integer> {
 	* @return
 	*/
 	public User getOneByMap(Map<String,Object> paramMap);
+	
+	/**
+	* @Title: deleteByBatch
+	* @Description: 批量删除
+	* @author zhuzq
+	* @date  2020年4月21日 上午11:18:59
+	* @param list
+	* @return
+	*/
+	public Integer deleteByBatch(List<Integer> list);
 
 }
