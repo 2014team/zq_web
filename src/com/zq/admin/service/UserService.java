@@ -1,7 +1,9 @@
 
 package com.zq.admin.service;
 
-import com.zq.admin.entity.User;
+import com.zq.admin.domain.dto.UserDto;
+import com.zq.admin.domain.entity.User;
+import com.zq.admin.domain.vo.UserVo;
 import com.zq.common.entity.JsonResultByPage;
 import com.zq.common.service.BaseService;
 
@@ -9,99 +11,119 @@ import com.zq.common.service.BaseService;
  * @ClassName: UserService
  * @Description: 用户
  * @author zhuzq
- * @date 2020年4月16日 上午10:44:48
+ * @date 2020年4月23日 下午1:41:50
  */
 public interface UserService extends BaseService<User, Integer> {
 
 	/**
-	 * @Title: checkParam
-	 * @Description: 参数验证
-	 * @author zhuzq
-	 * @date 2020年4月16日 上午10:46:05
-	 * @param user
-	 * @return
-	 */
-	public String checkParam(User user);
-
-	/**
 	 * @Title: saveUser
-	 * @Description: 用户保存
+	 * @Description: 保存
 	 * @author zhuzq
-	 * @date 2020年4月16日 上午10:46:13
-	 * @param user
+	 * @date 2020年4月23日 下午1:42:41
+	 * @param userVo
 	 * @return
 	 */
-	public boolean saveUser(User user);
-
-	/**
-	 * @Title: updateUser
-	 * @Description: 修改
-	 * @author zhuzq
-	 * @date 2020年4月16日 上午10:51:03
-	 * @param user
-	 * @return
-	 */
-	public boolean updateUser(User user);
+	public boolean saveUser(UserVo userVo);
 
 	/**
 	 * @Title: deleteUser
 	 * @Description: 删除
 	 * @author zhuzq
-	 * @date 2020年4月16日 上午10:53:12
+	 * @date 2020年4月23日 下午1:43:10
 	 * @param userId
 	 * @return
 	 */
 	public boolean deleteUser(Integer userId);
 
 	/**
-	 * @Title: checkLoginParam
-	 * @Description: 登录参数验证
+	 * @Title: deleteByBatch
+	 * @Description: 批量删除
 	 * @author zhuzq
-	 * @date 2020年4月16日 下午1:49:09
-	 * @param user
+	 * @date 2020年4月23日 下午1:43:28
+	 * @param userIdArr
 	 * @return
 	 */
-	public String checkLoginParam(User user);
+	public int deleteByBatch(Integer[] userIdArr);
 
 	/**
-	 * @Title: login
-	 * @Description: 登录
+	 * @Title: updateUser
+	 * @Description: 修改
 	 * @author zhuzq
-	 * @date 2020年4月16日 下午2:07:30
-	 * @param user
+	 * @date 2020年4月23日 下午1:43:37
+	 * @param userVo
 	 * @return
 	 */
-	public User login(User user);
+	public boolean updateUser(UserVo userVo);
+
+	/**
+	 * @Title: getUser
+	 * @Description: 根据userId获取用户
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:43:45
+	 * @param userId
+	 * @return
+	 */
+	public UserDto getUser(Integer userId);
 
 	/**
 	 * @Title: findByPage
 	 * @Description: 分页查找
 	 * @author zhuzq
-	 * @date 2020年4月16日 下午4:16:52
-	 * @param entity
+	 * @date 2020年4月23日 下午1:43:51
+	 * @param userVo
 	 * @param jsonResult
 	 * @return
 	 */
-	public JsonResultByPage findByPage(User entity, JsonResultByPage jsonResult);
-	
-	/**
-	* @Title: checkUnique
-	* @Description: 唯一性确认
-	* @author zhuzq
-	* @date  2020年4月17日 下午7:50:25
-	* @param user
-	* @return
-	*/
-	public String checkUnique(User user);
+	public JsonResultByPage findByPage(UserVo userVo, JsonResultByPage jsonResult);
 
 	/**
-	* @Title: deleteByBatch
-	* @Description: 批量删除
-	* @author zhuzq
-	* @date  2020年4月21日 上午11:21:14
-	* @param userIdArr
-	* @return
-	*/
-	public int deleteByBatch(Integer[] userIdArr);
+	 * @Title: login
+	 * @Description: 登录
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:44:00
+	 * @param userVo
+	 * @return
+	 */
+	public UserDto login(UserVo userVo);
+
+	/**
+	 * @Title: checkParam
+	 * @Description: 参数验证
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:44:07
+	 * @param userVo
+	 * @return
+	 */
+	public String checkParam(UserVo userVo);
+
+	/**
+	 * @Title: checkLoginParam
+	 * @Description: 登录参数验证
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:44:21
+	 * @param userVo
+	 * @return
+	 */
+	public String checkLoginParam(UserVo userVo);
+
+	/**
+	 * @Title: checkUnique
+	 * @Description: 唯一性验证
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:44:47
+	 * @param userVo
+	 * @return
+	 */
+	public String checkUnique(UserVo userVo);
+
+	/**
+	 * @Title: updateValidFlag
+	 * @Description: 更新状态
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:45:11
+	 * @param userVo
+	 * @return
+	 */
+	public boolean updateValidFlag(UserVo userVo);
 
 }

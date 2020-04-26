@@ -19,7 +19,7 @@
           <li class="layui-nav-item">
             <a href="javascript:;">admin</a>
             <dl class="layui-nav-child"> 
-              <dd><a href="login.html">退出</a></dd>
+              <dd><a href="/admin/logout">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="#">前台首页</a></li>

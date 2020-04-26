@@ -71,7 +71,8 @@ layui.use([ 'form', 'layer' ], function() {
 
 //检查是否保存还是修改操作
 function checkSave() {
-	return (document.getElementById("userId") + "");
+	var userId = $("#userId").val();
+	return userId;
 };
 
 //回显Select选值

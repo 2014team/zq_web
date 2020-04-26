@@ -12,7 +12,6 @@ import com.zq.common.dao.BaseDao;
 import com.zq.common.entity.BaseEntity;
 import com.zq.common.service.BaseService;
 
-
 public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> implements BaseService<T, PK> {
 
 	// @SuppressWarnings("unchecked")
@@ -28,6 +27,12 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 	@Autowired
 	public BaseDao<T, PK> dao;
 
+	/**
+	 * @Title: save
+	 * @Description: 保存
+	 * @param t
+	 * @return
+	 */
 	public int save(T t) {
 
 		if (t == null) {
@@ -37,6 +42,12 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 		return this.dao.save(t);
 	}
 
+	/**
+	 * @Title: saveOrUpdate
+	 * @Description: 保存或更新数据
+	 * @param t
+	 * @return
+	 */
 	public int saveOrUpdate(T t) {
 
 		if (t == null) {
@@ -45,29 +56,31 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 
 		if (t.id == null || t.id == 0) {
 			return this.save(t);
-		}
-		else {
+		} else {
 			return this.update(t);
 		}
 	}
 
 	/**
-	 * 修改记录 根据param条件
-	 * 
-	 * @param param 用于产生SQL的参数值，包括WHERE条件、目标字段和新值等
-	 * @throws Exception
+	 * @Title: update
+	 * @Description: 根据Map修改
+	 * @param paramMap
+	 * @return
 	 */
 	@Transactional
-	public int update(Map<String, Object> param) {
+	public int update(Map<String, Object> paramMap) {
 
-		if (param == null || param.size() == 0) {
+		if (paramMap == null || paramMap.size() == 0) {
 			return 0;
 		}
-		return this.dao.update(param);
+		return this.dao.update(paramMap);
 	}
 
 	/**
-	 * 修改实体
+	 * @Title: update
+	 * @Description: 修改
+	 * @param t
+	 * @return
 	 */
 	@Transactional
 	public int update(T t) {
@@ -79,10 +92,10 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 	}
 
 	/**
-	 * 删除实体
-	 *
+	 * @Title: delete
+	 * @Description: 根据主键删除
 	 * @param id
-	 * @throws Exception
+	 * @return
 	 */
 	@Transactional
 	public int delete(PK id) {
@@ -94,22 +107,25 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 	}
 
 	/**
-	 * 删除实体 根据param条件
-	 * 
-	 * @param param 用于产生SQL的参数值，包括WHERE条件、目标字段和新值等
-	 * @throws Exception
+	 * @Title: delete
+	 * @Description: 根据Map删除
+	 * @param paramMap
+	 * @return
 	 */
 	@Transactional
-	public int delete(Map<String, Object> param) {
+	public int delete(Map<String, Object> paramMap) {
 
-		if (param == null || param.size() == 0) {
+		if (paramMap == null || paramMap.size() == 0) {
 			return 0;
 		}
-		return this.dao.delete(param);
+		return this.dao.delete(paramMap);
 	}
 
 	/**
-	 * 通过ID获取实体
+	 * @Title: get
+	 * @Description: 根据主键获取
+	 * @param id
+	 * @return
 	 */
 	public T get(PK id) {
 
@@ -121,24 +137,24 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 	}
 
 	/**
-	 * 查询实体 根据param条件
-	 * 
-	 * @param param 用于产生SQL的参数值，包括WHERE条件、目标字段和新值等
-	 * @throws Exception
+	 * @Title: get
+	 * @Description: 根据Map获取
+	 * @param paramMap
+	 * @return
 	 */
-	public T get(Map<String, Object> param) {
+	public T get(Map<String, Object> paramMap) {
 
-		if (param == null || param.size() == 0) {
+		if (paramMap == null || paramMap.size() == 0) {
 			return null;
 		}
-		T t = this.dao.get(param);
+		T t = this.dao.get(paramMap);
 		return t;
 	}
 
 	/**
-	 * 取全部记录
-	 * 
-	 * @return 全部记录实体对象的List
+	 * @Title: list
+	 * @Description: 获取列表
+	 * @return
 	 */
 	public List<T> list() {
 
@@ -146,20 +162,20 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 	}
 
 	/**
-	 * 按条件查询记录
-	 * 
-	 * @param param 查询条件参数，包括WHERE条件、分页条件、排序条件
-	 * @return 符合条件记录的实体对象的List
+	 * @Title: select
+	 * @Description: 根据Map获取列表
+	 * @param paramMap
+	 * @return
 	 */
-	public List<T> select(Map<String, Object> param) {
+	public List<T> select(Map<String, Object> paramMap) {
 
-		return this.dao.select(param);
+		return this.dao.select(paramMap);
 	}
 
 	/**
-	 * 按条件查询记录
-	 * 
-	 * @param entity 实体对象
+	 * @Title: select
+	 * @Description: 根据实体类获取列表
+	 * @param t
 	 * @return
 	 */
 	public List<T> select(T t) {
@@ -168,7 +184,9 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 	}
 
 	/**
-	 * 查询整表总记录数
+	 * @Title: count
+	 * @Description: 查询整表总记录数
+	 * @return
 	 */
 	public int count() {
 
@@ -176,41 +194,64 @@ public abstract class BaseServiceImpl<T extends BaseEntity, PK extends Serializa
 	}
 
 	/**
-	 * 查询符合条件的记录数
-	 * 
-	 * @param param 查询条件参数，包括WHERE条件（其他参数内容不起作用）。此参数设置为null，则相当于count()
+	 * @Title: count
+	 * @Description: 根据Map获取记录总数
+	 * @param paramMap
 	 * @return
 	 */
-	public int count(Map<String, Object> param) {
+	public int count(Map<String, Object> paramMap) {
 
-		if (param == null || param.size() == 0) {
+		if (paramMap == null || paramMap.size() == 0) {
 			return 0;
 		}
-		return this.dao.count(param);
+		return this.dao.count(paramMap);
 	}
 
 	/**
 	 * @Title: findByPage
-	 * @Description: 分页查找
-	 * @param param
+	 * @Description: 分类查找
+	 * @param paramMap
 	 * @return
 	 */
-	public List<T> findByPage(Map<String, Object> param) {
+	public List<T> findByPage(Map<String, Object> paramMap) {
 
-		return this.dao.findByPage(param);
+		return this.dao.findByPage(paramMap);
 	}
 
 	/**
 	 * @Title: findByPageCount
 	 * @Description: 分页查找总数
-	 * @param param
+	 * @param paramMap
 	 * @return
 	 */
-	public int findByPageCount(Map<String, Object> param) {
+	public int findByPageCount(Map<String, Object> paramMap) {
 
-		if (param == null || param.size() == 0) {
+		if (paramMap == null || paramMap.size() == 0) {
 			return 0;
 		}
-		return this.dao.findByPageCount(param);
+		return this.dao.findByPageCount(paramMap);
+	}
+
+	/**
+	 * @Title: getOneByMap
+	 * @Description: 根据Map获取单个对象
+	 * @param paramMap
+	 * @return
+	 */
+	public T getOneByMap(Map<String, Object> paramMap) {
+		return this.dao.getOneByMap(paramMap);
+	}
+
+	/**
+	 * @Title: deleteByBatch
+	 * @Description: 批量删除
+	 * @param list
+	 * @return
+	 */
+	public int deleteByBatch(List<Integer> list) {
+		if (list == null || list.size() < 1) {
+			return 0;
+		}
+		return this.dao.deleteByBatch(list);
 	}
 }

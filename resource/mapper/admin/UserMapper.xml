@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zq.admin.dao.UserDao">
 
-	<resultMap type="com.zq.admin.entity.User" id="result">
+	<!-- resultMap -->
+	<resultMap type="com.zq.admin.domain.entity.User" id="resultMap">
 		<result property="userId" column="user_id" />
 		<result property="userName" column="user_name" />
 		<result property="password" column="password" />
@@ -16,17 +16,17 @@
 	</resultMap>
 
 	<!--保存 -->
-	<insert id="save" parameterType="com.zq.admin.entity.User">
+	<insert id="save" parameterType="com.zq.admin.domain.entity.User">
 		insert into
 		`t_admin_user`(user_name,password,role_id,valid_Flag,sort_id)
-		values(#{userName},#{password},#{roleId},#{validFlag},#{sortId})
+		values(#{userName},#{password},#{roleId},#{validFlag},#{sortId});
 	</insert>
 
 	<!--删除 -->
 	<delete id="delete" parameterType="Integer">
 		delete from
 		`t_admin_user`
-		where user_id=#{userId}
+		where user_id=#{userId};
 	</delete>
 
 	<!-- 批量删除 -->
@@ -40,7 +40,7 @@
 	</delete>
 
 	<!-- 修改 -->
-	<update id="update" parameterType="com.zq.admin.entity.User">
+	<update id="update" parameterType="com.zq.admin.domain.entity.User">
 		update `t_admin_user`
 		set
 		user_name=#{userName}
@@ -49,19 +49,19 @@
 		,valid_flag=#{validFlag}
 		,sort_id=#{sortId}
 		where
-		user_id=#{userId}
+		user_id=#{userId};
 	</update>
 
 	<!-- 单个查找 -->
-	<select id="get" parameterType="Integer" resultMap="result">
+	<select id="get" parameterType="Integer" resultMap="resultMap">
 		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from
 		`t_admin_user`
 		where user_id = #{userId}
-		order by sort_id limit 1
+		order by sort_id limit 1;
 	</select>
 	
 	<!-- 通过Map单个查找-->
-	<select id="getOneByMap" parameterType="Map" resultMap="result">
+	<select id="getOneByMap" parameterType="Map" resultMap="resultMap">
 		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from
 		`t_admin_user`
 		<where>
@@ -74,15 +74,17 @@
 			<if test="null != password and '' != password">
 				and password = #{password}
 			</if>
-			<if test="null != validFlag and '' != validFlag">
+			<if test="null != validFlag">
 				and valid_Flag = #{validFlag}
 			</if>
 		</where>
-		order by sort_id limit 1
+		order by sort_id limit 1;
 	</select>
+	
+	
 
 	<!-- 列表查询 -->
-	<select id="select" parameterType="Map" resultMap="result">
+	<select id="select" parameterType="Map" resultMap="resultMap">
 		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from
 		`t_admin_user`
 		<where>
@@ -93,19 +95,19 @@
 				and user_name = #{userName}
 			</if>
 		</where>
-		order by sort_id
+		order by sort_id;
 	</select>
 
 
 	<!-- 分页查找 -->
-	<select id="findByPage" parameterType="Map" resultMap="result">
+	<select id="findByPage" parameterType="Map" resultMap="resultMap">
 		select user_id,user_name,password,role_id,valid_Flag,sort_id,create_date,update_date from `t_admin_user`
 		<where>
-			<if test="entity.userName != null and '' != entity.userName">
-				user_name=#{entity.userName}
+			<if test="userVo.userName != null and '' != userVo.userName">
+				user_name=#{userVo.userName}
 			</if>
-			<if test="entity.startDate != null and '' != entity.startDate and entity.endDate != null and '' != entity.endDate">
-				<![CDATA[and create_date >= #{entity.startDate} and create_date <= #{entity.endDate}]]>
+			<if test="userVo.startDate != null and '' != userVo.startDate and userVo.endDate != null and '' != userVo.endDate">
+				<![CDATA[and create_date >= #{userVo.startDate} and create_date <= #{userVo.endDate}]]>
 			</if>
 		</where>
 		order by sort_id,update_date desc  limit ${page.begin},${page.limit} ;
@@ -115,11 +117,11 @@
 	<select id="findByPageCount" parameterType="Map" resultType="Integer">
 		select count(1) from `t_admin_user`
 		<where>
-			<if test="entity.userName != null and '' != entity.userName">
-				user_name=#{entity.userName}
+			<if test="userVo.userName != null and '' != userVo.userName">
+				user_name=#{userVo.userName}
 			</if>
-			<if test="entity.startDate != null and '' != entity.startDate and entity.endDate != null and '' != entity.endDate">
-				<![CDATA[and create_date >= #{entity.startDate} and create_date <= #{entity.endDate}]]>
+			<if test="userVo.startDate != null and '' != userVo.startDate and userVo.endDate != null and '' != userVo.endDate">
+				<![CDATA[and create_date >= #{userVo.startDate} and create_date <= #{userVo.endDate}]]>
 			</if>
 		</where>
 	</select>

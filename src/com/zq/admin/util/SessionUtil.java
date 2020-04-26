@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.zq.admin.constant.SessionConstant;
-import com.zq.admin.entity.User;
+import com.zq.admin.domain.dto.UserDto;
 
 public class SessionUtil {
 
@@ -17,12 +17,12 @@ public class SessionUtil {
 	 * @param request
 	 * @return
 	 */
-	public static User getSessionUser(HttpServletRequest request) {
+	public static UserDto getSessionUser(HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 		Object object = session.getAttribute(SessionConstant.USER_KEY_SESSION);
 		if (null != object) {
-			return (User) object;
+			return (UserDto) object;
 		}
 		return null;
 	}
@@ -51,9 +51,9 @@ public class SessionUtil {
 	 * @param request
 	 * @param user
 	 */
-	public static void saveSessionUser(HttpServletRequest request, User user) {
+	public static void saveSessionUser(HttpServletRequest request, UserDto userDTO) {
 
 		HttpSession session = request.getSession();
-		session.setAttribute(SessionConstant.USER_KEY_SESSION, user);
+		session.setAttribute(SessionConstant.USER_KEY_SESSION, userDTO);
 	}
 }

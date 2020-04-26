@@ -6,15 +6,15 @@
   </head>
    <body>
     <div class="x-body">
-        <form class="layui-form">
-          <input type="hidden" name="userId" id="userId" value="${entity.userId}" /> 
+        <div class="layui-form">
+          <input type="hidden" name="userId" id="userId" value="${userDTO.userId}" /> 
         
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
                   <span class="x-red">*</span>用户名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" name="userName" value="${entity.userName }" lay-verify="required|userName"
+                  <input type="text" name="userName" value="${userDTO.userName }" lay-verify="required|userName"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -27,7 +27,7 @@
                   <span class="x-red">*</span>密码
               </label>
               <div class="layui-input-inline">
-                  <input type="text" name="password" value="${entity.password }" lay-verify="required|password"
+                  <input type="text" name="password" value="${userDTO.password }" lay-verify="required|password"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -40,7 +40,7 @@
                   <span class="x-red">*</span>状态
               </label>
                <div class="layui-input-inline">
-                 <select name="validFlag" id="validFlag" value="${entity.validFlag}" lay-verify="required">
+                 <select name="validFlag" id="validFlag" value="${userDTO.validFlag}" lay-verify="required">
 				  <option value="0" >启用</option>
 				  <option value="1" >停用</option>
 				 </select>  
@@ -53,7 +53,7 @@
               </label>
                <div class="layui-input-inline">
 				 <div class="layui-col-md6">
-		              <select name="roleId" id="roleId" value="${entity.roleId}" lay-verify="required"  lay-search>
+		              <select name="roleId" id="roleId" value="${userDTO.roleId}" lay-verify="required"  lay-search>
 		                 <option value="" >请选择角色</option>
 		                 <option value="0" >超级管理员</option>
 				 		 <option value="1" >普通管理员</option>
@@ -68,7 +68,7 @@
 					class="x-red">*</span>排序
 				</label>
 				<div class="layui-input-inline">
-					<input type="text" name="sortId" value="${(empty entity.sortId or entity.sortId eq 0) ? 1:  entity.sortId }" maxlength="10"
+					<input type="text" name="sortId" value="${(empty userDTO.sortId or userDTO.sortId eq 0) ? 1:  userDTO.sortId }" maxlength="10"
 						lay-verify="required|integer" autocomplete="off"
 						class="layui-input">
 				</div>
@@ -80,7 +80,7 @@
               </label>
                <button class="layui-btn" lay-submit lay-filter="editSave"> 保存</button>
           </div>
-      </form>
+      </div>
     </div>
   </body>
   

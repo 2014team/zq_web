@@ -148,8 +148,11 @@ function userValidFlag(obj) {
 					time : 1000
 				});
 				
-				//更新行数据
-				updateRowData(result);
+				rowObj.update({
+					validFlag :validFlag
+					
+				});
+				
 			} else {
 				layer.msg(result.msg, {
 					icon : 2,

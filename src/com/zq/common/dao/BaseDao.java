@@ -10,7 +10,7 @@ import com.zq.common.entity.BaseEntity;
  * BaseDao DAO层泛型接口，定义基本的DAO功能
  * 
  * @since 0.1
- * @param <T> 实体类
+ * @param <T>实体类
  * @param <PK>主键类，必须实现Serializable接口
  * 
  */
@@ -24,7 +24,6 @@ public abstract interface BaseDao<T extends BaseEntity, PK extends Serializable>
 
 	/**
 	 * 修改一个实体对象（UPDATE一条记录）
-	 * 
 	 * @param entity 实体对象
 	 * @return 修改的对象个数，正常情况=1
 	 */
@@ -40,17 +39,13 @@ public abstract interface BaseDao<T extends BaseEntity, PK extends Serializable>
 
 	/**
 	 * 按主键删除记录
-	 * 
 	 * @param primaryKey主键对象
 	 * @return 删除的对象个数，正常情况=1
 	 */
 	public abstract int delete(PK primaryKey);
 
 	/**
-	 * 删除符合条件的记录
-	 * <p>
-	 * <strong>此方法一定要慎用，如果条件设置不当，可能会删除有用的记录！</strong>
-	 * </p>
+	 * 删除符合条件的记录 <strong>此方法一定要慎用，如果条件设置不当，可能会删除有用的记录！</strong>
 	 * 
 	 * @param param
 	 *            用于产生SQL的参数值，包括WHERE条件（其他参数内容不起作用）
@@ -64,7 +59,8 @@ public abstract interface BaseDao<T extends BaseEntity, PK extends Serializable>
 	 * <strong>此方法一定要慎用，如果条件设置不当，可能会删除有用的记录！</strong>
 	 * </p>
 	 * 
-	 * @param ids 删除的目标对象的id数组
+	 * @param ids
+	 *            删除的目标对象的id数组
 	 * @return
 	 */
 	public abstract int delete(String[] ids);
@@ -87,7 +83,8 @@ public abstract interface BaseDao<T extends BaseEntity, PK extends Serializable>
 	/**
 	 * 按主键取记录
 	 * 
-	 * @param primaryKey 主键值
+	 * @param primaryKey
+	 *            主键值
 	 * @return 记录实体对象，如果没有符合主键条件的记录，则返回null
 	 */
 	public abstract T get(PK primaryKey);
@@ -95,7 +92,8 @@ public abstract interface BaseDao<T extends BaseEntity, PK extends Serializable>
 	/**
 	 * 按param取记录
 	 * 
-	 * @param param 查询条件参数，包括WHERE条件、分页条件、排序条件
+	 * @param param
+	 *            查询条件参数，包括WHERE条件、分页条件、排序条件
 	 * @return 记录实体对象，如果没有符合param条件的记录，则返回null
 	 */
 	public abstract T get(Map<String, Object> param);
@@ -110,7 +108,8 @@ public abstract interface BaseDao<T extends BaseEntity, PK extends Serializable>
 	/**
 	 * 按条件查询记录
 	 * 
-	 * @param param 查询条件参数，包括WHERE条件、分页条件、排序条件
+	 * @param param
+	 *            查询条件参数，包括WHERE条件、分页条件、排序条件
 	 * @return 符合条件记录的实体对象的List
 	 */
 	public abstract List<T> select(Map<String, Object> param);
@@ -139,4 +138,20 @@ public abstract interface BaseDao<T extends BaseEntity, PK extends Serializable>
 	 * @return
 	 */
 	public abstract int findByPageCount(Map<String, Object> param);
+
+	/**
+	 * @Title: getOneByMap
+	 * @Description: 根据Map获取单个对象
+	 * @param param
+	 * @return
+	 */
+	public abstract T getOneByMap(Map<String, Object> param);
+
+	/**
+	 * @Title: deleteByBatch
+	 * @Description: 批量删除
+	 * @param list
+	 * @return
+	 */
+	public abstract int deleteByBatch(List<Integer> list);
 }

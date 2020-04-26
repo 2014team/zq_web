@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zq.admin.entity.User;
+import com.zq.admin.domain.dto.UserDto;
+import com.zq.admin.domain.vo.UserVo;
 import com.zq.admin.service.UserService;
 import com.zq.admin.util.SessionUtil;
 import com.zq.common.entity.JsonResult;
@@ -20,7 +21,7 @@ import com.zq.common.entity.JsonResultByPage;
  * @ClassName: UserController
  * @Description: 用户
  * @author zhuzq
- * @date 2020年4月16日 上午10:44:56
+ * @date 2020年4月23日 下午1:38:44
  */
 @Controller
 public class UserController {
@@ -29,157 +30,33 @@ public class UserController {
 	private UserService userService;
 
 	/**
-	 * @Title: toList
-	 * @Description: 列表UI
-	 * @author zhuzq
-	 * @date 2020年4月16日 下午4:15:42
-	 * @return
-	 */
-	@RequestMapping(value = "/admin/user/list/ui")
-	public String toList() {
-		return "/admin/user/user_list";
-	}
-
-	/**
-	 * @Title: list
-	 * @Description: 分页查找
-	 * @author zhuzq
-	 * @date 2020年4月16日 下午4:16:05
-	 * @param entity
-	 * @param request
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/admin/user/list", method = { RequestMethod.POST })
-	public JsonResultByPage list(User entity, HttpServletRequest request) {
-
-		Integer page = Integer.valueOf(request.getParameter("page"));
-		Integer limit = Integer.valueOf(request.getParameter("limit"));
-
-		JsonResultByPage jsonResult = new JsonResultByPage(page, limit);
-
-		jsonResult = userService.findByPage(entity, jsonResult);
-
-		return jsonResult;
-	}
-
-	/**
-	 * @Title: validFlag
-	 * @Description: 更新状态
-	 * @author zhuzq
-	 * @date 2020年4月17日 上午11:55:10
-	 * @param entity
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/admin/user/validFlag", method = { RequestMethod.POST })
-	public JsonResult validFlag(User entity) {
-		JsonResult jsonResult = new JsonResult();
-		Integer userId = entity.getUserId();
-		if (null == userId) {
-			jsonResult.failure("用户ID参数错误");
-			return jsonResult;
-		}
-
-		Integer validFlag = entity.getValidFlag();
-		if (null == validFlag) {
-			jsonResult.failure("状态参数错误");
-			return jsonResult;
-		}
-
-		User user = userService.get(userId);
-		if (null == user) {
-			jsonResult.failure("更新数据失败");
-			return jsonResult;
-		}
-
-		user.setValidFlag(validFlag);
-
-		Integer result = userService.update(user);
-		if (null != result && result > 0) {
-			jsonResult.success(user);
-		} else {
-			jsonResult.failure();
-		}
-		return jsonResult;
-	}
-
-	/**
-	 * @Title: login
-	 * @Description: 登录界面
-	 * @author zhuzq
-	 * @date 2020年4月16日 下午3:56:33
-	 * @return
-	 */
-	@RequestMapping(value = "/admin/login", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login() {
-		return "/admin/login";
-	}
-
-	/**
-	 * @Title: loginSubmit
-	 * @Description: 登录
-	 * @author zhuzq
-	 * @date 2020年4月16日 下午3:56:47
-	 * @param user
-	 * @param request
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/admin/login/submit", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult loginSubmit(User user, HttpServletRequest request) {
-		JsonResult result = new JsonResult();
-		// 验证参数
-		String errMsg = userService.checkLoginParam(user);
-		if (StringUtils.isNotBlank(errMsg)) {
-			result.failure(errMsg);
-			return result;
-		}
-
-		// 登录
-		User entity = userService.login(user);
-		if (null != entity) {
-			result.success();
-
-			// 保存信息到session
-			SessionUtil.saveSessionUser(request, entity);
-
-		} else {
-			result.failure("用户名或者密码错误!");
-		}
-
-		return result;
-	}
-
-	/**
 	 * @Title: save
 	 * @Description: 保存
 	 * @author zhuzq
-	 * @date 2020年4月16日 上午10:55:30
-	 * @param user
+	 * @date 2020年4月23日 下午1:38:54
+	 * @param userVo
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/user/save", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult save(User user) {
+	public JsonResult save(UserVo userVo) {
 		JsonResult result = new JsonResult();
 
-		// 验证参数
-		String errMsg = userService.checkParam(user);
+		// 参数验证
+		String errMsg = userService.checkParam(userVo);
 		if (StringUtils.isNotBlank(errMsg)) {
 			result.failure(errMsg);
 			return result;
 		}
 
 		// 唯一性验证
-		errMsg = userService.checkUnique(user);
+		errMsg = userService.checkUnique(userVo);
 		if (StringUtils.isNotBlank(errMsg)) {
 			result.failure(errMsg);
 			return result;
 		}
-
 		// 保存
-		boolean save = userService.saveUser(user);
+		boolean save = userService.saveUser(userVo);
 		if (save) {
 			result.success();
 		} else {
@@ -190,73 +67,10 @@ public class UserController {
 	}
 
 	/**
-	 * @Title: update
-	 * @Description: 修改
-	 * @author zhuzq
-	 * @date 2020年4月16日 上午10:55:38
-	 * @param user
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/admin/user/update", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult update(User user) {
-		JsonResult result = new JsonResult();
-
-		// 验证参数
-		Integer userId = user.getUserId();
-		if (null == userId) {
-			result.failure("用户ID不能为空");
-			return result;
-		}
-		String errMsg = userService.checkParam(user);
-		if (StringUtils.isNotBlank(errMsg)) {
-			result.failure(errMsg);
-			return result;
-		}
-
-		// 唯一性验证
-		errMsg = userService.checkUnique(user);
-		if (StringUtils.isNotBlank(errMsg)) {
-			result.failure(errMsg);
-			return result;
-		}
-
-		// 修改
-		boolean update = userService.updateUser(user);
-		if (update) {
-			result.success();
-		} else {
-			result.failure();
-		}
-
-		return result;
-	}
-
-	/**
-	 * @Title: edit
-	 * @Description: 编辑
-	 * @author zhuzq
-	 * @date 2020年4月17日 下午3:11:29
-	 * @param userId
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value = "/admin/user/edit", method = { RequestMethod.GET, RequestMethod.POST })
-	public String edit(Integer userId, HttpServletRequest request) {
-		// 编辑,为空新增
-		if (null != userId) {
-			User entity = userService.get(userId);
-			request.setAttribute("entity", entity);
-		}
-
-		return "/admin/user/user_edit";
-	}
-
-	/**
 	 * @Title: delete
 	 * @Description: 删除
 	 * @author zhuzq
-	 * @date 2020年4月16日 上午10:55:13
+	 * @date 2020年4月23日 下午1:39:03
 	 * @param userId
 	 * @return
 	 */
@@ -285,13 +99,13 @@ public class UserController {
 	 * @Title: batchDelete
 	 * @Description: 批量删除
 	 * @author zhuzq
-	 * @date 2020年4月22日 下午2:02:30
+	 * @date 2020年4月23日 下午1:39:19
 	 * @param userIdArr
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/user/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult batchDelete(@RequestParam("userIdArr[]") Integer[] userIdArr) {
+	public JsonResult deleteByIdArr(@RequestParam("userIdArr[]") Integer[] userIdArr) {
 		JsonResult result = new JsonResult();
 		// 验证参数
 		if (null == userIdArr || userIdArr.length < 1) {
@@ -307,6 +121,199 @@ public class UserController {
 		}
 
 		return result;
+	}
+
+	/**
+	 * @Title: update
+	 * @Description: 修改
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:39:28
+	 * @param userVo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/user/update", method = { RequestMethod.GET, RequestMethod.POST })
+	public JsonResult update(UserVo userVo) {
+		JsonResult result = new JsonResult();
+
+		// 验证参数
+		Integer userId = userVo.getUserId();
+		if (null == userId) {
+			result.failure("用户ID不能为空");
+			return result;
+		}
+		String errMsg = userService.checkParam(userVo);
+		if (StringUtils.isNotBlank(errMsg)) {
+			result.failure(errMsg);
+			return result;
+		}
+
+		// 唯一性验证
+		errMsg = userService.checkUnique(userVo);
+		if (StringUtils.isNotBlank(errMsg)) {
+			result.failure(errMsg);
+			return result;
+		}
+		// 修改
+		boolean update = userService.updateUser(userVo);
+		if (update) {
+			result.success();
+		} else {
+			result.failure();
+		}
+
+		return result;
+	}
+
+	/**
+	 * @Title: validFlag
+	 * @Description: 更新状态
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:39:36
+	 * @param userVo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/user/validFlag", method = { RequestMethod.POST })
+	public JsonResult validFlag(UserVo userVo) {
+		JsonResult jsonResult = new JsonResult();
+		Integer userId = userVo.getUserId();
+		if (null == userId) {
+			jsonResult.failure("用户ID参数错误");
+			return jsonResult;
+		}
+
+		Integer validFlag = userVo.getValidFlag();
+		if (null == validFlag) {
+			jsonResult.failure("状态参数错误");
+			return jsonResult;
+		}
+
+		// 更新状态
+		boolean result = userService.updateValidFlag(userVo);
+		if (result) {
+			jsonResult.success();
+		} else {
+			jsonResult.failure();
+		}
+		return jsonResult;
+	}
+
+	/**
+	 * @Title: list
+	 * @Description: 分页查找
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:40:00
+	 * @param userVo
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/user/list", method = { RequestMethod.POST })
+	public JsonResultByPage list(UserVo userVo, HttpServletRequest request) {
+
+		Integer page = Integer.valueOf(request.getParameter("page"));
+		Integer limit = Integer.valueOf(request.getParameter("limit"));
+
+		JsonResultByPage jsonResult = new JsonResultByPage(page, limit);
+
+		jsonResult = userService.findByPage(userVo, jsonResult);
+
+		return jsonResult;
+	}
+
+	/**
+	 * @Title: login
+	 * @Description: 登录界面
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:40:09
+	 * @return
+	 */
+	@RequestMapping(value = "/admin/login", method = { RequestMethod.GET, RequestMethod.POST })
+	public String login() {
+		return "/admin/login";
+	}
+
+	/**
+	 * @Title: loginSubmit
+	 * @Description: 登录
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:40:16
+	 * @param userVo
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/login/submit", method = { RequestMethod.GET, RequestMethod.POST })
+	public JsonResult loginSubmit(UserVo userVo, HttpServletRequest request) {
+		JsonResult result = new JsonResult();
+		// 验证参数
+		String errMsg = userService.checkLoginParam(userVo);
+		if (StringUtils.isNotBlank(errMsg)) {
+			result.failure(errMsg);
+			return result;
+		}
+
+		// 登录
+		UserDto userDTO = userService.login(userVo);
+		if (null != userDTO) {
+			result.success();
+
+			// 保存信息到session
+			SessionUtil.saveSessionUser(request, userDTO);
+
+		} else {
+			result.failure("用户名或者密码错误!");
+		}
+
+		return result;
+	}
+
+	/**
+	 * @Title: logout
+	 * @Description: 退出
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:40:58
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/admin/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	public String logout(HttpServletRequest request) {
+
+		// 删除用户session信息
+		SessionUtil.deleteSessionUser(request);
+		return "redirect:/admin/login";
+	}
+
+	/**
+	 * @Title: toList
+	 * @Description: 列表UI
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:41:16
+	 * @return
+	 */
+	@RequestMapping(value = "/admin/user/list/ui", method = { RequestMethod.GET })
+	public String toList() {
+		return "/admin/user/user_list";
+	}
+
+	/**
+	 * @Title: edit
+	 * @Description: 编辑
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:41:25
+	 * @param userId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/admin/user/edit", method = { RequestMethod.GET, RequestMethod.POST })
+	public String edit(Integer userId, HttpServletRequest request) {
+		// 编辑,为空新增
+		if (null != userId) {
+			UserDto userDTO = userService.getUser(userId);
+			request.setAttribute("userDTO", userDTO);
+		}
+		return "/admin/user/user_edit";
 	}
 
 }
