@@ -4,7 +4,7 @@ package com.zq.admin.service;
 import com.zq.admin.domain.dto.UserDto;
 import com.zq.admin.domain.entity.User;
 import com.zq.admin.domain.vo.UserVo;
-import com.zq.common.entity.JsonResultByPage;
+import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.service.BaseService;
 
 /**
@@ -74,7 +74,7 @@ public interface UserService extends BaseService<User, Integer> {
 	 * @param jsonResult
 	 * @return
 	 */
-	public JsonResultByPage findByPage(UserVo userVo, JsonResultByPage jsonResult);
+	public AdminResultByPage findByPage(UserVo userVo, AdminResultByPage jsonResult);
 
 	/**
 	 * @Title: login

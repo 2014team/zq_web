@@ -14,13 +14,13 @@ import com.zq.admin.domain.dto.RightCategoryDto;
 import com.zq.admin.domain.vo.RightCategoryVo;
 import com.zq.admin.service.RightCategoryService;
 import com.zq.common.entity.JsonResult;
-import com.zq.common.entity.JsonResultByPage;
+import com.zq.common.entity.AdminResultByPage;
 
 /**
  * @ClassName: RightCategoryController
  * @Description: 权限分类
  * @author zhuzq
- * @date 2020年04月26日 14:21:27
+ * @date 2020年04月28日 15:54:44
  */
 @Controller
 public class RightCategoryController {
@@ -32,7 +32,7 @@ public class RightCategoryController {
 	 * @Title: save
 	 * @Description: 保存
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:27
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class RightCategoryController {
 	 * @Title: delete
 	 * @Description: 删除
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:27
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryId
 	 * @return
 	 */
@@ -98,7 +98,7 @@ public class RightCategoryController {
 	 * @Title: batchDelete
 	 * @Description: 批量删除
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:27
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryIdArr
 	 * @return
 	 */
@@ -126,7 +126,7 @@ public class RightCategoryController {
 	 * @Title: update
 	 * @Description: 修改
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:27
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @return
 	 */
@@ -168,19 +168,19 @@ public class RightCategoryController {
 	 * @Title: list
 	 * @Description: 分页查找
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:27
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @param request
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/rightCategory/list", method = { RequestMethod.POST })
-	public JsonResultByPage list(RightCategoryVo rightCategoryVo, HttpServletRequest request) {
+	public AdminResultByPage list(RightCategoryVo rightCategoryVo, HttpServletRequest request) {
 
 		Integer page = Integer.valueOf(request.getParameter("page"));
 		Integer limit = Integer.valueOf(request.getParameter("limit"));
 
-		JsonResultByPage jsonResult = new JsonResultByPage(page, limit);
+		AdminResultByPage jsonResult = new AdminResultByPage(page, limit);
 
 		jsonResult = rightCategoryService.findByPage(rightCategoryVo, jsonResult);
 
@@ -191,7 +191,7 @@ public class RightCategoryController {
 	 * @Title: toList
 	 * @Description: 列表UI
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:27
+	 * @date 2020年04月28日 15:54:44
 	 * @return
 	 */
 	@RequestMapping(value = "/admin/rightCategory/list/ui", method = { RequestMethod.GET })
@@ -203,7 +203,7 @@ public class RightCategoryController {
 	 * @Title: edit
 	 * @Description: 编辑
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:27
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryId
 	 * @param request
 	 * @return

@@ -17,7 +17,7 @@ import ${servicePackageName}.${table.className?cap_first}Service;
 import ${serviceImplCommonPackageName}.BaseServiceImpl;
 import ${voPackageName}.${table.className?cap_first}Vo;
 import ${dtoPackageName}.${table.className?cap_first}Dto;
-import ${entityCommonPackage}.JsonResultByPage;
+import ${entityCommonPackage}.AdminResultByPage;
 
 /**
  * @ClassName: ${table.className?cap_first}ServiceImpl
@@ -129,7 +129,7 @@ public class ${table.className?cap_first}ServiceImpl extends BaseServiceImpl<${t
 	 * @return
 	 */
 	@Override
-	public JsonResultByPage findByPage(${table.className?cap_first}Vo ${table.className?uncap_first}Vo, JsonResultByPage jsonResult) {
+	public AdminResultByPage findByPage(${table.className?cap_first}Vo ${table.className?uncap_first}Vo, AdminResultByPage jsonResult) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("${table.className?uncap_first}Vo", ${table.className?uncap_first}Vo);
 		paramMap.put("page", jsonResult);

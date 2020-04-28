@@ -14,7 +14,7 @@ import ${dtoPackageName}.${table.className?cap_first}Dto;
 import ${voPackageName}.${table.className?cap_first}Vo;
 import ${servicePackageName}.${table.className?cap_first}Service;
 import ${entityCommonPackage}.JsonResult;
-import ${entityCommonPackage}.JsonResultByPage;
+import ${entityCommonPackage}.AdminResultByPage;
 
 /**
  * @ClassName: ${table.className?cap_first}Controller
@@ -175,12 +175,12 @@ public class ${table.className?cap_first}Controller {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/${table.className?uncap_first}/list", method = { RequestMethod.POST })
-	public JsonResultByPage list(${table.className?cap_first}Vo ${table.className?uncap_first}Vo, HttpServletRequest request) {
+	public AdminResultByPage list(${table.className?cap_first}Vo ${table.className?uncap_first}Vo, HttpServletRequest request) {
 
 		Integer page = Integer.valueOf(request.getParameter("page"));
 		Integer limit = Integer.valueOf(request.getParameter("limit"));
 
-		JsonResultByPage jsonResult = new JsonResultByPage(page, limit);
+		AdminResultByPage jsonResult = new AdminResultByPage(page, limit);
 
 		jsonResult = ${table.className?uncap_first}Service.findByPage(${table.className?uncap_first}Vo, jsonResult);
 

@@ -1,13 +1,16 @@
 
 package com.zq.common.entity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class JsonResult {
 
 	private String code;
 
 	private String msg;
 
-	private Object data;
+	private Map<String,Object> data;
 
 	public String getCode() {
 
@@ -34,7 +37,7 @@ public class JsonResult {
 		return data;
 	}
 
-	public void setData(Object data) {
+	public void setData(Map<String,Object> data) {
 
 		this.data = data;
 	}
@@ -45,10 +48,10 @@ public class JsonResult {
 		this.msg = "请求成功！";
 	}
 
-	public void success(Object data) {
-
+	public void success(String key,Object data) {
 		success();
-		this.data = data;
+		this.data = new HashMap<String, Object>();
+		this.data.put(key, data);
 	}
 
 	public void success(String msg) {

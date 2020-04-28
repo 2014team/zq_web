@@ -8,7 +8,7 @@ import com.zq.admin.domain.entity.RightCategory;
  * @ClassName: RightCategoryDao
  * @Description: 权限分类
  * @author zhuzq
- * @date 2020年04月26日 14:21:27
+ * @date 2020年04月28日 15:54:44
  */
 @Repository
 public interface RightCategoryDao extends BaseDao<RightCategory,Integer>{

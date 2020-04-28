@@ -17,7 +17,7 @@ import com.zq.admin.domain.dto.UserDto;
 import com.zq.admin.domain.entity.User;
 import com.zq.admin.domain.vo.UserVo;
 import com.zq.admin.service.UserService;
-import com.zq.common.entity.JsonResultByPage;
+import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.service.impl.BaseServiceImpl;
 import com.zq.common.util.LogUtil;
 
@@ -130,7 +130,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @return
 	 */
 	@Override
-	public JsonResultByPage findByPage(UserVo userVo, JsonResultByPage jsonResult) {
+	public AdminResultByPage findByPage(UserVo userVo, AdminResultByPage jsonResult) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("userVo", userVo);
 		paramMap.put("page", jsonResult);

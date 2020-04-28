@@ -5,7 +5,7 @@ import com.zq.common.entity.BaseEntity;
  * @ClassName: RightCategoryVo
  * @Description: 权限分类
  * @author zhuzq
- * @date 2020年04月26日 14:21:28
+ * @date 2020年04月28日 15:54:44
  */ 
 public class RightCategoryVo extends BaseEntity{
 

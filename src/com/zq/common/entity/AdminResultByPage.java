@@ -3,7 +3,7 @@ package com.zq.common.entity;
 
 import java.io.Serializable;
 
-public class JsonResultByPage implements Serializable {
+public class AdminResultByPage implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,11 +30,11 @@ public class JsonResultByPage implements Serializable {
 
 	private int totalPages = 10; // 总的页数
 
-	public JsonResultByPage() {
+	public AdminResultByPage() {
 		super();
 	}
 
-	public JsonResultByPage(int page, int limit) {
+	public AdminResultByPage(int page, int limit) {
 		super();
 		this.page = page;
 		this.limit = limit;
@@ -123,7 +123,7 @@ public class JsonResultByPage implements Serializable {
 	 */
 	public void success() {
 
-		this.code = 200;
+		this.code = 0;
 		this.msg = "请求成功";
 	}
 

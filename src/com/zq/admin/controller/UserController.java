@@ -15,7 +15,7 @@ import com.zq.admin.domain.vo.UserVo;
 import com.zq.admin.service.UserService;
 import com.zq.admin.util.SessionUtil;
 import com.zq.common.entity.JsonResult;
-import com.zq.common.entity.JsonResultByPage;
+import com.zq.common.entity.AdminResultByPage;
 
 /**
  * @ClassName: UserController
@@ -210,12 +210,12 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/user/list", method = { RequestMethod.POST })
-	public JsonResultByPage list(UserVo userVo, HttpServletRequest request) {
+	public AdminResultByPage list(UserVo userVo, HttpServletRequest request) {
 
 		Integer page = Integer.valueOf(request.getParameter("page"));
 		Integer limit = Integer.valueOf(request.getParameter("limit"));
 
-		JsonResultByPage jsonResult = new JsonResultByPage(page, limit);
+		AdminResultByPage jsonResult = new AdminResultByPage(page, limit);
 
 		jsonResult = userService.findByPage(userVo, jsonResult);
 

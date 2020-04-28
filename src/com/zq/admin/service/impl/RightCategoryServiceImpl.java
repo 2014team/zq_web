@@ -17,13 +17,13 @@ import com.zq.admin.service.RightCategoryService;
 import com.zq.common.service.impl.BaseServiceImpl;
 import com.zq.admin.domain.vo.RightCategoryVo;
 import com.zq.admin.domain.dto.RightCategoryDto;
-import com.zq.common.entity.JsonResultByPage;
+import com.zq.common.entity.AdminResultByPage;
 
 /**
  * @ClassName: RightCategoryServiceImpl
  * @Description: 权限分类
  * @author zhuzq
- * @date 2020年04月26日 14:21:28
+ * @date 2020年04月28日 15:54:44
  */
 @Service
 public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Integer>  implements RightCategoryService {
@@ -36,7 +36,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: saveRightCategory
 	 * @Description: 保存
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: deleteRightCategory
 	 * @Description: 删除
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryId
 	 * @return
 	 */
@@ -72,7 +72,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: deleteByBatch
 	 * @Description: 批量删除
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryIdArr
 	 * @return
 	 */
@@ -86,7 +86,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: updateRightCategory
 	 * @Description: 修改
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @return
 	 */
@@ -105,7 +105,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: getRightCategory
 	 * @Description: 根据rightCategoryId获取用户
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryId
 	 * @return
 	 */
@@ -123,13 +123,13 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: findByPage
 	 * @Description: 分页查找
 	 * @author zhuzq
-	 * * @date 2020年04月26日 14:21:28
+	 * * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @param jsonResult
 	 * @return
 	 */
 	@Override
-	public JsonResultByPage findByPage(RightCategoryVo rightCategoryVo, JsonResultByPage jsonResult) {
+	public AdminResultByPage findByPage(RightCategoryVo rightCategoryVo, AdminResultByPage jsonResult) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("rightCategoryVo", rightCategoryVo);
 		paramMap.put("page", jsonResult);
@@ -157,7 +157,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: checkParam
 	 * @Description: 参数验证
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @return
 	 */
@@ -179,7 +179,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: checkUnique
 	 * @Description: 唯一性验证
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @return
 	 */
@@ -210,7 +210,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: convertRightCategory
 	 * @Description: RightCategoryVo转RightCategory
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategoryVo
 	 * @return
 	 */
@@ -228,7 +228,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 	 * @Title: convertRightCategoryDto
 	 * @Description: RightCategory转RightCategoryDto
 	 * @author zhuzq
-	 * @date 2020年04月26日 14:21:28
+	 * @date 2020年04月28日 15:54:44
 	 * @param rightCategory
 	 * @return
 	 */

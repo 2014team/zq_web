@@ -4,7 +4,7 @@ import ${serviceCommonPackageName}.BaseService;
 import ${entityPackageName}.${table.className?cap_first};
 import ${voPackageName}.${table.className?cap_first}Vo;
 import ${dtoPackageName}.${table.className?cap_first}Dto;
-import ${entityCommonPackage}.JsonResultByPage;
+import ${entityCommonPackage}.AdminResultByPage;
 
 /**
  * @ClassName: ${table.className?cap_first}Dao
@@ -73,7 +73,7 @@ public interface ${table.className?cap_first}Service extends BaseService<${table
 	 * @param jsonResult
 	 * @return
 	 */
-	public JsonResultByPage findByPage(${table.className?cap_first}Vo ${table.className?uncap_first}Vo, JsonResultByPage jsonResult);
+	public AdminResultByPage findByPage(${table.className?cap_first}Vo ${table.className?uncap_first}Vo, AdminResultByPage jsonResult);
 
 	/**
 	 * @Title: checkParam
