@@ -4,6 +4,7 @@
 	
 	<!-- resultMap -->
 	<resultMap type="com.zq.admin.domain.entity.RightCategory" id="resultMap">
+		<result property="categoryId" column="category_id" />
 		<result property="categoryName" column="category_name" />
 		<result property="sortId" column="sort_id" />
 		<result property="createDate" column="create_date" />
@@ -11,7 +12,7 @@
 	</resultMap>
 
 	<!-- 保存 -->
-	<insert id="insert" parameterType="com.zq.admin.domain.entity.RightCategory" useGeneratedKeys="true" keyProperty="categoryId">
+	<insert id="save" parameterType="com.zq.admin.domain.entity.RightCategory" useGeneratedKeys="true" keyProperty="categoryId">
 		insert into t_admin_right_category (
 			category_name
 			,sort_id
@@ -137,12 +138,9 @@
 			<if test="null != rightCategoryVo.sortId ">
 			and sort_id = #{rightCategoryVo.sortId}
 			</if> 
-			<if test="null != rightCategoryVo.createDate and ''!= rightCategoryVo.createDate">
-			and create_date = #{rightCategoryVo.createDate}
-			</if> 
-			<if test="null != rightCategoryVo.updateDate and ''!= rightCategoryVo.updateDate">
-			and update_date = #{rightCategoryVo.updateDate}
-			</if> 
+			<if test="rightCategoryVo.startDate != null and '' != rightCategoryVo.startDate and rightCategoryVo.endDate != null and '' != rightCategoryVo.endDate">
+				<![CDATA[and create_date >= #{rightCategoryVo.startDate} and create_date <= #{rightCategoryVo.endDate}]]>
+			</if>
  		</where>
  		order by sort_id ,create_date desc   
  		<if test="null != page and '' != page and null != page.begin and '' != page.begin and null !=page.limit  and '' != page.limit">
@@ -163,12 +161,9 @@
 			<if test="null != rightCategoryVo.sortId ">
 			and sort_id = #{rightCategoryVo.sortId}
 			</if> 
-			<if test="null != rightCategoryVo.createDate and ''!= rightCategoryVo.createDate">
-			and create_date = #{rightCategoryVo.createDate}
-			</if> 
-			<if test="null != rightCategoryVo.updateDate and ''!= rightCategoryVo.updateDate">
-			and update_date = #{rightCategoryVo.updateDate}
-			</if> 
+			<if test="rightCategoryVo.startDate != null and '' != rightCategoryVo.startDate and rightCategoryVo.endDate != null and '' != rightCategoryVo.endDate">
+				<![CDATA[and create_date >= #{rightCategoryVo.startDate} and create_date <= #{rightCategoryVo.endDate}]]>
+			</if>
  		</where>
  		order by sort_id ,create_date desc ;
 	</select>

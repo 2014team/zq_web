@@ -4,13 +4,13 @@
 	
 	<!-- resultMap -->
 	<resultMap type="${entityPackageName}.${table.className?cap_first}" id="resultMap">
-	<#list (table.common_fields) as field>
+	<#list (table.key_fields + table.common_fields) as field>
 		<result property="${field.java_field_Name}" column="${field.field_name}" />
 	</#list>
 	</resultMap>
 
 	<!-- 保存 -->
-	<insert id="insert" parameterType="${entityPackageName}.${table.className?cap_first}" useGeneratedKeys="true" keyProperty="${table.key_fields[0].java_field_Name}">
+	<insert id="save" parameterType="${entityPackageName}.${table.className?cap_first}" useGeneratedKeys="true" keyProperty="${table.key_fields[0].java_field_Name}">
 		insert into ${table.tableName} (
 		<#list (table.common_fields) as field>
 		<#if field_index == 0>

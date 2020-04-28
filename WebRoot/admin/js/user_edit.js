@@ -35,7 +35,7 @@ layui.use([ 'form', 'layer' ], function() {
 	//保存
 	form.on('submit(editSave)', function(obj) {
 		var reqData = obj.field;
-		reqGetHasParameter(checkSave() ? USER_UPDATE : USER_SAVE, reqData, function(result) {
+		reqPostHasParameter(checkSave() ? USER_UPDATE : USER_SAVE, reqData, function(result) {
 			if (result.code == 200) {
 				layer.msg(result.msg, {
 					icon : 1,
