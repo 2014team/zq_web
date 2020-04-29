@@ -332,6 +332,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 		dto.setRoleId(user.getRoleId());
 		dto.setSortId(user.getSortId());
 		dto.setValidFlag(user.getValidFlag());
+		dto.setCreateDate(user.getCreateDate());
+		dto.setUpdateDate(user.getUpdateDate());
 		return dto;
 	}
 

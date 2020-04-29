@@ -1,13 +1,11 @@
 ﻿/*列表数据*/
-const USER_LIST = getAminUrl('admin/USER/LIST')
-/*列表状态修改*/
-const USER_VALIDFLAG = getAminUrl('admin/USER/VALIDFLAG');
+const LIST = getAminUrl('admin/RIGHTCATEGORY/LIST')
 /*列表删除*/
-const USER_DELETE = getAminUrl('admin/USER/DELETE');
+const DELETE = getAminUrl('admin/RIGHTCATEGORY/DELETE');
 /*编辑*/
-const USER_EDIT = getAminUrl('admin/USER/EDIT');
+const EDIT = getAminUrl('admin/RIGHTCATEGORY/EDIT');
 /*批量删除*/
-const USER_BATCH_DELETE = getAminUrl('admin/USER/BATCH/DELETE');
+const BATCH_DELETE = getAminUrl('admin/RIGHTCATEGORY/BATCH/DELETE');
 //行对象
 var rowObj = "";
 
@@ -33,7 +31,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 
 	table.render({
 		elem : '#table_list',
-		url : USER_LIST,
+		url : LIST,
 		toolbar : '#toolbar',
 		method : "post",
 		page : { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
@@ -57,23 +55,19 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 				sort : true,
 			}
 			, {
-				field : 'userName',
-				title : '用户名'
+				field : 'categoryId',
+				title : 'ID',
+				sort : true
 			}
 			, {
-				field : 'password',
-				title : '密码'
+				field : 'categoryName',
+				title : '类名称'
 			}, {
 				field : 'createDate',
 				title : '创建日期',
 				templet : function(d) {
 					return date.toDateString(d.createDate, 'yyyy-MM-dd HH:mm:ss');
-				},
-				width : 180
-			}, {
-				field : 'validFlag',
-				title : '状态',
-				templet : '#validFlagTpl'
+				}
 			}, {
 				field : 'sortId',
 				title : '排序',
@@ -106,7 +100,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 	
 	/*搜索*/
 	$('#search_id').on('click', function(){
-        var userName = $('#search_input').val();
+        var categoryName = $('#search_input').val();
 		var startDate = $("#startDate").val();
 		var endDate = $("#endDate").val();
 		      //执行重载
@@ -116,7 +110,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 		          curr: 1 //重新从第 1 页开始
 		        }
 		        ,where: {
-		            userName: userName,
+		        	categoryName: categoryName,
 		            startDate: startDate,
 		            endDate: endDate
 		        }
@@ -169,10 +163,10 @@ function userValidFlag(obj) {
 
 /*删除*/
 function del(obj) {
-	var userId = obj.data.userId;
+	var categoryId = obj.data.categoryId;
 	layer.confirm("确认要删除吗？", function(index) {
-		reqPostHasParameter(USER_DELETE, {
-			"userId" : userId
+		reqPostHasParameter(DELETE, {
+			"categoryId" : categoryId
 		}, function(result) {
 			if (result.code == 200) {
 				layer.msg(result.msg, {
@@ -198,11 +192,11 @@ function del(obj) {
 /*编辑*/
 function edit(obj) {
 	 
-	var url = USER_EDIT;
+	var url = EDIT;
 	var title = '新增用户';
 	if(obj){
-		userId = obj.data.userId;
-		url = USER_EDIT + "?userId=" + userId;
+		categoryId = obj.data.categoryId;
+		url = EDIT + "?categoryId=" + categoryId;
 		 title = '修改用户';
 	}	
 	x_admin_show(title, url);
@@ -218,9 +212,9 @@ function batchDel() {
 	layer.confirm('确认要删除吗？', function(index) {
 		var array = new Array();
 		$.each(selectData,function(i,e){
-			array.push(e.userId);
+			array.push(e.categoryId);
 		 })
-		reqPostHasParameter(USER_BATCH_DELETE, {"userIdArr":array},function(result) {
+		reqPostHasParameter(BATCH_DELETE, {"categoryIdArr":array},function(result) {
 			if (result.code == 200) { //这个是从后台取回来的状态值
 				layer.msg(result.msg, {
 					icon : 1,
@@ -244,12 +238,9 @@ function batchDel() {
 function updateRowData(obj){
 	 var reqData = obj.field;
    	 rowObj.update({
-		userId : reqData.userId,
-		userName : reqData.userName,
-		password : reqData.password,
-		isAdmin : reqData.isAdmin,
-		validFlag : reqData.validFlag,
-		sortId : reqData.sortId,
+		categoryId : reqData.categoryId,
+		categoryName : reqData.categoryName,
+		sortId : reqData.sortId
 	});
 }
 

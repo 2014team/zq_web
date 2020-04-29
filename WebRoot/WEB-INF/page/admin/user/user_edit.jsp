@@ -14,7 +14,7 @@
                   <span class="x-red">*</span>用户名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" name="userName" value="${userDTO.userName }" lay-verify="required|userName"
+                  <input type="text" name="userName" value="${userDTO.userName }" lay-verify="required" maxlength="25"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">

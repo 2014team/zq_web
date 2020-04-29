@@ -3,15 +3,14 @@
 <html>
   <head>
   	<%@include file="/WEB-INF/page/admin/common/head_layui.jsp" %>
-  	<link rel="stylesheet" href="/admin/css/user_list.css?t=<%=new java.util.Date().getTime() %>">
-  	<script type="text/javascript" src="/admin/js/user_list.js?t=<%=new java.util.Date().getTime() %>"></script>
+  	<script type="text/javascript" src="/admin/js/rightCategory_list.js?t=<%=new java.util.Date().getTime() %>"></script>
   </head>
   
    <body>
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="/admin/user/list/ui">管理员管理</a>
+        <a href="/admin/rightCategory/list/ui">权限分类</a>
         <a>
           <cite>列表</cite></a>
       </span>
@@ -44,9 +43,6 @@
     <!-- 操作模板 -->
     <script type="text/html" id="operateBarTpl">
 		<div class="class="td-manage">
-              <a title="状态修改" lay-event="updateValidFlag" href="javascript:;">
-					<i class="layui-icon">&#xe62f;</i>
-				</a>
               <a title="编辑"  lay-event="edit" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
@@ -56,17 +52,5 @@
 		</div>
 	</script>
 
-	<!-- 状态模板 -->
-    <script type="text/html" id="validFlagTpl">
-		{{# if(d.validFlag == 0){ }}
-			<div class="td-status">
-				<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
-			</div>	
-		{{#}else if(d.validFlag == 1){ }}
-			<div class="td-status">
-			    <span class="layui-btn layui-btn-normal layui-btn-mini layui-bg-red">已停用</span>
-			</div>			
-		{{#  }	}}
-	</script>
   </body>
 </html>
