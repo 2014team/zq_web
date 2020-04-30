@@ -3,7 +3,7 @@
 <html>
   <head>
   	<%@include file="/WEB-INF/page/admin/common/head_layui.jsp" %>
-  	<link rel="stylesheet" href="/admin/css/user_list.css?t=<%=new java.util.Date().getTime() %>">
+  	<link rel="stylesheet" href="/admin/css/list.css?t=<%=new java.util.Date().getTime() %>">
   	<script type="text/javascript" src="/admin/js/user_list.js?t=<%=new java.util.Date().getTime() %>"></script>
   </head>
   
@@ -46,7 +46,7 @@
 		<div class="class="td-manage">
               <a title="状态修改" lay-event="updateValidFlag" href="javascript:;">
 					<i class="layui-icon">&#xe62f;</i>
-				</a>
+			  </a>
               <a title="编辑"  lay-event="edit" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>

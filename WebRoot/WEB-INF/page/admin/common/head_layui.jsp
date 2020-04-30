@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="/admin/images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="/admin/css/font.css?t=<%=new java.util.Date().getTime() %>">
 <link rel="stylesheet" href="/admin/css/xadmin.css?t=<%=new java.util.Date().getTime() %>">
-<script src="/admin/js/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <script src="/admin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/admin/js/xadmin.js?t=<%=new java.util.Date().getTime() %>"></script>
 <link rel="stylesheet" type="text/css" href="/admin/lib/layui/css/layui.css">

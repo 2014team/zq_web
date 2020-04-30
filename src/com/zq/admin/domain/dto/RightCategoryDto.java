@@ -1,4 +1,6 @@
 package com.zq.admin.domain.dto;
+import java.util.List;
+
 import com.zq.common.entity.BaseEntity;
  
 /**
@@ -22,6 +24,8 @@ public class RightCategoryDto extends BaseEntity{
 	 * 排序
 	 */
 	private Integer sortId;
+	
+	private List<RightDto> rightDtoList;
  
 	public Integer getCategoryId(){
 		return this.categoryId;
@@ -44,4 +48,13 @@ public class RightCategoryDto extends BaseEntity{
 	public void setSortId(Integer sortId){
 		this.sortId = sortId;
 	}
+
+	public List<RightDto> getRightDtoList() {
+		return rightDtoList;
+	}
+
+	public void setRightDtoList(List<RightDto> rightDtoList) {
+		this.rightDtoList = rightDtoList;
+	}
+	
 }

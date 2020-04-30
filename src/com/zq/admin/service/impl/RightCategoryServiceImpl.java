@@ -205,6 +205,28 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 		return null;
 
 	}
+	
+	/**
+	* @Title: getRightCategoryList
+	* @Description: 查询列表
+	* @author zhuzq
+	* @date  2020年4月30日 下午3:56:18
+	* @return
+	*/
+	@Override
+	public List<RightCategoryDto> getRightCategoryList() {
+		Map<String,Object> paramMap = null;
+		List<RightCategory> rightCategoryList = rightCategoryDao.select(paramMap);
+		List<RightCategoryDto> rightCategoryDtoList = null;
+		if(null != rightCategoryList && rightCategoryList.size() > 0){
+			rightCategoryDtoList = new ArrayList<RightCategoryDto>();
+			for (RightCategory rightCategory : rightCategoryList) {
+				RightCategoryDto rightCategoryDto = convertRightCategoryDto(rightCategory);
+				rightCategoryDtoList.add(rightCategoryDto);
+			}
+		}
+		return rightCategoryDtoList;
+	}
 
 	/**
 	 * @Title: convertRightCategory
@@ -241,5 +263,7 @@ public class RightCategoryServiceImpl extends BaseServiceImpl<RightCategory,Inte
 		dto.setUpdateDate(rightCategory.getUpdateDate());
 		return dto;
 	}
+
+	
 	
 }

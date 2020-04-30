@@ -42,9 +42,9 @@ public class Start {
 			paramMap.put("basePackageName","com.zq.admin");
 			//dao、service、实体类继承父类包
 			paramMap.put("commonPackage","com.zq.common");
-			paramMap.put("description","权限");//表名
+			paramMap.put("description","角色");//表名
 
-			paramMap.put("tableName","t_admin_right");//表名
+			paramMap.put("tableName","t_admin_role");//表名
 			generator.createCode(paramMap);//第一个表
 			
 			//第二个表

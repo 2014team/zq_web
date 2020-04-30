@@ -1,7 +1,7 @@
 ﻿﻿/*列表数据*/
 const LIST = getAminUrl('admin/RIGHTCATEGORY/LIST')
 /*列表删除*/
-const DELETE = getAminUrl('admin/RIGHTCATEGORY/DELETE');
+const DELETE = getAminUrl('admin/rightcategory/DELETE');
 /*编辑*/
 const EDIT = getAminUrl('admin/RIGHTCATEGORY/EDIT');
 /*批量删除*/
@@ -144,11 +144,11 @@ function del(obj) {
 function edit(obj) {
 	 
 	var url = EDIT;
-	var title = '新增用户';
+	var title = '新增';
 	if(obj){
 		var categoryId = obj.data.categoryId;
 		url = EDIT + "?categoryId=" + categoryId;
-		 title = '修改用户';
+		 title = '修改';
 	}	
 	x_admin_show(title, url);
 };

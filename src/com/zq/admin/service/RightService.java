@@ -1,10 +1,14 @@
 package com.zq.admin.service;
 
-import com.zq.common.service.BaseService;
+import java.util.List;
+import java.util.Map;
+
+import com.zq.admin.domain.dto.RightCategoryDto;
+import com.zq.admin.domain.dto.RightDto;
 import com.zq.admin.domain.entity.Right;
 import com.zq.admin.domain.vo.RightVo;
-import com.zq.admin.domain.dto.RightDto;
 import com.zq.common.entity.AdminResultByPage;
+import com.zq.common.service.BaseService;
 
 /**
  * @ClassName: RightDao
@@ -94,5 +98,15 @@ public interface RightService extends BaseService<Right,Integer>{
 	 * @return
 	 */
 	public String checkUnique(RightVo rightVo);
+
+	/**
+	* @Title: getRightMap
+	* @Description: 权限列表
+	* @author zhuzq
+	* @date  2020年4月30日 下午4:06:11
+	* @param rightCategoryDtoList
+	* @return
+	*/
+	public List<RightCategoryDto> getRightList(List<RightCategoryDto> rightCategoryDtoList);
 
 }

@@ -157,11 +157,11 @@ function del(obj) {
 function edit(obj) {
 	 
 	var url = EDIT;
-	var title = '新增用户';
+	var title = '新增';
 	if(obj){
 		var rightId = obj.data.rightId;
 		url = EDIT + "?rightId=" + rightId;
-		 title = '修改用户';
+		 title = '修改';
 	}	
 	x_admin_show(title, url);
 };

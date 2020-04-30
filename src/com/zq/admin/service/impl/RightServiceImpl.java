@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zq.admin.dao.RightCategoryDao;
 import com.zq.admin.dao.RightDao;
+import com.zq.admin.domain.dto.RightCategoryDto;
+import com.zq.admin.domain.dto.RightDto;
 import com.zq.admin.domain.entity.Right;
 import com.zq.admin.domain.entity.RightCategory;
-import com.zq.admin.service.RightService;
-import com.zq.common.service.impl.BaseServiceImpl;
 import com.zq.admin.domain.vo.RightVo;
-import com.zq.admin.domain.dto.RightDto;
+import com.zq.admin.service.RightService;
 import com.zq.common.entity.AdminResultByPage;
+import com.zq.common.service.impl.BaseServiceImpl;
 
 /**
  * @ClassName: RightServiceImpl
@@ -266,11 +266,41 @@ public class RightServiceImpl extends BaseServiceImpl<Right,Integer>  implements
 		dto.setCreateDate(right.getCreateDate());
 		dto.setUpdateDate(right.getUpdateDate());
 		
-		
-		
-		
-		
 		return dto;
+	}
+
+	/**
+	* @Title: getRightList
+	* @Description: 权限列表
+	* @author zhuzq
+	* @date  2020年4月30日 下午4:06:11
+	* @param rightCategoryDtoList
+	* @return
+	*/
+	@Override
+	public List<RightCategoryDto> getRightList(List<RightCategoryDto> rightCategoryDtoList) {
+		
+		Map<String,Object> paramMap = null;
+		if(null != rightCategoryDtoList && rightCategoryDtoList.size() > 0){
+			paramMap = new HashMap<String,Object>();
+			List<RightDto> rightDtoList = null;
+			for (RightCategoryDto rightCategoryDto : rightCategoryDtoList) {
+				Integer categoryId = rightCategoryDto.getCategoryId();
+				paramMap.put("rightCategoryId", categoryId);
+				List<Right> rightList = rightDao.select(paramMap);
+				if(null != rightList && rightList.size() > 0){
+					rightDtoList = new ArrayList<RightDto>();
+					for (Right right : rightList) {
+						RightDto rightDto = convertRightDto(right);
+						rightDtoList.add(rightDto);
+					}
+					
+					rightCategoryDto.setRightDtoList(rightDtoList);
+					
+				}
+			}
+		}
+		return rightCategoryDtoList;
 	}
 	
 }

@@ -199,11 +199,11 @@ function del(obj) {
 function edit(obj) {
 	 
 	var url = USER_EDIT;
-	var title = '新增用户';
+	var title = '用户';
 	if(obj){
 		var userId = obj.data.userId;
 		url = USER_EDIT + "?userId=" + userId;
-		 title = '修改用户';
+		 title = '用户';
 	}	
 	x_admin_show(title, url);
 };

@@ -3,6 +3,9 @@ package com.zq.admin.service;
 import com.zq.common.service.BaseService;
 import com.zq.admin.domain.entity.RightCategory;
 import com.zq.admin.domain.vo.RightCategoryVo;
+
+import java.util.List;
+
 import com.zq.admin.domain.dto.RightCategoryDto;
 import com.zq.common.entity.AdminResultByPage;
 
@@ -94,5 +97,14 @@ public interface RightCategoryService extends BaseService<RightCategory,Integer>
 	 * @return
 	 */
 	public String checkUnique(RightCategoryVo rightCategoryVo);
+
+	/**
+	* @Title: getRightCategoryList
+	* @Description: 查询列表
+	* @author zhuzq
+	* @date  2020年4月30日 下午3:56:18
+	* @return
+	*/
+	public List<RightCategoryDto> getRightCategoryList();
 
 }

@@ -27,7 +27,16 @@ var admin_url_map = {
 	'admin/RIGHT/UPDATE': {url: '/admin/right/update', isUsed: true, desc: '权限修改'},
 	'admin/RIGHT/EDIT': {url: '/admin/right/edit', isUsed: true, desc: '权限编辑'},
 	'admin/RIGHT/LIST': {url: '/admin/right/list', isUsed: true, desc: '权限列表'},
-	'admin/RIGHT/BATCH/DELETE': {url: '/admin/right/batch/delete', isUsed: true, desc: '权限删除'},
+	'admin/RIGHT/BATCH/DELETE': {url: '/admin/right/batch/delete', isUsed: true, desc: '权限批量删除'},
+	
+	//角色
+	'admin/ROLE/GET': {url: '/admin/role/get', isUsed: true, desc: '角色查找'},
+	'admin/ROLE/SAVE': {url: '/admin/role/save', isUsed: true, desc: '角色保存'},
+	'admin/ROLE/DELETE': {url: '/admin/role/delete', isUsed: true, desc: '角色删除'},
+	'admin/ROLE/UPDATE': {url: '/admin/role/update', isUsed: true, desc: '角色修改'},
+	'admin/ROLE/EDIT': {url: '/admin/role/edit', isUsed: true, desc: '角色编辑'},
+	'admin/ROLE/LIST': {url: '/admin/role/list', isUsed: true, desc: '角色列表'},
+	'admin/ROLE/BATCH/DELETE': {url: '/admin/role/batch/delete', isUsed: true, desc: '角色批量删除'},
 
 }
 

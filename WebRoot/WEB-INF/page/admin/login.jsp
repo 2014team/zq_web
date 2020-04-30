@@ -4,7 +4,7 @@
 <head>
 <title>登录</title>
 <link rel="stylesheet" type="text/css" href="/admin/css/login.css?t=<%=new java.util.Date().getTime() %>">
-<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/url_map.js?t=<%=new java.util.Date().getTime() %>"></script>
 <script type="text/javascript" src="/js/http_util.js?t=<%=new java.util.Date().getTime() %>"></script>
 <script type="text/javascript" src="/admin/js/login.js?t=<%=new java.util.Date().getTime() %>"></script>
