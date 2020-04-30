@@ -1,8 +1,7 @@
 ﻿/*更新*/
-const USER_UPDATE = getAminUrl('admin/USER/UPDATE');
+const UPDATE = getAminUrl('admin/RIGHT/UPDATE');
 /*保存*/
-const USER_SAVE = getAminUrl('admin/USER/SAVE');
-
+const SAVE = getAminUrl('admin/RIGHT/SAVE');
 
 $(function(){
 	//回显Select选值	
@@ -25,7 +24,7 @@ layui.use([ 'form', 'layer' ], function() {
 	//保存
 	form.on('submit(editSave)', function(obj) {
 		var reqData = obj.field;
-		reqPostHasParameter(checkSave() ? USER_UPDATE : USER_SAVE, reqData, function(result) {
+		reqPostHasParameter(checkSave() ? UPDATE : SAVE, reqData, function(result) {
 			if (result.code == 200) {
 				layer.msg(result.msg, {
 					icon : 1,
@@ -61,12 +60,11 @@ layui.use([ 'form', 'layer' ], function() {
 
 //检查是否保存还是修改操作
 function checkSave() {
-	var userId = $("#userId").val();
-	return userId;
+	var rightId = $("#rightId").val();
+	return rightId;
 };
 
 //回显Select选值
 function echoSelect(){
-	echoSelectData("validFlag",$("#validFlag").attr('value'));
-	echoSelectData("roleId",$("#roleId").attr('value'));
+	echoSelectData("rightCategoryId",$("#rightCategoryId").attr('value'))
 }

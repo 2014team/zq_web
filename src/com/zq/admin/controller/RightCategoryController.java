@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zq.admin.domain.dto.RightCategoryDto;
 import com.zq.admin.domain.vo.RightCategoryVo;
 import com.zq.admin.service.RightCategoryService;
-import com.zq.common.entity.JsonResult;
 import com.zq.common.entity.AdminResultByPage;
+import com.zq.common.entity.JsonResult;
 
 /**
  * @ClassName: RightCategoryController
@@ -217,5 +217,6 @@ public class RightCategoryController {
 		}
 		return "/admin/rightCategory/rightCategory_edit";
 	}
+	
 
 }

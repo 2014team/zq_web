@@ -22,7 +22,7 @@ public class Start {
 			DataBaseUtil.jdbc_driver = "com.mysql.jdbc.Driver";
 			DataBaseUtil.jdbc_url = "jdbc:mysql://112.74.216.57:3306/zzq_web?useUnicode=true&characterEncoding=utf8&autoReconnect=true";
 			DataBaseUtil.jdbc_user = "root";
-			DataBaseUtil.jdbc_password = "t_admin_right";
+			DataBaseUtil.jdbc_password = "artcweb_dz";
 			
 			
 			//sqlserver
@@ -42,9 +42,9 @@ public class Start {
 			paramMap.put("basePackageName","com.zq.admin");
 			//dao、service、实体类继承父类包
 			paramMap.put("commonPackage","com.zq.common");
-			paramMap.put("description","权限分类");//表名
+			paramMap.put("description","权限");//表名
 
-			paramMap.put("tableName","t_admin_right_category");//表名
+			paramMap.put("tableName","t_admin_right");//表名
 			generator.createCode(paramMap);//第一个表
 			
 			//第二个表

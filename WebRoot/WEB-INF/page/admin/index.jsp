@@ -68,7 +68,7 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="html/admin-rule.html">
+                        <a _href="/admin/right/list/ui">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限管理</cite>
                         </a>
@@ -90,7 +90,7 @@
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='/admin/rightCategory/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='/admin/right/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
           </div>
         </div>

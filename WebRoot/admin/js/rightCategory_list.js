@@ -1,4 +1,4 @@
-﻿/*列表数据*/
+﻿﻿/*列表数据*/
 const LIST = getAminUrl('admin/RIGHTCATEGORY/LIST')
 /*列表删除*/
 const DELETE = getAminUrl('admin/RIGHTCATEGORY/DELETE');
@@ -55,13 +55,8 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 				sort : true,
 			}
 			, {
-				field : 'categoryId',
-				title : 'ID',
-				sort : true
-			}
-			, {
 				field : 'categoryName',
-				title : '类名称'
+				title : '分类名称'
 			}, {
 				field : 'createDate',
 				title : '创建日期',
@@ -89,9 +84,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 		rowObj = obj;
 		var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 		var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-		if (layEvent === 'updateValidFlag') { //修改有效标识
-			userValidFlag(obj);
-		} else if (layEvent === 'edit') {
+		if (layEvent === 'edit') {
 			edit(obj)//列表编辑
 		} else if (layEvent === 'del') {
 			del(obj);//列表删除
@@ -118,48 +111,6 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
    
      }); 
 });
-
-/*状态修改*/
-function userValidFlag(obj) {
-	var confirmTile = '确认要停用吗？';
-	var data = obj.data; //获得当前行数据
-	var userId = data.userId;
-	var validFlag = data.validFlag
-	if (validFlag == 0) {
-		validFlag = 1;
-	} else {
-		confirmTile = '确认要启用吗？';
-		validFlag = 0;
-	}
-	layer.confirm(confirmTile, function(index) {
-		reqPostHasParameter(USER_VALIDFLAG, {
-			"userId" : userId,
-			"validFlag" : validFlag
-		}, function(result) {
-
-			if (result.code == 200) {
-				layer.msg(result.msg, {
-					icon : 1,
-					time : 1000
-				});
-				
-				rowObj.update({
-					validFlag :validFlag
-					
-				});
-				
-			} else {
-				layer.msg(result.msg, {
-					icon : 2,
-					time : 1000
-				});
-			}
-		}, function(e) {
-			console.log(e);
-		})
-	});
-}
-;
 
 /*删除*/
 function del(obj) {
@@ -195,7 +146,7 @@ function edit(obj) {
 	var url = EDIT;
 	var title = '新增用户';
 	if(obj){
-		categoryId = obj.data.categoryId;
+		var categoryId = obj.data.categoryId;
 		url = EDIT + "?categoryId=" + categoryId;
 		 title = '修改用户';
 	}	

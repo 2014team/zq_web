@@ -56,7 +56,7 @@ layui.use([ 'form', 'layer' ], function() {
 
 //检查是否保存还是修改操作
 function checkSave() {
-	var userId = $("#categoryId").val();
-	return userId;
+	var categoryId = $("#categoryId").val();
+	return categoryId;
 };
 

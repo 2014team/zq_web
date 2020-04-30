@@ -20,9 +20,9 @@
     <div class="x-body">
       <div class="layui-row">
         <div class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="startDate" id="startDate">
-          <input class="layui-input" placeholder="截止日" name="endDate" id="endDate">
-          <input type="text" id="search_input" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+          <input class="layui-input" placeholder="开始日" name="startDate" id="startDate" readonly>
+          <input class="layui-input" placeholder="截止日" name="endDate" id="endDate" readonly>
+          <input type="text" id="search_input" placeholder="请输入名称" autocomplete="off" class="layui-input">
           <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
         </div>
       </div>
