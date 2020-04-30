@@ -52,13 +52,11 @@
                   <span class="x-red">*</span>角色
               </label>
                <div class="layui-input-inline">
-				 <div class="layui-col-md6">
 		              <select name="roleId" id="roleId" value="${userDTO.roleId}" lay-verify="required"  lay-search>
 		                 <option value="" >请选择角色</option>
 		                 <option value="0" >超级管理员</option>
 				 		 <option value="1" >普通管理员</option>
 		              </select>
-		          </div>
 			  </div>
 		  </div>	
 		  

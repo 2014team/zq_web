@@ -42,14 +42,12 @@
                   <span class="x-red">*</span>所属类别
               </label>
                <div class="layui-input-inline">
-				 <div class="layui-col-md6">
-		              <select name="rightCategoryId" id="rightCategoryId" value="${rightDTO.rightCategoryId }" lay-filter="rightCategoryId" lay-verify="required"  lay-search>
-		                  <option value="" >请选择类别</option>
-		                  <c:forEach items="${rightCategoryList}" var="item">
-		                   <option value="${item.categoryId}" >${item.categoryName}</option>
-		                 </c:forEach>	
-		              </select>
-		          </div>
+	              <select name="rightCategoryId" id="rightCategoryId" value="${rightDTO.rightCategoryId }" lay-filter="rightCategoryId" lay-verify="required"  lay-search>
+	                  <option value="" >请选择类别</option>
+	                  <c:forEach items="${rightCategoryList}" var="item">
+	                   <option value="${item.categoryId}" >${item.categoryName}</option>
+	                 </c:forEach>	
+	              </select>
 			  </div>
 		  </div>	
 		  

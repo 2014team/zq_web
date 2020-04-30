@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-  	<script type="text/javascript" src="/admin/js/jquery.min.js"></script>
+  	<script type="text/javascript" src="/js/jquery.min.js"></script>
   </head>
  <body>
  <script type="text/javascript">
