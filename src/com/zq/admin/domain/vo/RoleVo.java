@@ -33,7 +33,7 @@ public class RoleVo extends BaseEntity{
 	/**
 	 * 有效标识 0:启用1：停用
 	 */
-	private byte validFlag;
+	private Integer validFlag;
 	/**
 	 * 排序
 	 */
@@ -46,7 +46,7 @@ public class RoleVo extends BaseEntity{
 	 * 结束日期
 	 */
 	private String endDate;
- 
+	
 	public Integer getRoleId(){
 		return this.roleId;
 	}
@@ -82,13 +82,19 @@ public class RoleVo extends BaseEntity{
 	public void setRightId(String rightId){
 		this.rightId = rightId;
 	}
-	public byte getValidFlag(){
-		return this.validFlag;
-	}
 	
-	public void setValidFlag(byte validFlag){
+	
+	public Integer getValidFlag() {
+	
+		return validFlag;
+	}
+
+	
+	public void setValidFlag(Integer validFlag) {
+	
 		this.validFlag = validFlag;
 	}
+
 	public Integer getSortId(){
 		return this.sortId;
 	}

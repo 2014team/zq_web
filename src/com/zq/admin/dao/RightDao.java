@@ -1,8 +1,11 @@
 package com.zq.admin.dao;
 
-import com.zq.common.dao.BaseDao;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
+
 import com.zq.admin.domain.entity.Right;
+import com.zq.common.dao.BaseDao;
 
 /**
  * @ClassName: RightDao
@@ -12,5 +15,8 @@ import com.zq.admin.domain.entity.Right;
  */
 @Repository
 public interface RightDao extends BaseDao<Right,Integer>{
+	
+	
+	List<Right> getByBatch(List<String> list);
 
 }

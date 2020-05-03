@@ -10,13 +10,18 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zq.admin.dao.RightCategoryDao;
+import com.zq.admin.dao.RightDao;
 import com.zq.admin.dao.RoleDao;
 import com.zq.admin.domain.dto.RoleDto;
+import com.zq.admin.domain.entity.Right;
+import com.zq.admin.domain.entity.RightCategory;
 import com.zq.admin.domain.entity.Role;
 import com.zq.admin.domain.vo.RoleVo;
 import com.zq.admin.service.RoleService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.service.impl.BaseServiceImpl;
+import com.zq.common.util.LogUtil;
 
 /**
  * @ClassName: RoleServiceImpl
@@ -29,6 +34,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 
 	@Autowired
 	private RoleDao roleDao;
+	@Autowired
+	private RightCategoryDao rightCategoryDao;
+	@Autowired
+	private RightDao rightDao;
 
 	/**
 	 * @Title: saveRole
@@ -170,11 +179,13 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 		}
 		String categoryId = roleVo.getCategoryId();
 		if (StringUtils.isBlank(categoryId)) {
-			return "权限类别ID不能为空";
+			//return "权限类别ID不能为空";
+			roleVo.setCategoryId("");
 		}
 		String rightId = roleVo.getRightId();
 		if (StringUtils.isBlank(rightId)) {
-			return "权限ID不能为空";
+			//return "权限ID不能为空";
+			roleVo.setRightId("");
 		}
 		Integer sortId = roleVo.getSortId();
 		if (null == sortId) {
@@ -223,6 +234,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @return
 	 */
 	private Role convertRole(RoleVo roleVo) {
+		
 		Role role = new Role();
 		role.setRoleId(roleVo.getRoleId());
 		role.setRoleName(roleVo.getRoleName());
@@ -246,6 +258,61 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 */
 	private RoleDto convertRoleDto(Role role) {
 		RoleDto dto = new RoleDto();
+		
+		//categoryId
+		String categoryId = role.getCategoryId();
+		String[] categoryIdArr = null;
+		List<String> categoryIdList = null;
+		if(StringUtils.isNotBlank(categoryId)){
+			categoryIdArr = categoryId.split(",");
+			if(null != categoryIdArr && categoryIdArr.length > 0){
+				categoryIdList = Arrays.asList(categoryIdArr);
+				if(null != categoryIdList && categoryIdList.size() > 0){
+					List<RightCategory> rightCategoryList  = rightCategoryDao.getByBatch(categoryIdList);
+					StringBuffer sb = new StringBuffer();
+					if(null != rightCategoryList && rightCategoryList.size() > 0){
+						for (RightCategory rightCategory : rightCategoryList) {
+							String categoryName = rightCategory.getCategoryName();
+							sb.append(categoryName).append(",");
+						}
+					}
+					String result = sb.toString();
+					if(StringUtils.isNotBlank(result) && result.lastIndexOf(",") != -1){
+						result = result.substring(0,result.lastIndexOf(","));
+					}
+					dto.setCategoryName(result);
+				}
+			}
+			
+		}
+		
+		//rightId
+		String rightId = role.getRightId();
+		String[]rightIdArr = null;
+		List<String> rightIdList = null;
+		if(StringUtils.isNotBlank(rightId)){
+			rightIdArr = rightId.split(",");
+			if(null != rightIdArr && rightIdArr.length > 0){
+				rightIdList = Arrays.asList(rightIdArr);
+				if(null != rightIdList && rightIdList.size() > 0){
+					List<Right> rightList  = rightDao.getByBatch(rightIdList);
+					StringBuffer sb = new StringBuffer();
+					if(null != rightList && rightList.size() > 0){
+						for (Right right : rightList) {
+							String rightName = right.getRightName();
+							sb.append(rightName).append(",");
+						}
+					}
+					String result = sb.toString();
+					if(StringUtils.isNotBlank(result) && result.lastIndexOf(",") != -1){
+						result = result.substring(0,result.lastIndexOf(","));
+					}
+					dto.setRightName(result);
+				}
+			}
+			
+		}
+		
 		dto.setRoleId(role.getRoleId());
 		dto.setRoleName(role.getRoleName());
 		dto.setDescription(role.getDescription());
@@ -256,6 +323,53 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 		dto.setCreateDate(role.getCreateDate());
 		dto.setUpdateDate(role.getUpdateDate());
 		return dto;
+	}
+
+	/**
+	* @Title: updateValidFlag
+	* @Description: 更新状态
+	* @author zhuzq
+	* @date  2020年5月3日 上午11:35:21
+	* @param roleVo
+	* @return
+	*/
+	@Override
+	public boolean updateValidFlag(RoleVo roleVo) {
+		Integer roleId = roleVo.getRoleId();
+		Integer validFlag = roleVo.getValidFlag();
+		Role role = roleDao.get(roleId);
+		if (null == role) {
+			LogUtil.logError("没有查倒数据，更新数据失败");
+			return false;
+		}
+		role.setValidFlag(validFlag);
+		Integer result = roleDao.update(role);
+		if (null != result && result > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	* @Title: selectList
+	* @Description: 获取列表
+	* @author zhuzq
+	* @date  2020年5月3日 下午2:32:59
+	* @return
+	*/
+	@Override
+	public List<RoleDto> selectList() {
+		Map<String, Object> paramMap = null;
+		List<RoleDto> roleDtoList = null;
+		List<Role> roleList = roleDao.select(paramMap);
+		if(null != roleList && roleList.size() > 0){
+			roleDtoList = new ArrayList<RoleDto>();
+			for (Role role : roleList) {
+				RoleDto roleDto = convertRoleDto(role);
+				roleDtoList.add(roleDto);
+			}
+		}
+		return roleDtoList;
 	}
 
 }

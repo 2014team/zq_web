@@ -106,9 +106,13 @@
 			<if test="userVo.userName != null and '' != userVo.userName">
 				user_name=#{userVo.userName}
 			</if>
+			<if test="userVo.roleId != null and '' != userVo.roleId">
+				and role_id=#{userVo.roleId}
+			</if>
 			<if test="userVo.startDate != null and '' != userVo.startDate and userVo.endDate != null and '' != userVo.endDate">
 				<![CDATA[and create_date >= #{userVo.startDate} and create_date <= #{userVo.endDate}]]>
 			</if>
+			
 		</where>
 		order by sort_id,update_date desc  limit ${page.begin},${page.limit} ;
 	</select>
@@ -119,6 +123,9 @@
 		<where>
 			<if test="userVo.userName != null and '' != userVo.userName">
 				user_name=#{userVo.userName}
+			</if>
+			<if test="userVo.roleId != null and '' != userVo.roleId">
+				and role_id=#{userVo.roleId}
 			</if>
 			<if test="userVo.startDate != null and '' != userVo.startDate and userVo.endDate != null and '' != userVo.endDate">
 				<![CDATA[and create_date >= #{userVo.startDate} and create_date <= #{userVo.endDate}]]>

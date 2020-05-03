@@ -33,7 +33,7 @@ public class Role extends BaseEntity{
 	/**
 	 * 有效标识 0:启用1：停用
 	 */
-	private byte validFlag;
+	private Integer validFlag;
 	/**
 	 * 排序
 	 */
@@ -74,13 +74,18 @@ public class Role extends BaseEntity{
 	public void setRightId(String rightId){
 		this.rightId = rightId;
 	}
-	public byte getValidFlag(){
-		return this.validFlag;
-	}
 	
-	public void setValidFlag(byte validFlag){
+	public Integer getValidFlag() {
+	
+		return validFlag;
+	}
+
+	
+	public void setValidFlag(Integer validFlag) {
+	
 		this.validFlag = validFlag;
 	}
+
 	public Integer getSortId(){
 		return this.sortId;
 	}

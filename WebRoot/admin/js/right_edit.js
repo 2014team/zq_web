@@ -56,6 +56,9 @@ layui.use([ 'form', 'layer' ], function() {
 
 		return false;
 	});
+	
+	
+	
 });
 
 //检查是否保存还是修改操作
@@ -68,3 +71,5 @@ function checkSave() {
 function echoSelect(){
 	echoSelectData("rightCategoryId",$("#rightCategoryId").attr('value'))
 }
+
+

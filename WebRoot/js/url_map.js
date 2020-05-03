@@ -11,6 +11,7 @@ var admin_url_map = {
 	'admin/USER/EDIT': {url: '/admin/user/edit', isUsed: true, desc: '编辑用户'},
 	'admin/USER/SAVE': {url: '/admin/user/save', isUsed: true, desc: '保存用户'},
 	'admin/USER/BATCH/DELETE': {url: '/admin/user/batch/delete', isUsed: true, desc: '用户批量删除'},
+	'admin/USER/GET': {url: '/admin/user/get', isUsed: true, desc: '查找单个用户'},
 	
 	//权限分类
 	'admin/RIGHTCATEGORY/SAVE': {url: '/admin/rightCategory/save', isUsed: true, desc: '权限分类保存'},
@@ -37,6 +38,7 @@ var admin_url_map = {
 	'admin/ROLE/EDIT': {url: '/admin/role/edit', isUsed: true, desc: '角色编辑'},
 	'admin/ROLE/LIST': {url: '/admin/role/list', isUsed: true, desc: '角色列表'},
 	'admin/ROLE/BATCH/DELETE': {url: '/admin/role/batch/delete', isUsed: true, desc: '角色批量删除'},
+	'admin/ROLE/VALIDFLAG': {url: '/admin/role/validFlag', isUsed: true, desc: '角色状态修改'}
 
 }
 

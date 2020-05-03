@@ -20,6 +20,7 @@ import com.zq.admin.service.RightService;
 import com.zq.admin.service.RoleService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.entity.JsonResult;
+import com.zq.common.util.StringUtil;
 
 /**
  * @ClassName: RoleController
@@ -48,9 +49,12 @@ public class RoleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/role/save", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult save(RoleVo roleVo) {
+	public JsonResult save(RoleVo roleVo,@RequestParam(required = false,value="categoryIdArr[]") Integer[] categoryIdArr,@RequestParam(required = false,value="rightIdArr[]") Integer[] rightIdArr) {
 		JsonResult result = new JsonResult();
-
+		
+		roleVo.setCategoryId(StringUtil.trim(categoryIdArr));
+		roleVo.setRightId(StringUtil.trim(rightIdArr));
+		
 		// 参数验证
 		String errMsg = roleService.checkParam(roleVo);
 		if (StringUtils.isNotBlank(errMsg)) {
@@ -142,9 +146,12 @@ public class RoleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/role/update", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult update(RoleVo roleVo) {
+	public JsonResult update(RoleVo roleVo,@RequestParam(required = false,value="categoryIdArr[]") Integer[] categoryIdArr,@RequestParam(required = false,value="rightIdArr[]") Integer[] rightIdArr) {
 		JsonResult result = new JsonResult();
 
+		roleVo.setCategoryId(StringUtil.trim(categoryIdArr));
+		roleVo.setRightId(StringUtil.trim(rightIdArr));
+		
 		// 验证参数
 		Integer roleId = roleVo.getRoleId();
 		if (null == roleId) {
@@ -172,6 +179,41 @@ public class RoleController {
 		}
 
 		return result;
+	}
+	
+
+	/**
+	 * @Title: validFlag
+	 * @Description: 更新状态
+	 * @author zhuzq
+	 * @date 2020年4月23日 下午1:39:36
+	 * @param roleVo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/role/validFlag", method = { RequestMethod.POST ,RequestMethod.GET })
+	public JsonResult validFlag(RoleVo roleVo) {
+		JsonResult jsonResult = new JsonResult();
+		Integer roleId = roleVo.getRoleId();
+		if (null == roleId) {
+			jsonResult.failure("角色ID参数错误");
+			return jsonResult;
+		}
+
+		Integer validFlag = roleVo.getValidFlag();
+		if (null == validFlag) {
+			jsonResult.failure("状态参数错误");
+			return jsonResult;
+		}
+
+		// 更新状态
+		boolean result = roleService.updateValidFlag(roleVo);
+		if (result) {
+			jsonResult.success();
+		} else {
+			jsonResult.failure();
+		}
+		return jsonResult;
 	}
 
 	/**
@@ -233,6 +275,22 @@ public class RoleController {
 		request.setAttribute("rightList", rightList);
 		
 		return "/admin/role/role_edit";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/admin/role/get", method = { RequestMethod.GET, RequestMethod.POST })
+	public JsonResult get(Integer roleId) {
+		
+		JsonResult result = new JsonResult();
+		// 验证参数
+		if (null == roleId || roleId< 1) {
+			result.failure("角色ID不能为空");
+			return result;
+		}
+		RoleDto roleDto = roleService.getRole(roleId);
+		result.success("roleDTO", roleDto);
+		return result;
 	}
 
 }

@@ -21,10 +21,22 @@
     <div class="x-body">
       <div class="layui-row">
         <div class="layui-form layui-col-md12 x-so">
+          <div class="layui-input-inline">
           <input class="layui-input" placeholder="开始日" name="startDate" id="startDate" readonly>
           <input class="layui-input" placeholder="截止日" name="endDate" id="endDate" readonly>
+         </div>
+          <div class="layui-input-inline">
+	             <select id="roleId" lay-search>
+	                 <option value="" >请选择角色</option>
+	              	  <c:forEach items="${roleDtoList}" var="item">
+	                  	<option value="${item.roleId}" >${item.roleName}</option>
+	                  </c:forEach>	
+	            </select>
+	          </div>
+           <div class="layui-input-inline">
           <input type="text" id="search_input" placeholder="请输入用户名" autocomplete="off" class="layui-input">
           <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
+          </div>
         </div>
       </div>
       

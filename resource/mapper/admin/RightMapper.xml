@@ -207,5 +207,22 @@
  		</where>
  		order by sort_id ,create_date desc ;
 	</select>
+	
+	<!-- 批量查找 -->
+	<select id="getByBatch"  parameterType="java.util.List" resultMap="resultMap">
+		select 
+				right_id
+				,rule
+				,right_name
+				,right_category_id
+				,sort_Id
+				,create_date
+				,update_date
+ 		 from t_admin_right
+		where right_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
 
 </mapper>

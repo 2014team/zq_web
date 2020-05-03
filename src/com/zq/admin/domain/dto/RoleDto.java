@@ -1,7 +1,4 @@
 package com.zq.admin.domain.dto;
-import java.util.List;
-import java.util.Map;
-
 import com.zq.common.entity.BaseEntity;
  
 /**
@@ -29,24 +26,21 @@ public class RoleDto extends BaseEntity{
 	 * 权限类别ID
 	 */
 	private String categoryId;
+	private String categoryName;
 	/**
 	 * 权限ID
 	 */
 	private String rightId;
+	private String rightName;
 	/**
 	 * 有效标识 0:启用1：停用
 	 */
-	private byte validFlag;
+	private Integer validFlag;
 	/**
 	 * 排序
 	 */
 	private Integer sortId;
 	
-	
-	/**
-	* 权限
-	*/
-	private Map<List<RightCategoryDto>,List<RightDto>> rightMap;
  
 	public Integer getRoleId(){
 		return this.roleId;
@@ -83,13 +77,19 @@ public class RoleDto extends BaseEntity{
 	public void setRightId(String rightId){
 		this.rightId = rightId;
 	}
-	public byte getValidFlag(){
-		return this.validFlag;
-	}
 	
-	public void setValidFlag(byte validFlag){
+	
+	public Integer getValidFlag() {
+	
+		return validFlag;
+	}
+
+	
+	public void setValidFlag(Integer validFlag) {
+	
 		this.validFlag = validFlag;
 	}
+
 	public Integer getSortId(){
 		return this.sortId;
 	}
@@ -97,4 +97,28 @@ public class RoleDto extends BaseEntity{
 	public void setSortId(Integer sortId){
 		this.sortId = sortId;
 	}
+
+	
+	public String getCategoryName() {
+	
+		return categoryName;
+	}
+
+	
+	public void setCategoryName(String categoryName) {
+	
+		this.categoryName = categoryName;
+	}
+
+	
+	public String getRightName() {
+	
+		return rightName;
+	}
+
+	public void setRightName(String rightName) {
+	
+		this.rightName = rightName;
+	}
+	
 }

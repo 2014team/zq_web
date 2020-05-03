@@ -22,6 +22,8 @@ public class UserDto extends BaseEntity {
 	 * 角色ID
 	 */
 	private Integer roleId;
+	
+	private String roleName;
 
 	/**
 	 * 有效标识 0:启用1：停用
@@ -104,5 +106,17 @@ public class UserDto extends BaseEntity {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
+	
+	public String getRoleName() {
+	
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+	
+		this.roleName = roleName;
+	}
+	
 	
 }

@@ -1,8 +1,11 @@
 package com.zq.admin.dao;
 
-import com.zq.common.dao.BaseDao;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
+
 import com.zq.admin.domain.entity.RightCategory;
+import com.zq.common.dao.BaseDao;
 
 /**
  * @ClassName: RightCategoryDao
@@ -12,5 +15,15 @@ import com.zq.admin.domain.entity.RightCategory;
  */
 @Repository
 public interface RightCategoryDao extends BaseDao<RightCategory,Integer>{
+	
+	/**
+	* @Title: getByBatch
+	* @Description: 批量查找
+	* @author zhuzq
+	* @date  2020年5月2日 下午5:23:34
+	* @param list
+	* @return
+	*/
+	List<RightCategory> getByBatch(List<String> list);
 
 }

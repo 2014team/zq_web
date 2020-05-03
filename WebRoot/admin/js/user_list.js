@@ -8,6 +8,8 @@ const USER_DELETE = getAminUrl('admin/USER/DELETE');
 const USER_EDIT = getAminUrl('admin/USER/EDIT');
 /*批量删除*/
 const USER_BATCH_DELETE = getAminUrl('admin/USER/BATCH/DELETE');
+/*查找单个对象*/
+const USER_GET = getAminUrl('admin/USER/GET');
 //行对象
 var rowObj = "";
 
@@ -64,6 +66,9 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 				field : 'password',
 				title : '密码'
 			}, {
+				field : 'roleName',
+				title : '角色'
+			},{
 				field : 'createDate',
 				title : '创建日期',
 				templet : function(d) {
@@ -107,6 +112,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 	/*搜索*/
 	$('#search_id').on('click', function(){
         var userName = $('#search_input').val();
+        var roleId = $('#roleId').val();
 		var startDate = $("#startDate").val();
 		var endDate = $("#endDate").val();
 		      //执行重载
@@ -117,6 +123,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 		        }
 		        ,where: {
 		            userName: userName,
+		            roleId: roleId,
 		            startDate: startDate,
 		            endDate: endDate
 		        }
@@ -242,15 +249,22 @@ function batchDel() {
 
 /*更新行数据*/
 function updateRowData(obj){
-	 var reqData = obj.field;
-   	 rowObj.update({
-		userId : reqData.userId,
-		userName : reqData.userName,
-		password : reqData.password,
-		isAdmin : reqData.isAdmin,
-		validFlag : reqData.validFlag,
-		sortId : reqData.sortId,
-	});
+	var reqData = obj.field;
+	 reqPostHasParameter(USER_GET, {"userId":reqData.userId}, function(result) {
+		 reqData = result.data.userDto;
+		 rowObj.update({
+			userId : reqData.userId,
+			userName : reqData.userName,
+			password : reqData.password,
+			roleName : reqData.roleName,
+			isAdmin : reqData.isAdmin,
+			validFlag : reqData.validFlag,
+			roleName : reqData.roleName,
+			sortId : reqData.sortId,
+			});	
+	 }, function(e) {
+		 console.log(e);
+	 })
 }
 
 /*表格重载*/

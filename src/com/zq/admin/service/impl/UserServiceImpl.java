@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zq.admin.constant.ValidFlagEnum;
+import com.zq.admin.dao.RoleDao;
 import com.zq.admin.dao.UserDao;
 import com.zq.admin.domain.dto.UserDto;
+import com.zq.admin.domain.entity.Role;
 import com.zq.admin.domain.entity.User;
 import com.zq.admin.domain.vo.UserVo;
 import com.zq.admin.service.UserService;
@@ -32,6 +34,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private RoleDao roleDao;
 
 	/**
 	 * @Title: saveUser
@@ -325,11 +329,20 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @return
 	 */
 	private UserDto convertUser(User user) {
+		
 		UserDto dto = new UserDto();
+		Integer roleId = user.getRoleId();
+		Role role = roleDao.get(roleId);
+		if(null != role){
+			String roleName = role.getRoleName();
+			dto.setRoleName(roleName);
+		}
+		
+		
 		dto.setUserId(user.getUserId());
 		dto.setUserName(user.getUserName());
 		dto.setPassword(user.getPassword());
-		dto.setRoleId(user.getRoleId());
+		dto.setRoleId(roleId);
 		dto.setSortId(user.getSortId());
 		dto.setValidFlag(user.getValidFlag());
 		dto.setCreateDate(user.getCreateDate());

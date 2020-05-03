@@ -1,5 +1,7 @@
 ﻿﻿/*列表数据*/
 const LIST = getAminUrl('admin/ROLE/LIST')
+/*列表状态修改*/
+const VALIDFLAG = getAminUrl('admin/ROLE/VALIDFLAG');
 /*列表删除*/
 const DELETE = getAminUrl('admin/ROLE/DELETE');
 /*编辑*/
@@ -46,7 +48,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 				title : '角色名'
 			}
 			, {
-				field : 'categoryId',
+				field : 'rightName',
 				title : '拥有权限规则'
 			}, {
 				field : 'description',
@@ -87,10 +89,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 	
 	/*搜索*/
 	$('#search_id').on('click', function(){
-        var rightName = $('#search_input').val();
-        var rightCategoryId = $('#rightCategoryId').val();
-		var startDate = $("#startDate").val();
-		var endDate = $("#endDate").val();
+        var roleName = $('#search_input').val();
 		      //执行重载
 		      table.reload( 'tableId',{
 		      	method:"post",
@@ -98,8 +97,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 		          curr: 1 //重新从第 1 页开始
 		        }
 		        ,where: {
-		        	roleName: roleName,
-		        	rightCategoryId: rightCategoryId
+		        	roleName: roleName
 		        }
 		      }, 'data');
    
@@ -137,12 +135,11 @@ function del(obj) {
 
 /*编辑*/
 function edit(obj) {
-	 
 	var url = EDIT;
 	var title = '新增';
 	if(obj){
 		var roleId = obj.data.roleId;
-		url = EDIT + "?rightId=" + roleId;
+		url = EDIT + "?roleId=" + roleId;
 		 title = '修改';
 	}	
 	x_admin_show(title, url);
@@ -158,9 +155,9 @@ function batchDel() {
 	layer.confirm('确认要删除吗？', function(index) {
 		var array = new Array();
 		$.each(selectData,function(i,e){
-			array.push(e.rightId);
+			array.push(e.roleId);
 		 })
-		reqPostHasParameter(BATCH_DELETE, {"rightIdArr":array},function(result) {
+		reqPostHasParameter(BATCH_DELETE, {"roleIdArr":array},function(result) {
 			if (result.code == 200) { //这个是从后台取回来的状态值
 				layer.msg(result.msg, {
 					icon : 1,
@@ -177,16 +174,60 @@ function batchDel() {
 		
 	});
 		
-   }	
+   };
+
+
+/*状态修改*/
+function userValidFlag(obj) {
+	var confirmTile = '确认要停用吗？';
+	var data = obj.data; //获得当前行数据
+	var roleId = data.roleId;
+	var validFlag = data.validFlag
+	if (validFlag == 0) {
+		validFlag = 1;
+	} else {
+		confirmTile = '确认要启用吗？';
+		validFlag = 0;
+	}
+	layer.confirm(confirmTile, function(index) {
+		reqPostHasParameter(VALIDFLAG, {
+			"roleId" : roleId,
+			"validFlag" : validFlag
+		}, function(result) {
+			if (result.code == 200) {
+				layer.msg(result.msg, {
+					icon : 1,
+					time : 1000
+				});
+				
+				rowObj.update({
+					validFlag :validFlag
+					
+				});
+				
+			} else {
+				layer.msg(result.msg, {
+					icon : 2,
+					time : 1000
+				});
+			}
+		}, function(e) {
+			console.log(e);
+		})
+	});
+};
 
 /*更新行数据*/
 function updateRowData(obj){
 	 var reqData = obj.field;
 	 reqPostHasParameter(GET, {"roleId":reqData.roleId}, function(result) {
-		 reqData = result.data.rightDTO;
+		 reqData = result.data.roleDTO;
 		 rowObj.update({
 			   roleId : reqData.roleId,
 			   roleName : reqData.roleName,
+			   rightName : reqData.rightName,
+			   validFlag : reqData.validFlag,
+			   description : reqData.description,
 			   sortId : reqData.sortId
 			});	
 	 }, function(e) {

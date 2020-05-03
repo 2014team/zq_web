@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zq.admin.domain.dto.RightCategoryDto;
 import com.zq.admin.domain.dto.RightDto;
 import com.zq.admin.domain.entity.RightCategory;
 import com.zq.admin.domain.vo.RightVo;
@@ -205,8 +206,8 @@ public class RightController {
 	@RequestMapping(value = "/admin/right/list/ui", method = { RequestMethod.GET })
 	public String toList(HttpServletRequest request) {
 		//权限分类列表
-		List<RightCategory> rightCategoryList = rightCategoryService.select(new HashMap<String, Object>());
-		request.setAttribute("rightCategoryList", rightCategoryList);
+		List<RightCategoryDto> rightCategoryDtoList = rightCategoryService.getRightCategoryList();
+		request.setAttribute("rightCategoryDtoList", rightCategoryDtoList);
 		
 		return "/admin/right/right_list";
 	}

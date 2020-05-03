@@ -17,30 +17,33 @@
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
     </div>
-
+    
+    
     <div class="x-body">
-	     <div class="layui-row">
-	       <div class="layui-form layui-col-md12 x-so">
-	         <input class="layui-input" placeholder="开始日" name="startDate" id="startDate" readonly>
-	         <input class="layui-input" placeholder="截止日" name="endDate" id="endDate" readonly>
-		       <div class="layui-input-inline">
-		            <select id="rightCategoryId">
-		                 <option value="" >请选择分类</option>
-		              	  <c:forEach items="${rightCategoryList}" var="item">
-		                  	<option value="${item.categoryId}" >${item.categoryName}</option>
-		                  </c:forEach>	
-		            </select>
-		        </div>
-	         
-	         <input type="text" id="search_input" placeholder="请输入权限名称" autocomplete="off" class="layui-input">
-	         <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
-	       </div>
-	  </div>
-      
+      <div class="layui-row">
+        <div class="layui-form layui-col-md12 x-so layui-form-pane">
+	          <div class="layui-input-inline">
+	          	 <input class="layui-input" placeholder="开始日" name="startDate" id="startDate" readonly>
+		         <input class="layui-input" placeholder="截止日" name="endDate" id="endDate" readonly>
+	          </div>
+	          <div class="layui-input-inline">
+	             <select id="rightCategoryId">
+	                 <option value="" >请选择分类</option>
+	              	  <c:forEach items="${rightCategoryDtoList}" var="item">
+	                  	<option value="${item.categoryId}" >${item.categoryName}</option>
+	                  </c:forEach>	
+	            </select>
+	          </div>
+	          <div class="layui-input-inline">
+	        	 <input type="text" id="search_input" placeholder="请输入权限名称" autocomplete="off" class="layui-input">
+		         <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
+	        </div>
+        </div>
+      </div>
+       
        <!-- 列表 -->	
       <table class="layui-hide" id="table_list" lay-filter="table_list" ></table>
     </div>
-    
     
     <script type="text/html" id="toolbar">
       <div class="layui-btn-container toolbar">

@@ -124,7 +124,7 @@ public class DataBaseUtil {
 		else if(sqlType.equalsIgnoreCase("BIT"))
 			javaType = "boolean";
 		else if(sqlType.equalsIgnoreCase("TINYINT"))
-			javaType = "byte";
+			javaType = "Integer";
 		else if(sqlType.equalsIgnoreCase("SAMLLINT"))
 			javaType = "short";
 		else if(sqlType.equalsIgnoreCase("INTEGER")||sqlType.equalsIgnoreCase("int")||sqlType.equalsIgnoreCase("mediumint"))

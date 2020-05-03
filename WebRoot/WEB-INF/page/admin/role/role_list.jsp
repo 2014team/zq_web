@@ -22,24 +22,16 @@
     <div class="x-body">
 	     <div class="layui-row">
 	       <div class="layui-form layui-col-md12 x-so">
-		       <div class="layui-input-inline">
-		            <select id="rightCategoryId">
-		                 <option value="" >请选择分类</option>
-		              	  <c:forEach items="${rightCategoryList}" var="item">
-		                  	<option value="${item.categoryId}" >${item.categoryName}</option>
-		                  </c:forEach>	
-		            </select>
-		        </div>
-	         
+	         <div class="layui-input-inline">
 	         <input type="text" id="search_input" placeholder="请输入角色名" autocomplete="off" class="layui-input">
 	         <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
+	       </div>
 	       </div>
 	  </div>
       
        <!-- 列表 -->	
       <table class="layui-hide" id="table_list" lay-filter="table_list" ></table>
     </div>
-    
     
     <script type="text/html" id="toolbar">
       <div class="layui-btn-container toolbar">

@@ -1,5 +1,7 @@
 package com.zq.admin.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.dto.UserDto;
 import com.zq.admin.domain.vo.UserVo;
+import com.zq.admin.service.RoleService;
 import com.zq.admin.service.UserService;
 import com.zq.admin.util.SessionUtil;
-import com.zq.common.entity.JsonResult;
 import com.zq.common.entity.AdminResultByPage;
+import com.zq.common.entity.JsonResult;
 
 /**
  * @ClassName: UserController
@@ -28,6 +32,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
 
 	/**
 	 * @Title: save
@@ -293,7 +299,9 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/admin/user/list/ui", method = { RequestMethod.GET })
-	public String toList() {
+	public String toList(HttpServletRequest request) {
+		List<RoleDto>  roleDtoList = roleService.selectList();
+		request.setAttribute("roleDtoList", roleDtoList);
 		return "/admin/user/user_list";
 	}
 
@@ -313,7 +321,35 @@ public class UserController {
 			UserDto userDTO = userService.getUser(userId);
 			request.setAttribute("userDTO", userDTO);
 		}
+		
+		List<RoleDto> roleatoList = roleService.selectList();
+		request.setAttribute("roleatoList", roleatoList);
+		
+		
 		return "/admin/user/user_edit";
+	}
+	
+	/**
+	* @Title: get
+	* @Description: 查找
+	* @author zhuzq
+	* @date  2020年5月3日 下午3:18:05
+	* @param userId
+	* @return
+	*/
+	@ResponseBody
+	@RequestMapping(value = "/admin/user/get", method = { RequestMethod.GET, RequestMethod.POST })
+	public JsonResult get(Integer userId) {
+		
+		JsonResult result = new JsonResult();
+		// 验证参数
+		if (null == userId || userId< 1) {
+			result.failure("用户ID不能为空");
+			return result;
+		}
+		UserDto userDto = userService.getUser(userId);
+		result.success("userDto", userDto);
+		return result;
 	}
 
 }

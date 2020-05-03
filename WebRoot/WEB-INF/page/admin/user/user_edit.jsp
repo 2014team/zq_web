@@ -54,8 +54,9 @@
                <div class="layui-input-inline">
 		              <select name="roleId" id="roleId" value="${userDTO.roleId}" lay-verify="required"  lay-search>
 		                 <option value="" >请选择角色</option>
-		                 <option value="0" >超级管理员</option>
-				 		 <option value="1" >普通管理员</option>
+		                 <c:forEach items="${roleatoList}" var="item">
+		                 <option value="${item.roleId }" >${item.roleName }</option>
+		                 </c:forEach>
 		              </select>
 			  </div>
 		  </div>	

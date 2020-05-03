@@ -1,16 +1,12 @@
 package com.zq.admin.service;
 
-import com.zq.common.service.BaseService;
+import java.util.List;
+
+import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.entity.Role;
 import com.zq.admin.domain.vo.RoleVo;
-
-import java.util.List;
-import java.util.Map;
-
-import com.zq.admin.domain.dto.RightCategoryDto;
-import com.zq.admin.domain.dto.RightDto;
-import com.zq.admin.domain.dto.RoleDto;
 import com.zq.common.entity.AdminResultByPage;
+import com.zq.common.service.BaseService;
 
 /**
  * @ClassName: RoleDao
@@ -100,6 +96,25 @@ public interface RoleService extends BaseService<Role,Integer>{
 	 * @return
 	 */
 	public String checkUnique(RoleVo roleVo);
+
+	/**
+	* @Title: updateValidFlag
+	* @Description: 更新状态
+	* @author zhuzq
+	* @date  2020年5月3日 上午11:35:21
+	* @param roleVo
+	* @return
+	*/
+	public boolean updateValidFlag(RoleVo roleVo);
+
+	/**
+	* @Title: selectList
+	* @Description: 获取列表
+	* @author zhuzq
+	* @date  2020年5月3日 下午2:32:59
+	* @return
+	*/
+	public List<RoleDto> selectList();
 	
 
 }
