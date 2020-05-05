@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.admin.dao.MenuDao">
+	
+	<!-- resultMap -->
+	<resultMap type="com.zq.admin.domain.entity.Menu" id="resultMap">
+		<result property="menuId" column="menu_id" />
+		<result property="menuName" column="menu_name" />
+		<result property="menuUrl" column="menu_url" />
+		<result property="validFlag" column="valid_flag" />
+		<result property="sortId" column="sort_id" />
+		<result property="menuType" column="menu_type" />
+		<result property="createDate" column="create_date" />
+		<result property="updateDate" column="update_date" />
+		<result property="parentId" column="parent_id" />
+	</resultMap>
+
+	<!-- 保存 -->
+	<insert id="save" parameterType="com.zq.admin.domain.entity.Menu" useGeneratedKeys="true" keyProperty="menuId">
+		insert into t_admin_menu (
+			menu_name
+			,menu_url
+			,valid_flag
+			,sort_id
+			,menu_type
+			,create_date
+			,update_date
+			,parent_id
+		)
+		 values
+		 (
+			#{menuName}
+				,#{menuUrl}
+				,#{validFlag}
+				,#{sortId}
+				,#{menuType}
+				,#{createDate}
+				,#{updateDate}
+				,#{parentId}
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="Integer">
+		delete from t_admin_menu where menu_id = #{menuId};
+	</delete>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByBatch"  parameterType="java.util.List">
+		delete from
+		t_admin_menu
+		where menu_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 修改-->
+	<update id="update" parameterType="com.zq.admin.domain.entity.Menu" >
+		update t_admin_menu 
+			set update_Date = now()
+				,menu_name = #{menuName}
+				,menu_url = #{menuUrl}
+				,valid_flag = #{validFlag}
+				,sort_id = #{sortId}
+				,menu_type = #{menuType}
+				,create_date = #{createDate}
+				,update_date = #{updateDate}
+				,parent_id = #{parentId}
+		where menu_id = #{menuId}
+	</update>
+	
+	<!-- 根据id获取对象-->
+ 	<select id="get" parameterType="Integer" resultMap="resultMap">
+ 		select 
+				menu_id
+				,menu_name
+				,menu_url
+				,valid_flag
+				,sort_id
+				,menu_type
+				,create_date
+				,update_date
+				,parent_id
+		 from t_admin_menu where menu_id = #{menuId} 
+		 order by sort_id ,create_date desc limit 1;
+ 	</select>
+ 	
+ 	<!-- 通过Map单个查找-->
+	<select id="getOneByMap" parameterType="Map" resultMap="resultMap">
+		select 
+				menu_id
+				,menu_name
+				,menu_url
+				,valid_flag
+				,sort_id
+				,menu_type
+				,create_date
+				,update_date
+				,parent_id
+		 from
+		t_admin_menu
+		<where>
+ 			<if test="null != menuName and ''!= menuName">
+			menu_name = #{menuName}
+			</if>
+			<if test="null != menuUrl and ''!= menuUrl">
+			and menu_url = #{menuUrl}
+			</if> 
+			<if test="null != validFlag ">
+			and valid_flag = #{validFlag}
+			</if> 
+			<if test="null != sortId ">
+			and sort_id = #{sortId}
+			</if> 
+			<if test="null != menuType ">
+			and menu_type = #{menuType}
+			</if> 
+			<if test="null != createDate and ''!= createDate">
+			and create_date = #{createDate}
+			</if> 
+			<if test="null != updateDate and ''!= updateDate">
+			and update_date = #{updateDate}
+			</if> 
+			<if test="null != parentId ">
+			and parent_id = #{parentId}
+			</if> 
+		</where>
+		order by sort_id ,create_date desc limit 1;
+	</select>
+	
+	<!-- 列表查询 -->
+	<select id="select" parameterType="Map" resultMap="resultMap">
+ 		select 
+				menu_id
+				,menu_name
+				,menu_url
+				,valid_flag
+				,sort_id
+				,menu_type
+				,create_date
+				,update_date
+				,parent_id
+ 		 from t_admin_menu
+ 		<where>
+ 			<if test="null != menuId and ''!= menuId">
+			menu_id = #{menuId}
+			</if>
+ 			<if test="null != menuName and ''!= menuName">
+			menu_name = #{menuName}
+			</if>
+			<if test="null != menuUrl and ''!= menuUrl">
+			and menu_url = #{menuUrl}
+			</if> 
+			<if test="null != validFlag ">
+			and valid_flag = #{validFlag}
+			</if> 
+			<if test="null != sortId ">
+			and sort_id = #{sortId}
+			</if> 
+			<if test="null != menuType ">
+			and menu_type = #{menuType}
+			</if> 
+			<if test="null != createDate and ''!= createDate">
+			and create_date = #{createDate}
+			</if> 
+			<if test="null != updateDate and ''!= updateDate">
+			and update_date = #{updateDate}
+			</if> 
+			<if test="null != parentId ">
+			and parent_id = #{parentId}
+			</if> 
+ 		</where>
+ 		order by sort_id ,create_date desc;
+ 	</select>
+ 	
+ 	<!-- 分页查找 -->
+	<select id="findByPage" parameterType="Map" resultMap="resultMap">
+		select 
+				menu_id
+				,menu_name
+				,menu_url
+				,valid_flag
+				,sort_id
+				,menu_type
+				,create_date
+				,update_date
+				,parent_id
+ 		 from t_admin_menu
+ 		<where>
+ 			<if test="null != menuVo.menuId ">
+			menu_id = #{menuVo.menuId} 
+			</if>	
+			<if test="null != menuVo.menuName and ''!= menuVo.menuName">
+			and menu_name = #{menuVo.menuName}
+			</if> 
+			<if test="null != menuVo.menuUrl and ''!= menuVo.menuUrl">
+			and menu_url = #{menuVo.menuUrl}
+			</if> 
+			<if test="null != menuVo.validFlag ">
+			and valid_flag = #{menuVo.validFlag}
+			</if> 
+			<if test="null != menuVo.sortId ">
+			and sort_id = #{menuVo.sortId}
+			</if> 
+			<if test="null != menuVo.menuType ">
+			and menu_type = #{menuVo.menuType}
+			</if> 
+			<if test="null != menuVo.createDate and ''!= menuVo.createDate">
+			and create_date = #{menuVo.createDate}
+			</if> 
+			<if test="null != menuVo.updateDate and ''!= menuVo.updateDate">
+			and update_date = #{menuVo.updateDate}
+			</if> 
+			<if test="null != menuVo.parentId ">
+			and parent_id = #{menuVo.parentId}
+			</if> 
+ 		</where>
+ 		order by sort_id ,create_date desc   
+ 		<if test="null != page and '' != page and null != page.begin and '' != page.begin and null !=page.limit  and '' != page.limit">
+ 		 limit ${page.begin} , ${page.limit};
+ 		 </if>
+	</select>
+	
+	<!-- 分页查找数量 -->
+	<select id="findByPageCount" parameterType="Map" resultType="Integer">
+		select count(1)  from t_admin_menu
+ 		<where>
+ 			<if test="null != menuVo.menuId ">
+			menu_id = #{menuVo.menuId} 
+			</if>	
+			<if test="null != menuVo.menuName and ''!= menuVo.menuName">
+			and menu_name = #{menuVo.menuName}
+			</if> 
+			<if test="null != menuVo.menuUrl and ''!= menuVo.menuUrl">
+			and menu_url = #{menuVo.menuUrl}
+			</if> 
+			<if test="null != menuVo.validFlag ">
+			and valid_flag = #{menuVo.validFlag}
+			</if> 
+			<if test="null != menuVo.sortId ">
+			and sort_id = #{menuVo.sortId}
+			</if> 
+			<if test="null != menuVo.menuType ">
+			and menu_type = #{menuVo.menuType}
+			</if> 
+			<if test="null != menuVo.createDate and ''!= menuVo.createDate">
+			and create_date = #{menuVo.createDate}
+			</if> 
+			<if test="null != menuVo.updateDate and ''!= menuVo.updateDate">
+			and update_date = #{menuVo.updateDate}
+			</if> 
+			<if test="null != menuVo.parentId ">
+			and parent_id = #{menuVo.parentId}
+			</if> 
+ 		</where>
+ 		order by sort_id ,create_date desc ;
+	</select>
+
+</mapper>

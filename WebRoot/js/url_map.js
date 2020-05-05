@@ -38,7 +38,17 @@ var admin_url_map = {
 	'admin/ROLE/EDIT': {url: '/admin/role/edit', isUsed: true, desc: '角色编辑'},
 	'admin/ROLE/LIST': {url: '/admin/role/list', isUsed: true, desc: '角色列表'},
 	'admin/ROLE/BATCH/DELETE': {url: '/admin/role/batch/delete', isUsed: true, desc: '角色批量删除'},
-	'admin/ROLE/VALIDFLAG': {url: '/admin/role/validFlag', isUsed: true, desc: '角色状态修改'}
+	'admin/ROLE/VALIDFLAG': {url: '/admin/role/validFlag', isUsed: true, desc: '角色状态修改'},
+	
+	//菜单
+	'admin/MENU/GET': {url: '/admin/menu/get', isUsed: true, desc: '菜单查找'},
+	'admin/MENU/SAVE': {url: '/admin/menu/save', isUsed: true, desc: '菜单保存'},
+	'admin/MENU/DELETE': {url: '/admin/menu/delete', isUsed: true, desc: '菜单删除'},
+	'admin/MENU/UPDATE': {url: '/admin/menu/update', isUsed: true, desc: '菜单修改'},
+	'admin/MENU/EDIT': {url: '/admin/menu/edit', isUsed: true, desc: '菜单编辑'},
+	'admin/MENU/LIST': {url: '/admin/menu/list', isUsed: true, desc: '菜单列表'},
+	'admin/MENU/BATCH/DELETE': {url: '/admin/menu/batch/delete', isUsed: true, desc: '菜单批量删除'},
+	'admin/MENU/VALIDFLAG': {url: '/admin/menu/validFlag', isUsed: true, desc: '菜单状态修改'}
 
 }
 
