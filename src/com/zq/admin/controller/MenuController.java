@@ -1,5 +1,7 @@
 package com.zq.admin.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -13,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zq.admin.domain.dto.MenuDto;
 import com.zq.admin.domain.vo.MenuVo;
 import com.zq.admin.service.MenuService;
-import com.zq.common.entity.JsonResult;
 import com.zq.common.entity.AdminResultByPage;
+import com.zq.common.entity.JsonResult;
 
 /**
  * @ClassName: MenuController
@@ -212,10 +214,37 @@ public class MenuController {
 	public String edit(Integer menuId, HttpServletRequest request) {
 		// 编辑,为空新增
 		if (null != menuId) {
-			MenuDto menuDTO = menuService.getMenu(menuId);
-			request.setAttribute("menuDTO", menuDTO);
+			MenuDto menuDto = menuService.getMenu(menuId);
+			request.setAttribute("menuDto", menuDto);
 		}
+		
+		List<MenuDto> menuDtoList =  menuService.selectList();
+		request.setAttribute("menuDtoList", menuDtoList);
+		
 		return "/admin/menu/menu_edit";
+	}
+	
+	/**
+	* @Title: get
+	* @Description: 查找
+	* @author zhuzq
+	* @date  2020年4月29日 下午6:20:21
+	* @param rightId
+	* @return
+	*/
+	@ResponseBody
+	@RequestMapping(value = "/admin/menu/get", method = { RequestMethod.GET, RequestMethod.POST })
+	public JsonResult get(Integer menuId) {
+		
+		JsonResult result = new JsonResult();
+		// 验证参数
+		if (null == menuId || menuId< 1) {
+			result.failure("菜单ID不能为空");
+			return result;
+		}
+		MenuDto menuDto = menuService.getMenu(menuId);
+		result.success("menuDto", menuDto);
+		return result;
 	}
 
 }

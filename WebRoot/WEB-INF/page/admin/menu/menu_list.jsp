@@ -43,14 +43,14 @@
    
     <!-- 操作模板 -->
     <script type="text/html" id="operateBarTpl">
-		<div class="class="td-manage">
-			<a title="状态修改" lay-event="updateValidFlag" href="javascript:;">
+		<div class="td-manage" >
+			<a title="状态修改" onclick="updateValidFlag({{d.menuId}})" href="javascript:;">
 					<i class="layui-icon">&#xe62f;</i>
 			  </a>
-              <a title="编辑"  lay-event="edit" href="javascript:;">
+              <a title="编辑"  onclick="edit({{d.menuId}})" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
-              <a title="删除"  lay-event="del" href="javascript:;">
+              <a title="删除"  onclick="del({{d.menuId}})" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
 		</div>

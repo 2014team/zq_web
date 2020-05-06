@@ -37,7 +37,7 @@ public class MenuVo extends BaseEntity{
 	/**
 	 * 父类ID
 	 */
-	private Integer parentId;
+	private String parentId;
  
 	public Integer getMenuId(){
 		return this.menuId;
@@ -81,11 +81,13 @@ public class MenuVo extends BaseEntity{
 	public void setMenuType(Integer menuType){
 		this.menuType = menuType;
 	}
-	public Integer getParentId(){
-		return this.parentId;
+
+	public String getParentId() {
+		return parentId;
 	}
-	
-	public void setParentId(Integer parentId){
+
+	public void setParentId(String parentId) {
 		this.parentId = parentId;
 	}
-}
+
+}	

@@ -55,7 +55,7 @@
    
     <!-- 操作模板 -->
     <script type="text/html" id="operateBarTpl">
-		<div class="class="td-manage">
+		<div class="td-manage">
               <a title="状态修改" lay-event="updateValidFlag" href="javascript:;">
 					<i class="layui-icon">&#xe62f;</i>
 			  </a>

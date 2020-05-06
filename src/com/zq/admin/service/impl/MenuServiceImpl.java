@@ -7,17 +7,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zq.admin.dao.MenuDao;
-import com.zq.admin.domain.entity.Menu;
-import com.zq.admin.service.MenuService;
-import com.zq.common.service.impl.BaseServiceImpl;
-import com.zq.admin.domain.vo.MenuVo;
 import com.zq.admin.domain.dto.MenuDto;
+import com.zq.admin.domain.entity.Menu;
+import com.zq.admin.domain.vo.MenuVo;
+import com.zq.admin.service.MenuService;
 import com.zq.common.entity.AdminResultByPage;
+import com.zq.common.service.impl.BaseServiceImpl;
 
 /**
  * @ClassName: MenuServiceImpl
@@ -114,7 +113,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer>  implements M
 		MenuDto menuDTO = null;
 		Menu menu = menuDao.get(menuId);
 		if (null != menu) {
-			menuDTO = convertMenuDto(menu);
+			menuDTO = menuDtoDeal(menu);
 		}
 		return menuDTO;
 	}
@@ -133,7 +132,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer>  implements M
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		
 		//默认选择父类
-		menuVo.setParentId(0);
+		menuVo.setParentId("0");
 		
 		paramMap.put("menuVo", menuVo);
 		paramMap.put("page", jsonResult);
@@ -187,9 +186,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer>  implements M
 		if (null == menuType) {
 			return "0:菜单1：按钮不能为空";
 		}
-		Integer parentId = menuVo.getParentId();
-		if (null == parentId) {
-			return "父类ID不能为空";
+		String  parentId = menuVo.getParentId();
+		if (StringUtils.isBlank(parentId)) {
+			menuVo.setParentId("0");
 		}
 		return null;
 	}
@@ -314,6 +313,28 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer>  implements M
 		paramMap.put("parentId", menuId);
 		List<Menu> menuList = menuDao.select(paramMap);
 		return menuList;
+	}
+
+	/**
+	* @Title: selectList
+	* @Description: 查询列表
+	* @author zhuzq
+	* @date  2020年5月6日 上午11:08:39
+	* @return
+	*/
+	@Override
+	public List<MenuDto> selectList() {
+		Map<String, Object> paramMap = null;
+		List<MenuDto> menuDtoList = null;
+		List<Menu> menuList = menuDao.select(paramMap);
+		if(null != menuList && menuList.size() > 0){
+			menuDtoList = new ArrayList<MenuDto>();
+			for (Menu menu : menuList) {
+				MenuDto menuDto = convertMenuDto(menu);
+				menuDtoList.add(menuDto);
+			}
+		}
+		return menuDtoList;
 	}
 	
 }

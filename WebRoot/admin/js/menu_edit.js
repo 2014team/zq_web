@@ -1,7 +1,7 @@
 ﻿/*更新*/
-const UPDATE = getAminUrl('admin/RIGHT/UPDATE');
+const UPDATE = getAminUrl('admin/MENU/UPDATE');
 /*保存*/
-const SAVE = getAminUrl('admin/RIGHT/SAVE');
+const SAVE = getAminUrl('admin/MENU/SAVE');
 
 $(function(){
 	//回显Select选值	
@@ -63,13 +63,15 @@ layui.use([ 'form', 'layer' ], function() {
 
 //检查是否保存还是修改操作
 function checkSave() {
-	var rightId = $("#rightId").val();
-	return rightId;
+	var menuId = $("#menuId").val();
+	return menuId;
 };
 
 //回显Select选值
 function echoSelect(){
-	echoSelectData("rightCategoryId",$("#rightCategoryId").attr('value'))
+	echoSelectData("validFlag",$("#validFlag").attr('value'));
+	echoSelectData("menuType",$("#menuType").attr('value'));
+	echoSelectData("parentId",$("#parentId").attr('value'));
 }
 
 

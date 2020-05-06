@@ -212,8 +212,8 @@ public class ${table.className?cap_first}Controller {
 	public String edit(Integer ${table.key_fields[0].java_field_Name}, HttpServletRequest request) {
 		// 编辑,为空新增
 		if (null != ${table.key_fields[0].java_field_Name}) {
-			${table.className?cap_first}Dto ${table.className?uncap_first}DTO = ${table.className?uncap_first}Service.get${table.className?cap_first}(${table.key_fields[0].java_field_Name});
-			request.setAttribute("${table.className?uncap_first}DTO", ${table.className?uncap_first}DTO);
+			${table.className?cap_first}Dto ${table.className?uncap_first}Dto = ${table.className?uncap_first}Service.get${table.className?cap_first}(${table.key_fields[0].java_field_Name});
+			request.setAttribute("${table.className?uncap_first}Dto", ${table.className?uncap_first}Dto);
 		}
 		return "/admin/${table.className?uncap_first}/${table.className?uncap_first}_edit";
 	}

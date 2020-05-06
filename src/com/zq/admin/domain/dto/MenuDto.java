@@ -48,7 +48,7 @@ public class MenuDto extends BaseEntity {
 	/**
 	 * 父类ID
 	 */
-	private Integer parentId;
+	private String parentId;
 
 	private List<MenuDto> childList;
 
@@ -112,16 +112,7 @@ public class MenuDto extends BaseEntity {
 		this.menuType = menuType;
 	}
 
-	public Integer getParentId() {
-
-		return this.parentId;
-	}
-
-	public void setParentId(Integer parentId) {
-
-		this.parentId = parentId;
-	}
-
+	
 	
 	public List<MenuDto> getChildList() {
 	
@@ -132,6 +123,14 @@ public class MenuDto extends BaseEntity {
 	public void setChildList(List<MenuDto> childList) {
 	
 		this.childList = childList;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
 	

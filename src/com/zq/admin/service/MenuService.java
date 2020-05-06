@@ -1,10 +1,13 @@
 package com.zq.admin.service;
 
-import com.zq.common.service.BaseService;
+import java.util.List;
+import java.util.Map;
+
+import com.zq.admin.domain.dto.MenuDto;
 import com.zq.admin.domain.entity.Menu;
 import com.zq.admin.domain.vo.MenuVo;
-import com.zq.admin.domain.dto.MenuDto;
 import com.zq.common.entity.AdminResultByPage;
+import com.zq.common.service.BaseService;
 
 /**
  * @ClassName: MenuDao
@@ -94,5 +97,14 @@ public interface MenuService extends BaseService<Menu,Integer>{
 	 * @return
 	 */
 	public String checkUnique(MenuVo menuVo);
+	
+	/**
+	* @Title: selectList
+	* @Description: 查询列表
+	* @author zhuzq
+	* @date  2020年5月6日 上午11:08:39
+	* @return
+	*/
+	public List<MenuDto> selectList();
 
 }
