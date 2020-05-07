@@ -23,7 +23,7 @@
 	     <div class="layui-row">
 	       <div class="layui-form layui-col-md12 x-so" >
 	         <div class="layui-input-inline">
-	         <input type="text" id="search_input" placeholder="请输入角色名" autocomplete="off" class="layui-input">
+	         <input type="text" id="search_input" placeholder="请输入名称" autocomplete="off" class="layui-input">
 	         <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
 	       </div>
 	       </div>
@@ -35,7 +35,6 @@
     
     <script type="text/html" id="toolbar">
       <div class="layui-btn-container toolbar">
-         <button class="layui-btn layui-btn-sm layui-btn-danger" onclick="batchDel()" >批量删除</button>
          <button class="layui-btn layui-btn-sm"  onclick="edit()" ><i class="layui-icon"></i>增加</button>
      </div>
 	</script>
@@ -44,9 +43,6 @@
     <!-- 操作模板 -->
     <script type="text/html" id="operateBarTpl">
 		<div class="td-manage" >
-			<a title="状态修改" onclick="updateValidFlag({{d.menuId}})" href="javascript:;">
-					<i class="layui-icon">&#xe62f;</i>
-			  </a>
               <a title="编辑"  onclick="edit({{d.menuId}})" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>

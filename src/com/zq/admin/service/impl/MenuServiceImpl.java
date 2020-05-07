@@ -131,8 +131,12 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu,Integer>  implements M
 	public AdminResultByPage findByPage(MenuVo menuVo, AdminResultByPage jsonResult) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		
-		//默认选择父类
-		menuVo.setParentId("0");
+		
+		String menuName = menuVo.getMenuName();
+		if(StringUtils.isBlank(menuName)){
+			//默认选择父类
+			menuVo.setParentId("0");
+		}
 		
 		paramMap.put("menuVo", menuVo);
 		paramMap.put("page", jsonResult);

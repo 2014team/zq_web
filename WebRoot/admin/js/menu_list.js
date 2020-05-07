@@ -96,7 +96,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 	                		  
 	                		  //二级菜单处理
 	                		  if(childList){
-	                			  tr.after('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;<i class="layui-icon x-show" status="false" onclick="showOrHide('+menuId+',this)"></i>'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="状态修改" lay-event="updateValidFlag" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
+	                			  tr.after('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;<i class="layui-icon x-show" status="false" onclick="showOrHide('+menuId+',this)"></i>'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
 	                			  
 	                			  var c_tr = that.find("tr[cate-id="+menuId+"]");
 		                		  //三级菜单处理
@@ -115,14 +115,14 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 		    	                			  c_validFlag_class += " layui-bg-red";
 		    	                			  c_validFlag_name = "已停用";
 		    	                		  }	  
-		    	                		  c_tr.after('<tr style="display: none;"  cate-id="'+c_menuId+'" fid="'+c_parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├'+c_menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+c_validFlag_class+'">'+c_validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="状态修改" lay-event="updateValidFlag" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="编辑" onclick="edit('+c_menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+c_menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
+		    	                		  c_tr.after('<tr style="display: none;"  cate-id="'+c_menuId+'" fid="'+c_parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├'+c_menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+c_validFlag_class+'">'+c_validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="编辑" onclick="edit('+c_menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+c_menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
 		                			  }
 		                		  }else{
 		                			  //
 		                		  }
 	                			  
 	                		  }else{
-	                			  tr.after('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;├'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="状态修改" lay-event="updateValidFlag" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
+	                			  tr.after('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;├'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
 	                		  
 	                		  }
 	                		  
@@ -156,7 +156,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 	
 	/*搜索*/
 	$('#search_id').on('click', function(){
-        var roleName = $('#search_input').val();
+        var menuName = $('#search_input').val();
 		      //执行重载
 		      table.reload( 'tableId',{
 		      	method:"post",
@@ -164,7 +164,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 		          curr: 1 //重新从第 1 页开始
 		        }
 		        ,where: {
-		        	roleName: roleName
+		        	menuName: menuName
 		        }
 		      }, 'data');
    
@@ -198,7 +198,7 @@ function del(menuId) {
 					icon : 1,
 					time : 1000
 				},function(){
-					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+					$("tr[cate-id="+menuId+"]").remove();
 					layer.close(index);		
 				});
 				
@@ -226,42 +226,14 @@ function edit(menuId) {
 	x_admin_show(title, url);
 };
 
-/*批量删除*/
-function batchDel() {
-	var selectData =layui.table.checkStatus('tableId').data;
-	if(selectData.length < 1){	
-		layer.msg('请选择要删除的数据！', {icon: 2});
-		return false;
-	}
-	layer.confirm('确认要删除吗？', function(index) {
-		var array = new Array();
-		$.each(selectData,function(i,e){
-			array.push(e.rightId);
-		 })
-		reqPostHasParameter(BATCH_DELETE, {"rightIdArr":array},function(result) {
-			if (result.code == 200) { //这个是从后台取回来的状态值
-				layer.msg(result.msg, {
-					icon : 1,
-					time : 1000
-				},function(){
-					layui.table.reload('tableId');
-					layer.close(index);	
-				});
-			}
-			
-		}, function(e) {
-			console.log(e);
-		}) 
-		
-	});
-		
-   }	
 
 /*更新行数据*/
 function updateRowData(obj){
+	
 	 var reqData = obj.field;
 	 reqPostHasParameter(GET, {"menuId":reqData.menuId}, function(result) {
-		 
+			 
+		 var parentId = result.data.menuDto.parentId;
 		 var menuId = result.data.menuDto.menuId;
 		 var tr = $("tr[cate-id="+menuId+"]");
 		 
@@ -290,7 +262,8 @@ function updateRowData(obj){
 		 
 		  var sortIdDiv = tr.children("td[data-field=sortId]").children("div");
 		  sortIdDiv.html(sortId);
-		
+		  
+		  
 	 }, function(e) {
 		 console.log(e);
 	 })

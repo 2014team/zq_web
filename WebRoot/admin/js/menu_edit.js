@@ -32,16 +32,18 @@ layui.use([ 'form', 'layer' ], function() {
 				}, function() {
 					x_admin_close();
 
-					//检查是否保存还是修改操作
+					/*//检查是否保存还是修改操作
 					if (checkSave()) {
 						//修改,更新行数据
 						window.parent.updateRowData(obj);
 					} else {
 						//保存，重载列表
 						window.parent.updateTableData();
-					}
+					}*/
 
-
+					//保存，重载列表
+					window.parent.updateTableData();
+					
 				});
 
 			} else {

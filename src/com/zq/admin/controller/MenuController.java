@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zq.admin.domain.dto.MenuDto;
@@ -88,34 +87,6 @@ public class MenuController {
 		// 删除
 		boolean delete = menuService.deleteMenu(menuId);
 		if (delete) {
-			result.success();
-		} else {
-			result.failure();
-		}
-
-		return result;
-	}
-
-	/**
-	 * @Title: batchDelete
-	 * @Description: 批量删除
-	 * @author zhuzq
-	 * @date 2020年05月04日 13:39:50
-	 * @param menuIdArr
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/admin/menu/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult deleteByIdArr(@RequestParam("menuIdArr[]") Integer[] menuIdArr) {
-		JsonResult result = new JsonResult();
-		// 验证参数
-		if (null == menuIdArr || menuIdArr.length < 1) {
-			result.failure("请选项要删除的数据");
-			return result;
-		}
-		// 删除
-		Integer delete = menuService.deleteByBatch(menuIdArr);
-		if (null != delete && delete > 0) {
 			result.success();
 		} else {
 			result.failure();
@@ -212,15 +183,27 @@ public class MenuController {
 	 */
 	@RequestMapping(value = "/admin/menu/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer menuId, HttpServletRequest request) {
-		// 编辑,为空新增
-		if (null != menuId) {
-			MenuDto menuDto = menuService.getMenu(menuId);
-			request.setAttribute("menuDto", menuDto);
-		}
-		
 		List<MenuDto> menuDtoList =  menuService.selectList();
+
+		// 编辑,为空新增
+		MenuDto menuDto = null;
+		if (null != menuId) {
+			menuDto = menuService.getMenu(menuId);
+			request.setAttribute("menuDto", menuDto);
+			// 移除自己
+			if(null != menuDtoList && menuDtoList.size() > 0){
+				for (MenuDto dto : menuDtoList) {
+					Integer dtoMenuId = dto.getMenuId();
+					if(dtoMenuId == menuId){
+						menuDto = dto;
+						break;
+					}
+				}
+				
+				menuDtoList.remove(menuDto);
+			}
+		}
 		request.setAttribute("menuDtoList", menuDtoList);
-		
 		return "/admin/menu/menu_edit";
 	}
 	
