@@ -1,3 +1,4 @@
+
 package com.zq.admin.controller;
 
 import java.util.List;
@@ -12,14 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zq.admin.domain.dto.MenuTreeDto;
 import com.zq.admin.domain.dto.RightCategoryDto;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.vo.RoleVo;
+import com.zq.admin.service.MenuService;
 import com.zq.admin.service.RightCategoryService;
 import com.zq.admin.service.RightService;
 import com.zq.admin.service.RoleService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.entity.JsonResult;
+import com.zq.common.util.GsonUtil;
 import com.zq.common.util.StringUtil;
 
 /**
@@ -33,11 +37,15 @@ public class RoleController {
 
 	@Autowired
 	private RoleService roleService;
+
 	@Autowired
 	private RightCategoryService rightCategoryService;
+
+	@Autowired
+	private MenuService menuService;
+
 	@Autowired
 	private RightService rightService;
-	
 
 	/**
 	 * @Title: save
@@ -49,12 +57,15 @@ public class RoleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/role/save", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult save(RoleVo roleVo,@RequestParam(required = false,value="categoryIdArr[]") Integer[] categoryIdArr,@RequestParam(required = false,value="rightIdArr[]") Integer[] rightIdArr) {
+	public JsonResult save(	RoleVo roleVo,
+							@RequestParam(required = false, value = "categoryIdArr[]") Integer[] categoryIdArr,
+							@RequestParam(required = false, value = "rightIdArr[]") Integer[] rightIdArr) {
+
 		JsonResult result = new JsonResult();
-		
+
 		roleVo.setCategoryId(StringUtil.trim(categoryIdArr));
 		roleVo.setRightId(StringUtil.trim(rightIdArr));
-		
+
 		// 参数验证
 		String errMsg = roleService.checkParam(roleVo);
 		if (StringUtils.isNotBlank(errMsg)) {
@@ -72,7 +83,8 @@ public class RoleController {
 		boolean save = roleService.saveRole(roleVo);
 		if (save) {
 			result.success();
-		} else {
+		}
+		else {
 			result.failure();
 		}
 
@@ -90,6 +102,7 @@ public class RoleController {
 	@ResponseBody
 	@RequestMapping(value = "/admin/role/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult delete(Integer roleId) {
+
 		JsonResult result = new JsonResult();
 
 		// 验证参数
@@ -101,7 +114,8 @@ public class RoleController {
 		boolean delete = roleService.deleteRole(roleId);
 		if (delete) {
 			result.success();
-		} else {
+		}
+		else {
 			result.failure();
 		}
 
@@ -119,6 +133,7 @@ public class RoleController {
 	@ResponseBody
 	@RequestMapping(value = "/admin/role/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult deleteByIdArr(@RequestParam("roleIdArr[]") Integer[] roleIdArr) {
+
 		JsonResult result = new JsonResult();
 		// 验证参数
 		if (null == roleIdArr || roleIdArr.length < 1) {
@@ -129,7 +144,8 @@ public class RoleController {
 		Integer delete = roleService.deleteByBatch(roleIdArr);
 		if (null != delete && delete > 0) {
 			result.success();
-		} else {
+		}
+		else {
 			result.failure();
 		}
 
@@ -146,12 +162,15 @@ public class RoleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/role/update", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult update(RoleVo roleVo,@RequestParam(required = false,value="categoryIdArr[]") Integer[] categoryIdArr,@RequestParam(required = false,value="rightIdArr[]") Integer[] rightIdArr) {
+	public JsonResult update(	RoleVo roleVo,
+								@RequestParam(required = false, value = "categoryIdArr[]") Integer[] categoryIdArr,
+								@RequestParam(required = false, value = "rightIdArr[]") Integer[] rightIdArr) {
+
 		JsonResult result = new JsonResult();
 
 		roleVo.setCategoryId(StringUtil.trim(categoryIdArr));
 		roleVo.setRightId(StringUtil.trim(rightIdArr));
-		
+
 		// 验证参数
 		Integer roleId = roleVo.getRoleId();
 		if (null == roleId) {
@@ -174,13 +193,13 @@ public class RoleController {
 		boolean update = roleService.updateRole(roleVo);
 		if (update) {
 			result.success();
-		} else {
+		}
+		else {
 			result.failure();
 		}
 
 		return result;
 	}
-	
 
 	/**
 	 * @Title: validFlag
@@ -191,8 +210,9 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/validFlag", method = { RequestMethod.POST ,RequestMethod.GET })
+	@RequestMapping(value = "/admin/role/validFlag", method = { RequestMethod.POST, RequestMethod.GET })
 	public JsonResult validFlag(RoleVo roleVo) {
+
 		JsonResult jsonResult = new JsonResult();
 		Integer roleId = roleVo.getRoleId();
 		if (null == roleId) {
@@ -210,7 +230,8 @@ public class RoleController {
 		boolean result = roleService.updateValidFlag(roleVo);
 		if (result) {
 			jsonResult.success();
-		} else {
+		}
+		else {
 			jsonResult.failure();
 		}
 		return jsonResult;
@@ -248,6 +269,7 @@ public class RoleController {
 	 */
 	@RequestMapping(value = "/admin/role/list/ui", method = { RequestMethod.GET })
 	public String toList() {
+
 		return "/admin/role/role_list";
 	}
 
@@ -262,34 +284,96 @@ public class RoleController {
 	 */
 	@RequestMapping(value = "/admin/role/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer roleId, HttpServletRequest request) {
+
 		// 编辑,为空新增
 		if (null != roleId) {
 			RoleDto roleDTO = roleService.getRole(roleId);
 			request.setAttribute("roleDTO", roleDTO);
 		}
-		
+
 		List<RightCategoryDto> rightCategoryDtoList = rightCategoryService.getRightCategoryList();
-		
+
 		// 权限列表
 		List<RightCategoryDto> rightList = rightService.getRightList(rightCategoryDtoList);
 		request.setAttribute("rightList", rightList);
-		
+
 		return "/admin/role/role_edit";
 	}
-	
-	
+
+	/**
+	 * @Title: get
+	 * @Description: 获取单个权限
+	 * @author zhuzq
+	 * @date 2020年5月8日 下午11:54:56
+	 * @param roleId
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/role/get", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult get(Integer roleId) {
-		
+
 		JsonResult result = new JsonResult();
 		// 验证参数
-		if (null == roleId || roleId< 1) {
+		if (null == roleId || roleId < 1) {
 			result.failure("角色ID不能为空");
 			return result;
 		}
 		RoleDto roleDto = roleService.getRole(roleId);
 		result.success("roleDTO", roleDto);
+		return result;
+	}
+
+	/**
+	 * @Title: right
+	 * @Description: 获取权限列表
+	 * @author zhuzq
+	 * @date 2020年5月8日 下午11:56:27
+	 * @param roleId
+	 * @return
+	 */
+	@RequestMapping(value = "/admin/role/right", method = { RequestMethod.GET, RequestMethod.POST })
+	public String right(Integer roleId, HttpServletRequest request) {
+
+		// 获取全部菜单
+		List<MenuTreeDto> menuTreeDtoList = menuService.getMenuTree();
+		// 获取角色菜单
+		String echoMenuId = menuService.getMenuIds(roleId);
+
+		request.setAttribute("menuTreeDtoList", GsonUtil.toJsonAll(menuTreeDtoList));
+		request.setAttribute("echoMenuId", echoMenuId);
+		request.setAttribute("roleId", roleId);
+		return "/admin/role/role_right";
+	}
+
+	/**
+	 * @Title: saveRight
+	 * @Description: 权限设置保存
+	 * @author zhuzq
+	 * @date 2020年5月10日 下午5:44:18
+	 * @param roleVo
+	 * @param menuIdArr
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/role/right/save", method = { RequestMethod.GET, RequestMethod.POST })
+	public JsonResult saveRight(RoleVo roleVo,
+								@RequestParam(required = false, value = "menuIdArr[]") Integer[] menuIdArr) {
+
+		JsonResult result = new JsonResult();
+
+		Integer roleId = roleVo.getRoleId();
+		if (null == roleId || roleId < 1) {
+			result.failure("角色ID不能为空");
+			return result;
+		}
+
+		boolean saveResult = roleService.saveRight(roleId, menuIdArr);
+		if (saveResult) {
+			result.success();
+		}
+		else {
+			result.failure();
+		}
 		return result;
 	}
 

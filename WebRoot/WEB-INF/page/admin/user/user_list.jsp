@@ -16,7 +16,7 @@
           <cite>列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
+        <i class="layui-icon" style="line-height:38px">&#xe669;</i></a>
     </div>
     <div class="x-body">
       <div class="layui-row">
@@ -57,13 +57,13 @@
     <script type="text/html" id="operateBarTpl">
 		<div class="td-manage">
               <a title="状态修改" lay-event="updateValidFlag" href="javascript:;">
-					<i class="layui-icon">&#xe62f;</i>
+					<i class="layui-icon"  style="font-size: 20px;">&#xe620;</i>
 			  </a>
               <a title="编辑"  lay-event="edit" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>
+                <i class="layui-icon" style="font-size: 20px;">&#xe642;</i>
               </a>
               <a title="删除"  lay-event="del" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
+                <i class="layui-icon" style="font-size: 20px;">&#xe640;</i>
               </a>
 		</div>
 	</script>

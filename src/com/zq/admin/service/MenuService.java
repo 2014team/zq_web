@@ -1,9 +1,9 @@
 package com.zq.admin.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.zq.admin.domain.dto.MenuDto;
+import com.zq.admin.domain.dto.MenuTreeDto;
 import com.zq.admin.domain.entity.Menu;
 import com.zq.admin.domain.vo.MenuVo;
 import com.zq.common.entity.AdminResultByPage;
@@ -106,5 +106,9 @@ public interface MenuService extends BaseService<Menu,Integer>{
 	* @return
 	*/
 	public List<MenuDto> selectList();
+
+	public List<MenuTreeDto> getMenuTree();
+
+	public String getMenuIds(Integer roleId);
 
 }

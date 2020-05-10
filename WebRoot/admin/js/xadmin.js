@@ -120,16 +120,16 @@ $(function () {
         if($(this).children('.sub-menu').length){
             if($(this).hasClass('open')){
                 $(this).removeClass('open');
-                $(this).find('.nav_right').html('&#xe6a7;');
+                $(this).find('.nav_right').html('&#xe602;');
                 $(this).children('.sub-menu').stop().slideUp();
                 $(this).siblings().children('.sub-menu').slideUp();
 				
             }else{
                 $(this).addClass('open');
-                $(this).children('a').find('.nav_right').html('&#xe6a6;');
+                $(this).children('a').find('.nav_right').html('&#xe61a;');
                 $(this).children('.sub-menu').stop().slideDown();
                 $(this).siblings().children('.sub-menu').stop().slideUp();
-                $(this).siblings().find('.nav_right').html('&#xe6a7;');
+                $(this).siblings().find('.nav_right').html('&#xe602;');
                 $(this).siblings().removeClass('open');
             }
         }else{

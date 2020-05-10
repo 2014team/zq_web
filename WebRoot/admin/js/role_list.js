@@ -10,6 +10,8 @@ const EDIT = getAminUrl('admin/ROLE/EDIT');
 const BATCH_DELETE = getAminUrl('admin/ROLE/BATCH/DELETE');
 /*查找*/
 const GET = getAminUrl('admin/ROLE/GET');
+/*角色分配权限*/
+const RIGHT = getAminUrl('admin/ROLE/RIGHT');
 //行对象
 var rowObj = "";
 
@@ -47,10 +49,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 				field : 'roleName',
 				title : '角色名'
 			}
-			, {
-				field : 'rightName',
-				title : '拥有权限规则'
-			}, {
+			,  {
 				field : 'description',
 				title : '描述'
 			}, {
@@ -77,8 +76,8 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 		rowObj = obj;
 		var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 		var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-		if (layEvent === 'updateValidFlag') { //修改有效标识
-			userValidFlag(obj);
+		if (layEvent === 'right') { //分配权限
+			right(obj);
 		} else if (layEvent === 'edit') {
 			edit(obj)//列表编辑
 		} else if (layEvent === 'del') {
@@ -144,6 +143,20 @@ function edit(obj) {
 	}	
 	x_admin_show(title, url);
 };
+
+
+function right(obj) {
+	var url = RIGHT;
+	var title = '新增';
+	if(obj){
+		var roleId = obj.data.roleId;
+		url = RIGHT + "?roleId=" + roleId;
+		title = '修改';
+	}	
+	x_admin_show(title, url);
+};
+
+
 
 /*批量删除*/
 function batchDel() {

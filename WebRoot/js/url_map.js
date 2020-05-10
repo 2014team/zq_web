@@ -39,6 +39,8 @@ var admin_url_map = {
 	'admin/ROLE/LIST': {url: '/admin/role/list', isUsed: true, desc: '角色列表'},
 	'admin/ROLE/BATCH/DELETE': {url: '/admin/role/batch/delete', isUsed: true, desc: '角色批量删除'},
 	'admin/ROLE/VALIDFLAG': {url: '/admin/role/validFlag', isUsed: true, desc: '角色状态修改'},
+	'admin/ROLE/RIGHT': {url: '/admin/role/right', isUsed: true, desc: '角色分配权限'},
+	'admin/ROLE/RIGHT/SAVE': {url: '/admin/role/right/save', isUsed: true, desc: '角色分配权限保存'},
 	
 	//菜单
 	'admin/MENU/GET': {url: '/admin/menu/get', isUsed: true, desc: '菜单查找'},

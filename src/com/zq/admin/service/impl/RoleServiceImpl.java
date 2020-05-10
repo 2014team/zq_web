@@ -22,6 +22,7 @@ import com.zq.admin.service.RoleService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.service.impl.BaseServiceImpl;
 import com.zq.common.util.LogUtil;
+import com.zq.common.util.StringUtil;
 
 /**
  * @ClassName: RoleServiceImpl
@@ -38,6 +39,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	private RightCategoryDao rightCategoryDao;
 	@Autowired
 	private RightDao rightDao;
+	
 
 	/**
 	 * @Title: saveRole
@@ -372,4 +374,22 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 		return roleDtoList;
 	}
 
+	@Override
+	public boolean saveRight(Integer roleId,Integer[] menuIdArr) {
+		Role role = roleDao.get(roleId);
+		if(null != role){
+			role.setMenuId(StringUtil.trim(menuIdArr));
+			Integer result = roleDao.update(role);
+			if(null != result && result > 0){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+
+	
+	
 }

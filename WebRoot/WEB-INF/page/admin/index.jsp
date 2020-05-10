@@ -12,7 +12,7 @@
     <div class="container">
         <div class="logo"><a href="index.html">L-admin v2.0</a></div>
         <div class="left_open">
-            <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+            <i title="展开左侧栏" class="iconfont" style="font-size: 20px;">&#xe668;</i>
         </div>
         
         <ul class="layui-nav right" lay-filter="">
@@ -34,48 +34,48 @@
         <ul id="nav">
              <li >
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe6eb;</i>
+                    <i class="iconfont" style="font-size: 20px;">&#xe68e;</i>
                     <cite>主页</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
+                    <i class="iconfont nav_right">&#xe602;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/welcome.html"><i class="iconfont">&#xe6a7;</i><cite>控制台</cite></a></li >
+                    <li><a _href="html/welcome.html"><i class="iconfont">&#xe602;</i><cite>控制台</cite></a></li >
                 </ul>
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
+                    <i class="iconfont" style="font-size: 20px;">&#xe770;</i>
                     <cite>管理员管理</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
+                    <i class="iconfont nav_right">&#xe602;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
                         <a _href="/admin/user/list/ui">
-                            <i class="iconfont">&#xe6a7;</i>
+                            <i class="iconfont">&#xe602;</i>
                             <cite>管理员列表</cite>
                         </a>
                     </li >
                     <li>
                         <a _href="/admin/role/list/ui">
-                            <i class="iconfont">&#xe6a7;</i>
+                            <i class="iconfont">&#xe602;</i>
                             <cite>角色管理</cite>
                         </a>
                     </li >
                     <li>
                         <a _href="/admin/rightCategory/list/ui">
-                            <i class="iconfont">&#xe6a7;</i>
+                            <i class="iconfont">&#xe602;</i>
                             <cite>权限分类</cite>
                         </a>
                     </li >
                     <li>
                         <a _href="/admin/right/list/ui">
-                            <i class="iconfont">&#xe6a7;</i>
+                            <i class="iconfont">&#xe602;</i>
                             <cite>权限管理</cite>
                         </a>
                     </li >
                     <li>
                         <a _href="/admin/menu/list/ui">
-                            <i class="iconfont">&#xe6a7;</i>
+                            <i class="iconfont">&#xe602;</i>
                             <cite>菜单管理</cite>
                         </a>
                     </li >
@@ -96,7 +96,7 @@
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='/admin/menu/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='/admin/role/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
           </div>
         </div>

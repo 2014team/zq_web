@@ -38,6 +38,11 @@ public class Role extends BaseEntity{
 	 * 排序
 	 */
 	private Integer sortId;
+	
+	/**
+	* 菜单Id
+	*/
+	private String menuId;
  
 	public Integer getRoleId(){
 		return this.roleId;
@@ -93,4 +98,17 @@ public class Role extends BaseEntity{
 	public void setSortId(Integer sortId){
 		this.sortId = sortId;
 	}
+
+	
+	public String getMenuId() {
+	
+		return menuId;
+	}
+
+	
+	public void setMenuId(String menuId) {
+	
+		this.menuId = menuId;
+	}
+	
 }

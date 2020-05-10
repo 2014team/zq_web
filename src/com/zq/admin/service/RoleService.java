@@ -2,6 +2,7 @@ package com.zq.admin.service;
 
 import java.util.List;
 
+import com.zq.admin.domain.dto.MenuTreeDto;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.entity.Role;
 import com.zq.admin.domain.vo.RoleVo;
@@ -115,6 +116,8 @@ public interface RoleService extends BaseService<Role,Integer>{
 	* @return
 	*/
 	public List<RoleDto> selectList();
+
+	public boolean saveRight(Integer roleId,Integer[] menuIdArr);
 	
 
 }

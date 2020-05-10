@@ -1,8 +1,9 @@
 package com.zq.admin.dao;
 
-import com.zq.common.dao.BaseDao;
 import org.springframework.stereotype.Repository;
+
 import com.zq.admin.domain.entity.Role;
+import com.zq.common.dao.BaseDao;
 
 /**
  * @ClassName: RoleDao
@@ -12,5 +13,7 @@ import com.zq.admin.domain.entity.Role;
  */
 @Repository
 public interface RoleDao extends BaseDao<Role,Integer>{
+	
+	
 
 }
