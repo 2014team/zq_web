@@ -51,7 +51,6 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 			}, {
 				field : 'sortId',
 				title : '排序',
-				sort : true
 			}
 			, {
 				align : 'left',
@@ -65,76 +64,74 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 			    var that = this.elem.next();
 	            //console.log(this.elem)
 	            //console.log(that)
-	            
-			  res.data.forEach(function (item, index) {
-				  	  var f_menuId = item.menuId;
-				  	  var f_fid = item.parentId;
-				  
-	                  var tr = that.find(".layui-table-box tbody tr[data-index='" + index + "']");
-	                  tr.attr({"cate-id":f_menuId,"fid":f_fid});
-	                  
-	                  
-	                  var html='';
-	                  if (item.childList) {
-	                	  tr.find("td[data-field=menuName]").children("div").prepend('<i class="layui-icon x-show" status="false" onclick="showOrHide('+f_menuId+',this)"></i>')
-	                	  var list = item.childList;
-	                	  for(var item in list){
-	                		  var parentId = list[item].parentId;
-	                		  var menuId = list[item].menuId;
-	                		  var menuName = list[item].menuName;
-	                		  var sortId = list[item].sortId;
-	                		  var validFlag = list[item].validFlag;
-	                		  var childList = list[item].childList;
-	                		  
-	                		  var validFlag_class = "layui-btn layui-btn-normal layui-btn-mini";
-	                		  var validFlag_name = "已启用";
-	                		  if(validFlag == 1){
-	                			  validFlag_class += " layui-bg-red";
-	                			  validFlag_name = "已停用";
-	                		  }	 
-	                		  
-	                		  
-	                		  //二级菜单处理
-	                		  if(childList){
-	                			  tr.after('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;<i class="layui-icon x-show" status="false" onclick="showOrHide('+menuId+',this)"></i>'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
-	                			  
-	                			  var c_tr = that.find("tr[cate-id="+menuId+"]");
-		                		  //三级菜单处理
-		                		  if(childList){
-		                			  for(var citem in childList){
-		                				  var c_parentId = childList[citem].parentId;
-		    	                		  var c_menuId = childList[citem].menuId;
-		    	                		  var c_menuName = childList[citem].menuName;
-		    	                		  var c_sortId = childList[citem].sortId;
-		    	                		  var c_validFlag = childList[citem].validFlag;
-		    	                		  var c_childList = childList[citem].childList;
-		    	                		  
-		    	                		  var c_validFlag_class = "layui-btn layui-btn-normal layui-btn-mini";
-		    	                		  var c_validFlag_name = "已启用";
-		    	                		  if(c_validFlag == 1){
-		    	                			  c_validFlag_class += " layui-bg-red";
-		    	                			  c_validFlag_name = "已停用";
-		    	                		  }	  
-		    	                		  c_tr.after('<tr style="display: none;"  cate-id="'+c_menuId+'" fid="'+c_parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├'+c_menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+c_validFlag_class+'">'+c_validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="编辑" onclick="edit('+c_menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+c_menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
-		                			  }
-		                		  }else{
-		                			  //
-		                		  }
-	                			  
-	                		  }else{
-	                			  tr.after('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;├'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">1</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div class="class=" td-manage"=""> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> </div> </div></td></tr>');
-	                		  
-	                		  }
-	                		  
-	                		 
-	                		  
-	                		  
-	                	  };
-	                	  
-	                  }
-	                 
+			    if(res.data){
+			        
+					  res.data.forEach(function (item, index) {
+						  	  var f_menuId = item.menuId;
+						  	  var f_fid = item.parentId;
+						  
+			                  var tr = that.find(".layui-table-box tbody tr[data-index='" + index + "']");
+			                  tr.attr({"cate-id":f_menuId,"fid":f_fid});
+			                  
+			                  
+			                  var html='';
+			                  if (item.childList) {
+			                	  tr.find("td[data-field=menuName]").children("div").prepend('<i class="layui-icon x-show" status="false" onclick="showOrHide('+f_menuId+',this)"></i>')
+			                	  var list = item.childList;
+			                	  for(var item in list){
+			                		  var parentId = list[item].parentId;
+			                		  var menuId = list[item].menuId;
+			                		  var menuName = list[item].menuName;
+			                		  var sortId = list[item].sortId;
+			                		  var validFlag = list[item].validFlag;
+			                		  var childList = list[item].childList;
+			                		  
+			                		  var validFlag_class = "layui-btn layui-btn-normal layui-btn-mini";
+			                		  var validFlag_name = "已启用";
+			                		  if(validFlag == 1){
+			                			  validFlag_class += " layui-bg-red";
+			                			  validFlag_name = "已停用";
+			                		  }	 
+			                		  
+			                		  
+			                		  //二级菜单处理
+			                		  if(childList){
+			                			  tr.prepend('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;<i class="layui-icon x-show" status="false" onclick="showOrHide('+menuId+',this)"></i>'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">'+sortId+'</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div  td-manage"=""> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon" style="font-size: 20px;"></i> </a> </div> </div></td></tr>');
+			                			  
+			                			  var c_tr = that.find("tr[cate-id="+menuId+"]");
+				                		  //三级菜单处理
+				                		  if(childList){
+				                			  for(var citem in childList){
+				                				  var c_parentId = childList[citem].parentId;
+				    	                		  var c_menuId = childList[citem].menuId;
+				    	                		  var c_menuName = childList[citem].menuName;
+				    	                		  var c_sortId = childList[citem].sortId;
+				    	                		  var c_validFlag = childList[citem].validFlag;
+				    	                		  var c_childList = childList[citem].childList;
+				    	                		  
+				    	                		  var c_validFlag_class = "layui-btn layui-btn-normal layui-btn-mini";
+				    	                		  var c_validFlag_name = "已启用";
+				    	                		  if(c_validFlag == 1){
+				    	                			  c_validFlag_class += " layui-bg-red";
+				    	                			  c_validFlag_name = "已停用";
+				    	                		  }	  
+				    	                		  c_tr.after('<tr style="display: none;"  cate-id="'+c_menuId+'" fid="'+c_parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├'+c_menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+c_validFlag_class+'">'+c_validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">'+c_sortId+'</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div  td-manage"=""> <a title="编辑" onclick="edit('+c_menuId+')" href="javascript:;"> <i class="layui-icon" style="font-size: 20px;"></i> </a> <a title="删除" onclick="del('+c_menuId+')" href="javascript:;"> <i class="layui-icon" style="font-size: 20px;"></i> </a> </div> </div></td></tr>');
+				                			  }
+				                		  }else{
+				                			  //
+				                		  }
+			                			  
+			                		  }else{
+			                			  tr.after('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;├'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">'+sortId+'</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div td-manage> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon" style="font-size: 20px;"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon" style="font-size: 20px;"></i> </a> </div> </div></td></tr>');
+			                		  
+			                		  }
+			                		  
+			                	  };
+			                  }
 
-	            });
+			            });
+			    }
+	       
 			  
 		  }
 	});

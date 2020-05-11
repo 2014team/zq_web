@@ -263,10 +263,10 @@ public class UserController {
 		// 登录
 		UserDto userDTO = userService.login(userVo);
 		if (null != userDTO) {
-			result.success();
-
 			// 保存信息到session
 			SessionUtil.saveSessionUser(request, userDTO);
+			result.success();
+
 
 		} else {
 			result.failure("用户名或者密码错误!");

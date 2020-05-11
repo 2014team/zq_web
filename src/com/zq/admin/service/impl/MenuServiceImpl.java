@@ -187,7 +187,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 		}
 		String menuUrl = menuVo.getMenuUrl();
 		if (StringUtils.isBlank(menuUrl)) {
-			return "菜单url不能为空";
+			menuVo.setMenuUrl("");
 		}
 		Integer validFlag = menuVo.getValidFlag();
 		if (null == validFlag) {
@@ -319,12 +319,12 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 						thirdList = new ArrayList<MenuDto>();
 						for (Menu menu2 : thirdMenuList) {
 							MenuDto thirdDto = convertMenuDto(menu2);
-							thirdList.add(thirdDto);
+							thirdList.add(0,thirdDto);
 						}
 						childDto.setChildList(thirdList);
 					}
 
-					childList.add(childDto);
+					childList.add(0,childDto);
 				}
 				result.setChildList(childList);
 			}

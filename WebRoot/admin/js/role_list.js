@@ -151,7 +151,7 @@ function right(obj) {
 	if(obj){
 		var roleId = obj.data.roleId;
 		url = RIGHT + "?roleId=" + roleId;
-		title = '修改';
+		title = '权限分配';
 	}	
 	x_admin_show(title, url);
 };

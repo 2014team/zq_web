@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zq.admin.domain.dto.MenuTreeDto;
-import com.zq.admin.domain.dto.RightCategoryDto;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.vo.RoleVo;
 import com.zq.admin.service.MenuService;
-import com.zq.admin.service.RightCategoryService;
-import com.zq.admin.service.RightService;
 import com.zq.admin.service.RoleService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.entity.JsonResult;
@@ -39,13 +36,7 @@ public class RoleController {
 	private RoleService roleService;
 
 	@Autowired
-	private RightCategoryService rightCategoryService;
-
-	@Autowired
 	private MenuService menuService;
-
-	@Autowired
-	private RightService rightService;
 
 	/**
 	 * @Title: save
@@ -290,12 +281,6 @@ public class RoleController {
 			RoleDto roleDTO = roleService.getRole(roleId);
 			request.setAttribute("roleDTO", roleDTO);
 		}
-
-		List<RightCategoryDto> rightCategoryDtoList = rightCategoryService.getRightCategoryList();
-
-		// 权限列表
-		List<RightCategoryDto> rightList = rightService.getRightList(rightCategoryDtoList);
-		request.setAttribute("rightList", rightList);
 
 		return "/admin/role/role_edit";
 	}

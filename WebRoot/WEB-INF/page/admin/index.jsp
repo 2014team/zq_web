@@ -5,6 +5,8 @@
   <head>
 	<title>后台中心</title>	
 	<%@include file="/WEB-INF/page/admin/common/head_layui.jsp" %>
+	<%@ taglib uri="/WEB-INF/tag/right.tld" prefix="r" %>  
+	
   </head>
   
   <body>
@@ -15,14 +17,14 @@
             <i title="展开左侧栏" class="iconfont" style="font-size: 20px;">&#xe668;</i>
         </div>
         
-        <ul class="layui-nav right" lay-filter="">
+        <ul class="layui-nav right">
           <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;" style="height: 52px">admin</a>
             <dl class="layui-nav-child"> 
               <dd><a href="/admin/logout">退出</a></dd>
             </dl>
           </li>
-          <li class="layui-nav-item to-index"><a href="#">前台首页</a></li>
+          <li class="layui-nav-item to-index"><a href="#" style="height: 52px">前台首页</a></li>
         </ul>
         
     </div>
@@ -42,45 +44,40 @@
                     <li><a _href="html/welcome.html"><i class="iconfont">&#xe602;</i><cite>控制台</cite></a></li >
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont" style="font-size: 20px;">&#xe770;</i>
-                    <cite>管理员管理</cite>
-                    <i class="iconfont nav_right">&#xe602;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="/admin/user/list/ui">
-                            <i class="iconfont">&#xe602;</i>
-                            <cite>管理员列表</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="/admin/role/list/ui">
-                            <i class="iconfont">&#xe602;</i>
-                            <cite>角色管理</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="/admin/rightCategory/list/ui">
-                            <i class="iconfont">&#xe602;</i>
-                            <cite>权限分类</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="/admin/right/list/ui">
-                            <i class="iconfont">&#xe602;</i>
-                            <cite>权限管理</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="/admin/menu/list/ui">
-                            <i class="iconfont">&#xe602;</i>
-                            <cite>菜单管理</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>            
+
+             <r:auth menuName="管理员管理" menuUrl="">
+	            <li>
+	            
+	                <a href="javascript:;">
+	                    <i class="iconfont" style="font-size: 20px;">&#xe770;</i>
+	                    <cite>管理员管理</cite>
+	                    <i class="iconfont nav_right">&#xe602;</i>
+	                </a>
+	                <ul class="sub-menu">
+	                    <li>
+	                        <a _href="/admin/user/list/ui">
+	                            <i class="iconfont">&#xe602;</i>
+	                            <cite>管理员列表</cite>
+	                        </a>
+	                    </li >
+	                    <li>
+	                        <a _href="/admin/role/list/ui">
+	                            <i class="iconfont">&#xe602;</i>
+	                            <cite>角色管理</cite>
+	                        </a>
+	                    </li >
+	                    <li>
+	                        <a _href="/admin/menu/list/ui">
+	                            <i class="iconfont">&#xe602;</i>
+	                            <cite>菜单管理</cite>
+	                        </a>
+	                    </li >
+	                </ul>
+	            </li>  
+            
+            </r:auth>
+                      
+                
                 </ul>
             </li> 
             </ul>

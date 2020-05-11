@@ -10,12 +10,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zq.admin.dao.RightCategoryDao;
-import com.zq.admin.dao.RightDao;
 import com.zq.admin.dao.RoleDao;
 import com.zq.admin.domain.dto.RoleDto;
-import com.zq.admin.domain.entity.Right;
-import com.zq.admin.domain.entity.RightCategory;
 import com.zq.admin.domain.entity.Role;
 import com.zq.admin.domain.vo.RoleVo;
 import com.zq.admin.service.RoleService;
@@ -35,10 +31,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 
 	@Autowired
 	private RoleDao roleDao;
-	@Autowired
-	private RightCategoryDao rightCategoryDao;
-	@Autowired
-	private RightDao rightDao;
 	
 
 	/**
@@ -260,61 +252,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 */
 	private RoleDto convertRoleDto(Role role) {
 		RoleDto dto = new RoleDto();
-		
-		//categoryId
-		String categoryId = role.getCategoryId();
-		String[] categoryIdArr = null;
-		List<String> categoryIdList = null;
-		if(StringUtils.isNotBlank(categoryId)){
-			categoryIdArr = categoryId.split(",");
-			if(null != categoryIdArr && categoryIdArr.length > 0){
-				categoryIdList = Arrays.asList(categoryIdArr);
-				if(null != categoryIdList && categoryIdList.size() > 0){
-					List<RightCategory> rightCategoryList  = rightCategoryDao.getByBatch(categoryIdList);
-					StringBuffer sb = new StringBuffer();
-					if(null != rightCategoryList && rightCategoryList.size() > 0){
-						for (RightCategory rightCategory : rightCategoryList) {
-							String categoryName = rightCategory.getCategoryName();
-							sb.append(categoryName).append(",");
-						}
-					}
-					String result = sb.toString();
-					if(StringUtils.isNotBlank(result) && result.lastIndexOf(",") != -1){
-						result = result.substring(0,result.lastIndexOf(","));
-					}
-					dto.setCategoryName(result);
-				}
-			}
-			
-		}
-		
-		//rightId
-		String rightId = role.getRightId();
-		String[]rightIdArr = null;
-		List<String> rightIdList = null;
-		if(StringUtils.isNotBlank(rightId)){
-			rightIdArr = rightId.split(",");
-			if(null != rightIdArr && rightIdArr.length > 0){
-				rightIdList = Arrays.asList(rightIdArr);
-				if(null != rightIdList && rightIdList.size() > 0){
-					List<Right> rightList  = rightDao.getByBatch(rightIdList);
-					StringBuffer sb = new StringBuffer();
-					if(null != rightList && rightList.size() > 0){
-						for (Right right : rightList) {
-							String rightName = right.getRightName();
-							sb.append(rightName).append(",");
-						}
-					}
-					String result = sb.toString();
-					if(StringUtils.isNotBlank(result) && result.lastIndexOf(",") != -1){
-						result = result.substring(0,result.lastIndexOf(","));
-					}
-					dto.setRightName(result);
-				}
-			}
-			
-		}
-		
 		dto.setRoleId(role.getRoleId());
 		dto.setRoleName(role.getRoleName());
 		dto.setDescription(role.getDescription());

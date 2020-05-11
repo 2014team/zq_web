@@ -7,8 +7,6 @@
 		<result property="roleId" column="role_id" />
 		<result property="roleName" column="role_name" />
 		<result property="description" column="description" />
-		<result property="categoryId" column="category_id" />
-		<result property="rightId" column="right_id" />
 		<result property="menuId" column="menu_id" />
 		<result property="validFlag" column="valid_flag" />
 		<result property="sortId" column="sort_id" />
@@ -21,8 +19,6 @@
 		insert into t_admin_role (
 			role_name
 			,description
-			,category_id
-			,right_id
 			,valid_flag
 			,sort_id
 			,create_date
@@ -32,8 +28,6 @@
 		 (
 			#{roleName}
 				,#{description}
-				,#{categoryId}
-				,#{rightId}
 				,#{validFlag}
 				,#{sortId}
 				,#{createDate}
@@ -62,8 +56,6 @@
 			set update_Date = now()
 				,role_name = #{roleName}
 				,description = #{description}
-				,category_id = #{categoryId}
-				,right_id = #{rightId}
 				,menu_id = #{menuId}
 				,valid_flag = #{validFlag}
 				,sort_id = #{sortId}
@@ -78,8 +70,6 @@
 				role_id
 				,role_name
 				,description
-				,category_id
-				,right_id
 				,menu_id
 				,valid_flag
 				,sort_id
@@ -95,8 +85,6 @@
 				role_id
 				,role_name
 				,description
-				,category_id
-				,right_id
 				,valid_flag
 				,sort_id
 				,create_date
@@ -109,12 +97,6 @@
 			</if>
 			<if test="null != description and ''!= description">
 			and description = #{description}
-			</if> 
-			<if test="null != categoryId and ''!= categoryId">
-			and category_id = #{categoryId}
-			</if> 
-			<if test="null != rightId and ''!= rightId">
-			and right_id = #{rightId}
 			</if> 
 			<if test="null != validFlag and ''!= validFlag">
 			and valid_flag = #{validFlag}
@@ -138,8 +120,6 @@
 				role_id
 				,role_name
 				,description
-				,category_id
-				,right_id
 				,valid_flag
 				,sort_id
 				,create_date
@@ -149,12 +129,6 @@
  			<if test="null != roleName and ''!= roleName">
 			role_name = #{roleName}
 			</if>
-			<if test="null != description and ''!= description">
-			and description = #{description}
-			</if> 
-			<if test="null != categoryId and ''!= categoryId">
-			and category_id = #{categoryId}
-			</if> 
 			<if test="null != rightId and ''!= rightId">
 			and right_id = #{rightId}
 			</if> 
@@ -180,8 +154,6 @@
 				role_id
 				,role_name
 				,description
-				,category_id
-				,right_id
 				,valid_flag
 				,sort_id
 				,create_date
@@ -196,12 +168,6 @@
 			</if> 
 			<if test="null != roleVo.description and ''!= roleVo.description">
 			and description = #{roleVo.description}
-			</if> 
-			<if test="null != roleVo.categoryId and ''!= roleVo.categoryId">
-			and category_id = #{roleVo.categoryId}
-			</if> 
-			<if test="null != roleVo.rightId and ''!= roleVo.rightId">
-			and right_id = #{roleVo.rightId}
 			</if> 
 			<if test="null != roleVo.validFlag and ''!= roleVo.validFlag">
 			and valid_flag = #{roleVo.validFlag}
@@ -231,12 +197,6 @@
 			</if> 
 			<if test="null != roleVo.description and ''!= roleVo.description">
 			and description = #{roleVo.description}
-			</if> 
-			<if test="null != roleVo.categoryId and ''!= roleVo.categoryId">
-			and category_id = #{roleVo.categoryId}
-			</if> 
-			<if test="null != roleVo.rightId and ''!= roleVo.rightId">
-			and right_id = #{roleVo.rightId}
 			</if> 
 			<if test="null != roleVo.validFlag and ''!= roleVo.validFlag">
 			and valid_flag = #{roleVo.validFlag}

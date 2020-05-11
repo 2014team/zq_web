@@ -25,10 +25,10 @@
           
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
-                  <span class="x-red">*</span>资源URL
+                  	资源URL
               </label>
               <div class="layui-input-inline" style="width: 600px">
-                  <input type="text" name="menuUrl" value="${menuDto.menuUrl }" lay-verify="required" maxlength="60"
+                  <input type="text" name="menuUrl" value="${menuDto.menuUrl }"  maxlength="60"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">

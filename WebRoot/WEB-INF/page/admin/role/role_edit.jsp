@@ -4,7 +4,6 @@
   	<%@include file="/WEB-INF/page/admin/common/head_layui.jsp" %>
   </head>
     <body onload="bodyInit()"> 
-<!--    <body> -->
      <div class="x-body">
         <div  class="layui-form layui-form-pane">
         	<input type="hidden" name="roleId" id="roleId" value="${roleDTO.roleId}" /> 
@@ -44,32 +43,6 @@
 				 				<option value="1" >停用</option>
 		                    </select>
                  		 </div>
-                </div>
-                
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">
-                     	   拥有权限 
-                     	   <input type="hidden" id="hivCategoryId" value="${roleDTO.categoryId}">
-                     	   <input type="hidden" id="hivRightId" value="${roleDTO.rightId}">
-                    </label>
-                    <table  class="layui-table layui-input-block">
-                        <tbody>
-                        <c:forEach items="${rightList}" var="item">
-                        	 <tr>
-                                <td>
-                                    <input type="checkbox"  lay-skin="primary" lay-filter="categoryId" lay-filter-catetory="${item.categoryId}"  name="categoryId" value="${item.categoryId}" title="${item.categoryName}" >
-                                </td>
-                                <td>
-                                    <div class="layui-input-block">
-                                    	<c:forEach items="${item.rightDtoList }" var="chileItem">
-	                                        <input  lay-skin="primary" type="checkbox" lay-filter="rightId" lay-filter-right="${item.categoryId}"  name="rightId" value="${chileItem.rightId}" title="${chileItem.rightName}"> 
-                                    	</c:forEach>
-                                    </div>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
                 </div>
                 
                 
