@@ -111,10 +111,8 @@ public class RightServiceImpl implements RightService {
 		Date now = new Date();
 		RightDto right = new RightDto(now, menuList);
 		
-		synchronized(this) {
-			if(cacheMap.size() > 5000) {
-				delFirst();
-			}
+		if(cacheMap.size() > 5000) {
+			delFirst();
 		}
 		cacheMap.put(userId, right);
 
