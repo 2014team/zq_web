@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.dto.UserDto;
 import com.zq.admin.domain.vo.UserVo;
+import com.zq.admin.service.RightService;
 import com.zq.admin.service.RoleService;
 import com.zq.admin.service.UserService;
 import com.zq.admin.util.SessionUtil;
@@ -34,6 +35,8 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private RightService rightService;
 
 	/**
 	 * @Title: save
@@ -261,12 +264,16 @@ public class UserController {
 		}
 
 		// 登录
-		UserDto userDTO = userService.login(userVo);
-		if (null != userDTO) {
+		UserDto userDto = userService.login(userVo);
+		if (null != userDto) {
 			// 保存信息到session
-			SessionUtil.saveSessionUser(request, userDTO);
+			SessionUtil.saveSessionUser(request, userDto);
+			
+			//新增用户权限到缓存
+			rightService.addCache(userDto);
+			
 			result.success();
-
+			
 
 		} else {
 			result.failure("用户名或者密码错误!");
@@ -286,8 +293,17 @@ public class UserController {
 	@RequestMapping(value = "/admin/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpServletRequest request) {
 
-		// 删除用户session信息
-		SessionUtil.deleteSessionUser(request);
+		UserDto userDto = SessionUtil.getSessionUser(request);
+		if(null != userDto){
+			
+			//移除用户权限到缓存
+			rightService.removeCache(userDto);
+			
+			// 删除用户session信息
+			SessionUtil.deleteSessionUser(request);
+			
+		}
+		
 		return "redirect:/admin/login";
 	}
 

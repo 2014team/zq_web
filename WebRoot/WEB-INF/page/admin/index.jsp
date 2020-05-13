@@ -45,7 +45,7 @@
                 </ul>
             </li>
 
-             <r:auth menuName="管理员管理" menuUrl="">
+              <r:auth menuName="管理员管理" menuUrl=""> 
 	            <li>
 	            
 	                <a href="javascript:;">
@@ -74,9 +74,7 @@
 	                    </li >
 	                </ul>
 	            </li>  
-            
-            </r:auth>
-                      
+             </r:auth> 
                 
                 </ul>
             </li> 

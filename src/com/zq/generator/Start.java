@@ -44,7 +44,7 @@ public class Start {
 			paramMap.put("commonPackage","com.zq.common");
 			paramMap.put("description","菜单");//表名
 
-			paramMap.put("tableName","t_admin_menu");//表名
+			paramMap.put("tableName","t_admin_right");//表名
 			generator.createCode(paramMap);//第一个表
 			
 			//第二个表
