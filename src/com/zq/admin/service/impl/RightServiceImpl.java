@@ -3,9 +3,10 @@ package com.zq.admin.service.impl;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,8 @@ import com.zq.admin.service.RightService;
 @Service
 public class RightServiceImpl implements RightService {
 
-	private static Map<Integer, RightDto> cacheMap = new HashMap<Integer, RightDto>();
+	private static Map<Integer, RightDto> cacheMap = new LinkedHashMap<Integer, RightDto>();
+	
 
 	@Autowired
 	private RoleDao roleDao;
@@ -108,9 +110,11 @@ public class RightServiceImpl implements RightService {
 
 		Date now = new Date();
 		RightDto right = new RightDto(now, menuList);
-
-		if (cacheMap.size() > 5000) {
-			cacheMap.clear();
+		
+		synchronized(this) {
+			if(cacheMap.size() > 5000) {
+				delFirst();
+			}
 		}
 		cacheMap.put(userId, right);
 
@@ -136,6 +140,19 @@ public class RightServiceImpl implements RightService {
 			cacheMap.remove(userId);
 		}
 
+	}
+	
+	
+	private static Integer delFirst() {
+		Integer key = null;
+		for (Entry<Integer, RightDto> entry : cacheMap.entrySet()) {
+			key = entry.getKey();
+			if (key != null) {
+				cacheMap.remove(key);
+				break;
+			}
+		}
+		return key;
 	}
 
 }
