@@ -36,5 +36,16 @@
 	<mvc:resources location="/admin/" mapping="/admin/**" />
 	<mvc:resources location="/web/" mapping="/web/**" />
 	
+	<mvc:interceptors>
+		<!-- 后台登录拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/center/**" />
+			<mvc:exclude-mapping path="/admin/login"/>
+			<mvc:exclude-mapping path="/admin/login/submit"/>
+			<mvc:exclude-mapping path="/admin/logout"/>
+			<bean class="com.zq.admin.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 
 </beans>

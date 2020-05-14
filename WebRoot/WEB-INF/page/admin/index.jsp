@@ -6,7 +6,6 @@
 	<title>后台中心</title>	
 	<%@include file="/WEB-INF/page/admin/common/head_layui.jsp" %>
   </head>
-  
   <body>
     <!-- 顶部开始 -->
     <div class="container">
@@ -17,7 +16,7 @@
         
         <ul class="layui-nav right">
           <li class="layui-nav-item">
-            <a href="javascript:;" style="height: 52px">admin</a>
+            <a href="javascript:;" style="height: 52px">${userDto.userName}</a>
             <dl class="layui-nav-child"> 
               <dd><a href="/admin/logout">退出</a></dd>
             </dl>
@@ -53,27 +52,27 @@
 	                
 	                <ul class="sub-menu">
 	               
-	                <r:auth menuName="管理员列表" menuUrl="/admin/user/list/ui"> 	
+	                <r:auth menuName="管理员列表" menuUrl="/admin/center/user/list/ui"> 	
 	                    <li>
-	                        <a _href="/admin/user/list/ui">
+	                        <a _href="/admin/center/user/list/ui">
 	                            <i class="iconfont">&#xe602;</i>
 	                            <cite>管理员列表</cite>
 	                        </a>
 	                    </li >
 	                 </r:auth>
 	                 
-	                  <r:auth menuName="角色管理" menuUrl="/admin/role/list/ui"> 	
+	                  <r:auth menuName="角色管理" menuUrl="/admin/center/role/list/ui"> 	
 	                    <li>
-	                        <a _href="/admin/role/list/ui">
+	                        <a _href="/admin/center/role/list/ui">
 	                            <i class="iconfont">&#xe602;</i>
 	                            <cite>角色管理</cite>
 	                        </a>
 	                    </li >
 	                    </r:auth>
 	                    
-	                    <r:auth menuName="菜单管理" menuUrl="/admin/menu/list/ui"> 	
+	                    <r:auth menuName="菜单管理" menuUrl="/admin/center/menu/list/ui"> 	
 	                    <li>
-	                        <a _href="/admin/menu/list/ui">
+	                        <a _href="/admin/center/menu/list/ui">
 	                            <i class="iconfont">&#xe602;</i>
 	                            <cite>菜单管理</cite>
 	                        </a>
@@ -98,7 +97,7 @@
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='/admin/menu/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='/admin/center/menu/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
           </div>
         </div>

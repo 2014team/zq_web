@@ -1,17 +1,17 @@
 ﻿﻿/*列表数据*/
-const LIST = getAminUrl('admin/ROLE/LIST')
+const LIST = getAminUrl('admin/CENTER/ROLE/LIST')
 /*列表状态修改*/
-const VALIDFLAG = getAminUrl('admin/ROLE/VALIDFLAG');
+const VALIDFLAG = getAminUrl('admin/CENTER/ROLE/VALIDFLAG');
 /*列表删除*/
-const DELETE = getAminUrl('admin/ROLE/DELETE');
+const DELETE = getAminUrl('admin/CENTER/ROLE/DELETE');
 /*编辑*/
-const EDIT = getAminUrl('admin/ROLE/EDIT');
+const EDIT = getAminUrl('admin/CENTER/ROLE/EDIT');
 /*批量删除*/
-const BATCH_DELETE = getAminUrl('admin/ROLE/BATCH/DELETE');
+const BATCH_DELETE = getAminUrl('admin/CENTER/ROLE/BATCH/DELETE');
 /*查找*/
-const GET = getAminUrl('admin/ROLE/GET');
+const GET = getAminUrl('admin/CENTER/ROLE/GET');
 /*角色分配权限*/
-const RIGHT = getAminUrl('admin/ROLE/RIGHT');
+const RIGHT = getAminUrl('admin/CENTER/ROLE/RIGHT');
 //行对象
 var rowObj = "";
 

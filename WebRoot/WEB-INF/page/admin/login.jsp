@@ -10,6 +10,15 @@
 <script type="text/javascript" src="/admin/js/login.js?t=<%=new java.util.Date().getTime() %>"></script>
 </head>
 
+<script type="text/javascript">
+	$(function(){
+		if (top.location.href != location.href) {
+	         top.location.href ="/";
+	     }
+	})
+</script>
+
+
 <div id="wrapper" class="login-page">
 	<div id="login_form" class="form">
 		<form class="login-form" id="login_form_id">

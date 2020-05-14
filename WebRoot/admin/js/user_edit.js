@@ -1,7 +1,7 @@
 ﻿/*更新*/
-const USER_UPDATE = getAminUrl('admin/USER/UPDATE');
+const USER_UPDATE = getAminUrl('admin/CENTER/USER/UPDATE');
 /*保存*/
-const USER_SAVE = getAminUrl('admin/USER/SAVE');
+const USER_SAVE = getAminUrl('admin/CENTER/USER/SAVE');
 
 
 $(function(){

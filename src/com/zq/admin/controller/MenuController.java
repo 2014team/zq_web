@@ -42,7 +42,7 @@ public class MenuController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/menu/save", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/menu/save", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult save(MenuVo menuVo) {
 		JsonResult result = new JsonResult();
 
@@ -79,7 +79,7 @@ public class MenuController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/menu/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/menu/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult delete(Integer menuId) {
 		JsonResult result = new JsonResult();
 
@@ -108,7 +108,7 @@ public class MenuController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/menu/update", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/menu/update", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult update(MenuVo menuVo) {
 		JsonResult result = new JsonResult();
 
@@ -151,7 +151,7 @@ public class MenuController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/menu/list", method = { RequestMethod.POST,RequestMethod.GET })
+	@RequestMapping(value = "/admin/center/menu/list", method = { RequestMethod.POST,RequestMethod.GET })
 	public AdminResultByPage list(MenuVo menuVo, HttpServletRequest request) {
 
 		Integer page = Integer.valueOf(request.getParameter("page"));
@@ -171,9 +171,9 @@ public class MenuController {
 	 * @date 2020年05月04日 13:39:50
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/menu/list/ui", method = { RequestMethod.GET })
+	@RequestMapping(value = "/admin/center/menu/list/ui", method = { RequestMethod.GET })
 	public String toList() {
-		return "/admin/menu/menu_list";
+		return "/admin/center/menu/menu_list";
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class MenuController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/menu/edit", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/menu/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer menuId, HttpServletRequest request) {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -212,7 +212,7 @@ public class MenuController {
 			}
 		}
 		request.setAttribute("menuDtoList", menuDtoList);
-		return "/admin/menu/menu_edit";
+		return "/admin/center/menu/menu_edit";
 	}
 	
 	/**
@@ -224,7 +224,7 @@ public class MenuController {
 	* @return
 	*/
 	@ResponseBody
-	@RequestMapping(value = "/admin/menu/get", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/menu/get", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult get(Integer menuId) {
 		
 		JsonResult result = new JsonResult();

@@ -47,7 +47,7 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/save", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/save", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult save(	RoleVo roleVo,
 							@RequestParam(required = false, value = "categoryIdArr[]") Integer[] categoryIdArr,
 							@RequestParam(required = false, value = "rightIdArr[]") Integer[] rightIdArr) {
@@ -91,7 +91,7 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult delete(Integer roleId) {
 
 		JsonResult result = new JsonResult();
@@ -122,7 +122,7 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult deleteByIdArr(@RequestParam("roleIdArr[]") Integer[] roleIdArr) {
 
 		JsonResult result = new JsonResult();
@@ -152,7 +152,7 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/update", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/update", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult update(	RoleVo roleVo,
 								@RequestParam(required = false, value = "categoryIdArr[]") Integer[] categoryIdArr,
 								@RequestParam(required = false, value = "rightIdArr[]") Integer[] rightIdArr) {
@@ -201,7 +201,7 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/validFlag", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/admin/center/role/validFlag", method = { RequestMethod.POST, RequestMethod.GET })
 	public JsonResult validFlag(RoleVo roleVo) {
 
 		JsonResult jsonResult = new JsonResult();
@@ -238,7 +238,7 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/list", method = { RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/list", method = { RequestMethod.POST })
 	public AdminResultByPage list(RoleVo roleVo, HttpServletRequest request) {
 
 		Integer page = Integer.valueOf(request.getParameter("page"));
@@ -258,10 +258,10 @@ public class RoleController {
 	 * @date 2020年04月30日 14:04:25
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/role/list/ui", method = { RequestMethod.GET })
+	@RequestMapping(value = "/admin/center/role/list/ui", method = { RequestMethod.GET })
 	public String toList() {
 
-		return "/admin/role/role_list";
+		return "/admin/center/role/role_list";
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class RoleController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/role/edit", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer roleId, HttpServletRequest request) {
 
 		// 编辑,为空新增
@@ -282,7 +282,7 @@ public class RoleController {
 			request.setAttribute("roleDTO", roleDTO);
 		}
 
-		return "/admin/role/role_edit";
+		return "/admin/center/role/role_edit";
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/get", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/get", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult get(Integer roleId) {
 
 		JsonResult result = new JsonResult();
@@ -316,7 +316,7 @@ public class RoleController {
 	 * @param roleId
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/role/right", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/right", method = { RequestMethod.GET, RequestMethod.POST })
 	public String right(Integer roleId, HttpServletRequest request) {
 
 		// 获取全部菜单
@@ -327,7 +327,7 @@ public class RoleController {
 		request.setAttribute("menuTreeDtoList", GsonUtil.toJsonAll(menuTreeDtoList));
 		request.setAttribute("echoMenuId", echoMenuId);
 		request.setAttribute("roleId", roleId);
-		return "/admin/role/role_right";
+		return "/admin/center/role/role_right";
 	}
 
 	/**
@@ -340,7 +340,7 @@ public class RoleController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/role/right/save", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/role/right/save", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult saveRight(RoleVo roleVo,
 								@RequestParam(required = false, value = "menuIdArr[]") Integer[] menuIdArr) {
 

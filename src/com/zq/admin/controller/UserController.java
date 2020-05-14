@@ -18,10 +18,8 @@ import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.dto.UserDto;
 import com.zq.admin.domain.vo.UserVo;
-import com.zq.admin.service.RightService;
 import com.zq.admin.service.RoleService;
 import com.zq.admin.service.UserService;
-import com.zq.admin.util.SessionUtil;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.entity.JsonResult;
 
@@ -38,8 +36,6 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private RoleService roleService;
-	@Autowired
-	private RightService rightService;
 
 	/**
 	 * @Title: save
@@ -50,7 +46,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/user/save", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/user/save", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult save(UserVo userVo) {
 		JsonResult result = new JsonResult();
 
@@ -87,7 +83,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/user/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/user/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult delete(Integer userId) {
 		JsonResult result = new JsonResult();
 
@@ -116,7 +112,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/user/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/user/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult deleteByIdArr(@RequestParam("userIdArr[]") Integer[] userIdArr) {
 		JsonResult result = new JsonResult();
 		// 验证参数
@@ -144,7 +140,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/user/update", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/user/update", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult update(UserVo userVo) {
 		JsonResult result = new JsonResult();
 
@@ -186,7 +182,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/user/validFlag", method = { RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/user/validFlag", method = { RequestMethod.POST })
 	public JsonResult validFlag(UserVo userVo) {
 		JsonResult jsonResult = new JsonResult();
 		Integer userId = userVo.getUserId();
@@ -221,7 +217,7 @@ public class UserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/user/list", method = { RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/user/list", method = { RequestMethod.POST })
 	public AdminResultByPage list(UserVo userVo, HttpServletRequest request) {
 
 		Integer page = Integer.valueOf(request.getParameter("page"));
@@ -235,94 +231,18 @@ public class UserController {
 	}
 
 	/**
-	 * @Title: login
-	 * @Description: 登录界面
-	 * @author zhuzq
-	 * @date 2020年4月23日 下午1:40:09
-	 * @return
-	 */
-	@RequestMapping(value = "/admin/login", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login() {
-		return "/admin/login";
-	}
-
-	/**
-	 * @Title: loginSubmit
-	 * @Description: 登录
-	 * @author zhuzq
-	 * @date 2020年4月23日 下午1:40:16
-	 * @param userVo
-	 * @param request
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/admin/login/submit", method = { RequestMethod.GET, RequestMethod.POST })
-	public JsonResult loginSubmit(UserVo userVo, HttpServletRequest request) {
-		JsonResult result = new JsonResult();
-		// 验证参数
-		String errMsg = userService.checkLoginParam(userVo);
-		if (StringUtils.isNotBlank(errMsg)) {
-			result.failure(errMsg);
-			return result;
-		}
-
-		// 登录
-		UserDto userDto = userService.login(userVo);
-		if (null != userDto) {
-			// 保存信息到session
-			SessionUtil.saveSessionUser(request, userDto);
-			
-			//新增用户权限到缓存
-			rightService.addCache(userDto);
-			
-			result.success();
-			
-
-		} else {
-			result.failure("用户名或者密码错误!");
-		}
-
-		return result;
-	}
-
-	/**
-	 * @Title: logout
-	 * @Description: 退出
-	 * @author zhuzq
-	 * @date 2020年4月23日 下午1:40:58
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value = "/admin/logout", method = { RequestMethod.GET, RequestMethod.POST })
-	public String logout(HttpServletRequest request) {
-
-		UserDto userDto = SessionUtil.getSessionUser(request);
-		if(null != userDto){
-			
-			//移除用户权限到缓存
-			rightService.removeCache(userDto);
-			
-			// 删除用户session信息
-			SessionUtil.deleteSessionUser(request);
-			
-		}
-		
-		return "redirect:/admin/login";
-	}
-
-	/**
 	 * @Title: toList
 	 * @Description: 列表UI
 	 * @author zhuzq
 	 * @date 2020年4月23日 下午1:41:16
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/user/list/ui", method = { RequestMethod.GET })
+	@RequestMapping(value = "/admin/center/user/list/ui", method = { RequestMethod.GET })
 	public String toList(HttpServletRequest request) {
 		Map<String, Object> paramMap = null;
-		List<RoleDto>  roleDtoList = roleService.selectList(paramMap);
+		List<RoleDto> roleDtoList = roleService.selectList(paramMap);
 		request.setAttribute("roleDtoList", roleDtoList);
-		return "/admin/user/user_list";
+		return "/admin/center/user/user_list";
 	}
 
 	/**
@@ -334,38 +254,37 @@ public class UserController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/admin/user/edit", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/user/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer userId, HttpServletRequest request) {
 		// 编辑,为空新增
 		if (null != userId) {
 			UserDto userDTO = userService.getUser(userId);
 			request.setAttribute("userDTO", userDTO);
 		}
-		
+
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("validFlag", ValidFlagEnum.ON.ordinal());
 		List<RoleDto> roleatoList = roleService.selectList(paramMap);
 		request.setAttribute("roleatoList", roleatoList);
-		
-		
-		return "/admin/user/user_edit";
+
+		return "/admin/center/user/user_edit";
 	}
-	
+
 	/**
-	* @Title: get
-	* @Description: 查找
-	* @author zhuzq
-	* @date  2020年5月3日 下午3:18:05
-	* @param userId
-	* @return
-	*/
+	 * @Title: get
+	 * @Description: 查找
+	 * @author zhuzq
+	 * @date 2020年5月3日 下午3:18:05
+	 * @param userId
+	 * @return
+	 */
 	@ResponseBody
-	@RequestMapping(value = "/admin/user/get", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/admin/center/user/get", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult get(Integer userId) {
-		
+
 		JsonResult result = new JsonResult();
 		// 验证参数
-		if (null == userId || userId< 1) {
+		if (null == userId || userId < 1) {
 			result.failure("用户ID不能为空");
 			return result;
 		}

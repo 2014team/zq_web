@@ -1,13 +1,13 @@
 ﻿﻿/*列表数据*/
-const LIST = getAminUrl('admin/MENU/LIST')
+const LIST = getAminUrl('admin/CENTER/MENU/LIST')
 /*列表删除*/
-const DELETE = getAminUrl('admin/MENU/DELETE');
+const DELETE = getAminUrl('admin/CENTER/MENU/DELETE');
 /*编辑*/
-const EDIT = getAminUrl('admin/MENU/EDIT');
+const EDIT = getAminUrl('admin/CENTER/MENU/EDIT');
 /*批量删除*/
-const BATCH_DELETE = getAminUrl('admin/MENU/BATCH/DELETE');
+const BATCH_DELETE = getAminUrl('admin/CENTER/MENU/BATCH/DELETE');
 /*查找*/
-const GET = getAminUrl('admin/MENU/GET');
+const GET = getAminUrl('admin/CENTER/MENU/GET');
 //行对象
 var rowObj = "";
 

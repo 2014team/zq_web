@@ -1,7 +1,7 @@
 ﻿/*更新*/
-const UPDATE = getAminUrl('admin/ROLE/UPDATE');
+const UPDATE = getAminUrl('admin/CENTER/ROLE/UPDATE');
 /*保存*/
-const SAVE = getAminUrl('admin/ROLE/SAVE');
+const SAVE = getAminUrl('admin/CENTER/ROLE/SAVE');
 
 $(function(){
 	//回显Select选值	

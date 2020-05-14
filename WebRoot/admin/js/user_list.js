@@ -1,15 +1,15 @@
 ﻿/*列表数据*/
-const USER_LIST = getAminUrl('admin/USER/LIST')
+const USER_LIST = getAminUrl('admin/CENTER/USER/LIST')
 /*列表状态修改*/
-const USER_VALIDFLAG = getAminUrl('admin/USER/VALIDFLAG');
+const USER_VALIDFLAG = getAminUrl('admin/CENTER/USER/VALIDFLAG');
 /*列表删除*/
-const USER_DELETE = getAminUrl('admin/USER/DELETE');
+const USER_DELETE = getAminUrl('admin/CENTER/USER/DELETE');
 /*编辑*/
-const USER_EDIT = getAminUrl('admin/USER/EDIT');
+const USER_EDIT = getAminUrl('admin/CENTER/USER/EDIT');
 /*批量删除*/
-const USER_BATCH_DELETE = getAminUrl('admin/USER/BATCH/DELETE');
+const USER_BATCH_DELETE = getAminUrl('admin/CENTER/USER/BATCH/DELETE');
 /*查找单个对象*/
-const USER_GET = getAminUrl('admin/USER/GET');
+const USER_GET = getAminUrl('admin/CENTER/USER/GET');
 //行对象
 var rowObj = "";
 
