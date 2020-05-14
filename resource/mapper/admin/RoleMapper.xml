@@ -132,7 +132,7 @@
 			<if test="null != rightId and ''!= rightId">
 			and right_id = #{rightId}
 			</if> 
-			<if test="null != validFlag and ''!= validFlag">
+			<if test="null != validFlag">
 			and valid_flag = #{validFlag}
 			</if> 
 			<if test="null != sortId ">

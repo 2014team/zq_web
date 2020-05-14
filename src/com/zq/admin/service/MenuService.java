@@ -1,6 +1,7 @@
 package com.zq.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zq.admin.domain.dto.MenuDto;
 import com.zq.admin.domain.dto.MenuTreeDto;
@@ -105,7 +106,7 @@ public interface MenuService extends BaseService<Menu,Integer>{
 	* @date  2020年5月6日 上午11:08:39
 	* @return
 	*/
-	public List<MenuDto> selectList();
+	public List<MenuDto> selectList(Map<String, Object> paramMap);
 
 	public List<MenuTreeDto> getMenuTree();
 

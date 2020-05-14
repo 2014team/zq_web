@@ -87,7 +87,7 @@
  	</select>
  	
  	<!--批量查找  -->
- 	<select id="selectByBatch"  parameterType="java.util.List" resultMap="resultMap">
+ 	<select id="selectByBatch"  parameterType="java.util.Map" resultMap="resultMap">
 		select 
 				menu_id
 				,menu_name
@@ -98,10 +98,21 @@
 				,create_date
 				,update_date
 				,parent_id
-		 from t_admin_menu where menu_id in
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
-			#{item}
-		</foreach>
+		 from t_admin_menu  
+		 <where>
+		 	<if test="null != menuIdlist">
+		 		menu_id in
+		 		<foreach collection="menuIdlist" item="item" open="(" close=")" separator=",">
+				#{item}
+				</foreach>
+		 	</if>
+		 	<if test="null != validFlag">
+		 		and valid_flag = #{validFlag}
+		 	</if>
+		 
+		 </where>
+		 
+		
 	</select>
 	
  	

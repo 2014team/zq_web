@@ -1,6 +1,8 @@
 package com.zq.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zq.admin.constant.MenuTypeEnum;
+import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.domain.dto.MenuDto;
 import com.zq.admin.domain.vo.MenuVo;
 import com.zq.admin.service.MenuService;
@@ -183,7 +187,11 @@ public class MenuController {
 	 */
 	@RequestMapping(value = "/admin/menu/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer menuId, HttpServletRequest request) {
-		List<MenuDto> menuDtoList =  menuService.selectList();
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("menuType", MenuTypeEnum.MENU.ordinal());
+		paramMap.put("validFlag", ValidFlagEnum.ON.ordinal());
+		List<MenuDto> menuDtoList =  menuService.selectList(paramMap);
 
 		// 编辑,为空新增
 		MenuDto menuDto = null;

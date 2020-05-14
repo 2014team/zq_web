@@ -18,27 +18,29 @@
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">&#xe669;</i></a>
     </div>
-
-    <div class="x-body">
-	     <div class="layui-row">
-	       <div class="layui-form layui-col-md12 x-so" >
-	         <div class="layui-input-inline">
-	         	<input type="text" id="search_input" placeholder="请输入名称" autocomplete="off" class="layui-input">
-	       	 </div>
-	         <div class="layui-input-inline">
-	        	 <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
-	        </div>
-	       </div>
-	  </div>
-      
+		    <div class="x-body">
+			     <div class="layui-row">
+			       <div class="layui-form layui-col-md12 x-so" >
+	 				<r:auth menuName="菜单管理/查询" menuUrl="菜单管理/查询"> 	
+				         <div class="layui-input-inline">
+				         	<input type="text" id="search_input" placeholder="请输入名称" autocomplete="off" class="layui-input">
+				       	 </div>
+				         <div class="layui-input-inline">
+				        	 <button class="layui-btn"  id="search_id"><i class="layui-icon">&#xe615;</i></button>
+				        </div>
+      				</r:auth>
+			       </div>
+			  </div>
        <!-- 列表 -->	
      <table class="layui-hide" id="table_list" lay-filter="table_list" ></table> 
     </div>
     
     <script type="text/html" id="toolbar">
       <div class="layui-btn-container toolbar">
-         <button class="layui-btn layui-btn-sm"  onclick="edit()" ><i class="layui-icon"></i>增加</button>
-     </div>
+		<r:auth menuName="菜单管理/增加" menuUrl="菜单管理/增加"> 	
+         	<button class="layui-btn layui-btn-sm"  onclick="edit()" ><i class="layui-icon"></i>增加</button>
+     	</r:auth>
+	</div>
 	</script>
    
    

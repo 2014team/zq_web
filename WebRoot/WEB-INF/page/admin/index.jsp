@@ -5,8 +5,6 @@
   <head>
 	<title>后台中心</title>	
 	<%@include file="/WEB-INF/page/admin/common/head_layui.jsp" %>
-	<%@ taglib uri="/WEB-INF/tag/right.tld" prefix="r" %>  
-	
   </head>
   
   <body>
@@ -45,33 +43,42 @@
                 </ul>
             </li>
 
-              <r:auth menuName="管理员管理" menuUrl=""> 
+              <r:auth menuName="管理员管理"> 
 	            <li>
-	            
 	                <a href="javascript:;">
 	                    <i class="iconfont" style="font-size: 20px;">&#xe770;</i>
 	                    <cite>管理员管理</cite>
 	                    <i class="iconfont nav_right">&#xe602;</i>
 	                </a>
+	                
 	                <ul class="sub-menu">
+	               
+	                <r:auth menuName="管理员列表" menuUrl="/admin/user/list/ui"> 	
 	                    <li>
 	                        <a _href="/admin/user/list/ui">
 	                            <i class="iconfont">&#xe602;</i>
 	                            <cite>管理员列表</cite>
 	                        </a>
 	                    </li >
+	                 </r:auth>
+	                 
+	                  <r:auth menuName="角色管理" menuUrl="/admin/role/list/ui"> 	
 	                    <li>
 	                        <a _href="/admin/role/list/ui">
 	                            <i class="iconfont">&#xe602;</i>
 	                            <cite>角色管理</cite>
 	                        </a>
 	                    </li >
+	                    </r:auth>
+	                    
+	                    <r:auth menuName="菜单管理" menuUrl="/admin/menu/list/ui"> 	
 	                    <li>
 	                        <a _href="/admin/menu/list/ui">
 	                            <i class="iconfont">&#xe602;</i>
 	                            <cite>菜单管理</cite>
 	                        </a>
 	                    </li >
+	                    </r:auth>
 	                </ul>
 	            </li>  
              </r:auth> 
@@ -91,7 +98,7 @@
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='/admin/role/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='/admin/menu/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
           </div>
         </div>

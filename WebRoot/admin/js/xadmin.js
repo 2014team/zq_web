@@ -217,7 +217,7 @@ function echoSelectData(selectId,echoValue){
         $(this).children("option").each(function() {
             // 判断需要对那个选项进行回显
             if (this.value == echoValue) {
-                console.log($(this).text());
+               // console.log($(this).text());
                 // 进行回显
                 $(this).attr("selected","selected");
             }

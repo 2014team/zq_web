@@ -18,3 +18,6 @@
 <script type="text/javascript" src="/js/http_util.js?t=<%=new java.util.Date().getTime() %>"></script>
 <script type="text/javascript" src="/js/date_util.js?t=<%=new java.util.Date().getTime() %>"></script>
 <script type="text/javascript" src="/js/json_util.js?t=<%=new java.util.Date().getTime() %>"></script>
+
+<!-- 自定义权限标签 -->
+<%@ taglib uri="/WEB-INF/tag/right.tld" prefix="r" %>  

@@ -1,6 +1,7 @@
 package com.zq.admin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +22,8 @@ public interface MenuDao extends BaseDao<Menu,Integer>{
 	* @Description: 批量查找
 	* @author zhuzq
 	* @date  2020年5月10日 下午10:56:26
-	* @param list
+	* @param paramMap
 	* @return
 	*/
-	public List<Menu> selectByBatch(List<String> list);
+	public List<Menu> selectByBatch(Map<String,Object> paramMap);
 }

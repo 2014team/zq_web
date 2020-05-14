@@ -96,7 +96,7 @@ layui.use([ 'table', 'form', 'laydate' ], function() {
 			                		  
 			                		  //二级菜单处理
 			                		  if(childList){
-			                			  tr.prepend('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;<i class="layui-icon x-show" status="false" onclick="showOrHide('+menuId+',this)"></i>'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">'+sortId+'</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div  td-manage"=""> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon" style="font-size: 20px;"></i> </a> </div> </div></td></tr>');
+			                			  tr.after('<tr style="display: none;"  cate-id="'+menuId+'" fid="'+parentId+'" class=""><td data-field="indexId"><div class="layui-table-cell laytable-cell-1-indexId laytable-cell-numbers"></div></td><td data-field="menuName"><div class="layui-table-cell laytable-cell-1-menuName">&nbsp;&nbsp;&nbsp;&nbsp;<i class="layui-icon x-show" status="false" onclick="showOrHide('+menuId+',this)"></i>'+menuName+'</div></td><td data-field="validFlag" data-content="0"><div class="layui-table-cell laytable-cell-1-validFlag">  <div class="td-status"> <span class="'+validFlag_class+'">'+validFlag_name+'</span> </div>  </div></td><td data-field="sortId"><div class="layui-table-cell laytable-cell-1-sortId">'+sortId+'</div></td><td data-field="4" align="left" data-off="true"><div class="layui-table-cell laytable-cell-1-4"> <div  td-manage"=""> <a title="编辑" onclick="edit('+menuId+')" href="javascript:;"> <i class="layui-icon"></i> </a> <a title="删除" onclick="del('+menuId+')" href="javascript:;"> <i class="layui-icon" style="font-size: 20px;"></i> </a> </div> </div></td></tr>');
 			                			  
 			                			  var c_tr = that.find("tr[cate-id="+menuId+"]");
 				                		  //三级菜单处理
@@ -212,12 +212,12 @@ function del(menuId) {
 };
 
 /*编辑*/
-function edit(menuId) {
+function edit(menuId,menuName) {
 	 
 	var url = EDIT;
 	var title = '新增';
 	if(menuId){
-		url = EDIT + "?menuId=" + menuId;
+		url = EDIT + "?menuId=" + menuId+"&menuName="+menuName;
 		 title = '修改';
 	}	
 	x_admin_show(title, url);

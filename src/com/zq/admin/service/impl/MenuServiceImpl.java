@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.dao.MenuDao;
 import com.zq.admin.dao.RoleDao;
 import com.zq.admin.domain.dto.MenuDto;
@@ -350,9 +351,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @return
 	 */
 	@Override
-	public List<MenuDto> selectList() {
-
-		Map<String, Object> paramMap = null;
+	public List<MenuDto> selectList(Map<String, Object> paramMap) {
 		List<MenuDto> menuDtoList = null;
 		List<Menu> menuList = menuDao.select(paramMap);
 		if (null != menuList && menuList.size() > 0) {
@@ -370,6 +369,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("parentId", 0);
+		paramMap.put("validFlag",ValidFlagEnum.ON.ordinal());
 		List<Menu> menuList = menuDao.select(paramMap);
 		List<MenuTreeDto> menuTreeDtoList = new ArrayList<MenuTreeDto>();;
 		if (null != menuList && menuList.size() > 0) {
@@ -436,7 +436,10 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 
 				if (null != list && list.size() > 0) {
 					// 获取菜单
-					List<Menu> menuList = menuDao.selectByBatch(list);
+					Map<String,Object> paramMap = new HashMap<String, Object>();
+					paramMap.put("validFlag", ValidFlagEnum.ON.ordinal());
+					paramMap.put("menuIdlist", list);
+					List<Menu> menuList = menuDao.selectByBatch(paramMap);
 					for (String str : menuIdArr) {
 						if (null != menuList && menuList.size() > 0) {
 							for (Menu menu : menuList) {

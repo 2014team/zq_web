@@ -48,7 +48,7 @@ public class RightTag extends RequestContextAwareTag {
 
 	@Override
 	protected int doStartTagInternal() throws Exception {
-		LogUtil.logInfo("menuName = "+this.menuName + " menuUrl" + this.menuUrl);
+		LogUtil.logInfo("menuName => "+this.menuName + "  menuUrl=>" + this.menuUrl);
 		
 		HttpServletRequest request = ( HttpServletRequest ) this.pageContext.getRequest();
 		UserDto userDto = SessionUtil.getSessionUser(request);
@@ -58,6 +58,13 @@ public class RightTag extends RequestContextAwareTag {
 			return SKIP_BODY;
 		}
 		Integer userId = userDto.getUserId();
+		String userName = userDto.getUserName();
+		
+		// admin拥有所有权限
+		if("admin".equals(userName)){
+			return EVAL_PAGE;
+		}
+		
 
 		// 权限验证
 		boolean result = getRightService().checkRight(userId, menuName, menuUrl);

@@ -31,7 +31,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 
 	@Autowired
 	private RoleDao roleDao;
-	
 
 	/**
 	 * @Title: saveRole
@@ -173,12 +172,12 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 		}
 		String categoryId = roleVo.getCategoryId();
 		if (StringUtils.isBlank(categoryId)) {
-			//return "权限类别ID不能为空";
+			// return "权限类别ID不能为空";
 			roleVo.setCategoryId("");
 		}
 		String rightId = roleVo.getRightId();
 		if (StringUtils.isBlank(rightId)) {
-			//return "权限ID不能为空";
+			// return "权限ID不能为空";
 			roleVo.setRightId("");
 		}
 		Integer sortId = roleVo.getSortId();
@@ -228,7 +227,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @return
 	 */
 	private Role convertRole(RoleVo roleVo) {
-		
+
 		Role role = new Role();
 		role.setRoleId(roleVo.getRoleId());
 		role.setRoleName(roleVo.getRoleName());
@@ -265,13 +264,13 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	}
 
 	/**
-	* @Title: updateValidFlag
-	* @Description: 更新状态
-	* @author zhuzq
-	* @date  2020年5月3日 上午11:35:21
-	* @param roleVo
-	* @return
-	*/
+	 * @Title: updateValidFlag
+	 * @Description: 更新状态
+	 * @author zhuzq
+	 * @date 2020年5月3日 上午11:35:21
+	 * @param roleVo
+	 * @return
+	 */
 	@Override
 	public boolean updateValidFlag(RoleVo roleVo) {
 		Integer roleId = roleVo.getRoleId();
@@ -290,18 +289,17 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	}
 
 	/**
-	* @Title: selectList
-	* @Description: 获取列表
-	* @author zhuzq
-	* @date  2020年5月3日 下午2:32:59
-	* @return
-	*/
+	 * @Title: selectList
+	 * @Description: 获取列表
+	 * @author zhuzq
+	 * @date 2020年5月3日 下午2:32:59
+	 * @return
+	 */
 	@Override
-	public List<RoleDto> selectList() {
-		Map<String, Object> paramMap = null;
+	public List<RoleDto> selectList(Map<String, Object> paramMap) {
 		List<RoleDto> roleDtoList = null;
 		List<Role> roleList = roleDao.select(paramMap);
-		if(null != roleList && roleList.size() > 0){
+		if (null != roleList && roleList.size() > 0) {
 			roleDtoList = new ArrayList<RoleDto>();
 			for (Role role : roleList) {
 				RoleDto roleDto = convertRoleDto(role);
@@ -311,22 +309,29 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 		return roleDtoList;
 	}
 
+	/**
+	 * @Title: saveRight
+	 * @Description: 保存权限
+	 * @author zhuzq
+	 * @date 2020年5月14日 下午1:43:05
+	 * @param roleId
+	 * @param menuIdArr
+	 * @return
+	 */
 	@Override
-	public boolean saveRight(Integer roleId,Integer[] menuIdArr) {
+	public boolean saveRight(Integer roleId, Integer[] menuIdArr) {
 		Role role = roleDao.get(roleId);
-		if(null != role){
+		if (null != role) {
 			role.setMenuId(StringUtil.trim(menuIdArr));
 			Integer result = roleDao.update(role);
-			if(null != result && result > 0){
+			if (null != result && result > 0) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
-		}else{
+		} else {
 			return false;
 		}
 	}
 
-	
-	
 }

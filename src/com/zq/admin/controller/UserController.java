@@ -1,6 +1,8 @@
 package com.zq.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.dto.UserDto;
 import com.zq.admin.domain.vo.UserVo;
@@ -316,7 +319,8 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/admin/user/list/ui", method = { RequestMethod.GET })
 	public String toList(HttpServletRequest request) {
-		List<RoleDto>  roleDtoList = roleService.selectList();
+		Map<String, Object> paramMap = null;
+		List<RoleDto>  roleDtoList = roleService.selectList(paramMap);
 		request.setAttribute("roleDtoList", roleDtoList);
 		return "/admin/user/user_list";
 	}
@@ -338,7 +342,9 @@ public class UserController {
 			request.setAttribute("userDTO", userDTO);
 		}
 		
-		List<RoleDto> roleatoList = roleService.selectList();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("validFlag", ValidFlagEnum.ON.ordinal());
+		List<RoleDto> roleatoList = roleService.selectList(paramMap);
 		request.setAttribute("roleatoList", roleatoList);
 		
 		

@@ -1,6 +1,7 @@
 package com.zq.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.entity.Role;
@@ -114,8 +115,17 @@ public interface RoleService extends BaseService<Role,Integer>{
 	* @date  2020年5月3日 下午2:32:59
 	* @return
 	*/
-	public List<RoleDto> selectList();
+	public List<RoleDto> selectList(Map<String, Object> paramMap);
 
+	/**
+	* @Title: saveRight
+	* @Description: 保存权限
+	* @author zhuzq
+	* @date  2020年5月14日 下午1:43:05
+	* @param roleId
+	* @param menuIdArr
+	* @return
+	*/
 	public boolean saveRight(Integer roleId,Integer[] menuIdArr);
 	
 

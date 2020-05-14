@@ -3,6 +3,7 @@ package com.zq.admin.service.impl;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.dao.MenuDao;
 import com.zq.admin.dao.RoleDao;
 import com.zq.admin.domain.dto.RightDto;
@@ -106,7 +108,10 @@ public class RightServiceImpl implements RightService {
 
 		// 根据menuId获取权限菜单
 		List<String> menuIdlist = Arrays.asList(menuId.split(","));
-		List<Menu> menuList = menuDao.selectByBatch(menuIdlist);
+		Map<String,Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("validFlag", ValidFlagEnum.ON.ordinal());
+		paramMap.put("menuIdlist", menuIdlist);
+		List<Menu> menuList = menuDao.selectByBatch(paramMap);
 
 		Date now = new Date();
 		RightDto right = new RightDto(now, menuList);
