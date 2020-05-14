@@ -23,8 +23,6 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan> 
 	 
-    
-    
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -60,17 +58,19 @@
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="get*" read-only="true" />
-			<tx:method name="find*" read-only="true" />
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="find*" read-only="true"/>
 			<tx:method name="save*" propagation="REQUIRED" rollback-for="Exception" />
 			<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception" />
 			<tx:method name="merge*" propagation="REQUIRED" rollback-for="Exception" />
 			<tx:method name="del*" propagation="REQUIRED" rollback-for="Exception" />
+			<!-- 对其他方法 使用默认的事务管理 -->
+            <tx:method name="*"/>
 		</tx:attributes>
 	</tx:advice>
 
 	<aop:config>                                                  
-		<aop:pointcut id="servicePointcut" expression="execution(* com.zq.*.controller.*.*(..)) or execution(* com.zq.*.service.*.*(..))" />
+		<aop:pointcut id="servicePointcut" expression="execution(* com.zq.*.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut" />
 	</aop:config>
 

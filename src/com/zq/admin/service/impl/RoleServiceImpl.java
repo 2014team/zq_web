@@ -18,7 +18,7 @@ import com.zq.admin.service.RoleService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.service.impl.BaseServiceImpl;
 import com.zq.common.util.LogUtil;
-import com.zq.common.util.StringUtil;
+import com.zq.common.util.ToolsUtil;
 
 /**
  * @ClassName: RoleServiceImpl
@@ -322,7 +322,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	public boolean saveRight(Integer roleId, Integer[] menuIdArr) {
 		Role role = roleDao.get(roleId);
 		if (null != role) {
-			role.setMenuId(StringUtil.trim(menuIdArr));
+			role.setMenuId(ToolsUtil.trim(menuIdArr));
 			Integer result = roleDao.update(role);
 			if (null != result && result > 0) {
 				return true;

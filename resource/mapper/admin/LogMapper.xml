@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.admin.dao.LogDao">
+	
+	<!-- resultMap -->
+	<resultMap type="com.zq.admin.domain.entity.Log" id="resultMap">
+		<result property="logId" column="log_id" />
+		<result property="logType" column="log_type" />
+		<result property="operator" column="operator" />
+		<result property="requestIp" column="request_ip" />
+		<result property="requestMethod" column="request_method" />
+		<result property="requestParams" column="request_params" />
+		<result property="methodDescrible" column="method_describle" />
+		<result property="exceptionCode" column="exception_code" />
+		<result property="exceptionDetail" column="exception_detail" />
+		<result property="createDate" column="create_date" />
+		<result property="updateDate" column="update_date" />
+	</resultMap>
+
+	<!-- 保存 -->
+	<insert id="save" parameterType="com.zq.admin.domain.entity.Log" useGeneratedKeys="true" keyProperty="logId">
+		insert into t_admin_log (
+			log_type
+			,operator
+			,request_ip
+			,request_method
+			,request_params
+			,method_describle
+			,exception_code
+			,exception_detail
+		)
+		 values
+		 (
+			#{logType}
+				,#{operator}
+				,#{requestIp}
+				,#{requestMethod}
+				,#{requestParams}
+				,#{methodDescrible}
+				,#{exceptionCode}
+				,#{exceptionDetail}
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="Integer">
+		delete from t_admin_log where log_id = #{logId};
+	</delete>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByBatch"  parameterType="java.util.List">
+		delete from
+		t_admin_log
+		where log_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 修改-->
+	<update id="update" parameterType="com.zq.admin.domain.entity.Log" >
+		update t_admin_log 
+			set update_Date = now()
+				,log_type = #{logType}
+				,operator = #{operator}
+				,request_ip = #{requestIp}
+				,request_method = #{requestMethod}
+				,request_params = #{requestParams}
+				,method_describle = #{methodDescrible}
+				,exception_code = #{exceptionCode}
+				,exception_detail = #{exceptionDetail}
+				,create_date = #{createDate}
+				,update_date = #{updateDate}
+		where log_id = #{logId}
+	</update>
+	
+	<!-- 根据id获取对象-->
+ 	<select id="get" parameterType="Integer" resultMap="resultMap">
+ 		select 
+				log_id
+				,log_type
+				,operator
+				,request_ip
+				,request_method
+				,request_params
+				,method_describle
+				,exception_code
+				,exception_detail
+				,create_date
+				,update_date
+		 from t_admin_log where log_id = #{logId} 
+		 order by create_date desc limit 1;
+ 	</select>
+ 	
+ 	<!-- 通过Map单个查找-->
+	<select id="getOneByMap" parameterType="Map" resultMap="resultMap">
+		select 
+				log_id
+				,log_type
+				,operator
+				,request_ip
+				,request_method
+				,request_params
+				,method_describle
+				,exception_code
+				,exception_detail
+				,create_date
+				,update_date
+		 from
+		t_admin_log
+		<where>
+ 			<if test="null != logType ">
+			log_type = #{logType}
+			</if>
+			<if test="null != operator and ''!= operator">
+			and operator = #{operator}
+			</if> 
+			<if test="null != requestIp and ''!= requestIp">
+			and request_ip = #{requestIp}
+			</if> 
+			<if test="null != requestMethod and ''!= requestMethod">
+			and request_method = #{requestMethod}
+			</if> 
+			<if test="null != requestParams and ''!= requestParams">
+			and request_params = #{requestParams}
+			</if> 
+			<if test="null != methodDescrible and ''!= methodDescrible">
+			and method_describle = #{methodDescrible}
+			</if> 
+			<if test="null != exceptionCode and ''!= exceptionCode">
+			and exception_code = #{exceptionCode}
+			</if> 
+			<if test="null != exceptionDetail and ''!= exceptionDetail">
+			and exception_detail = #{exceptionDetail}
+			</if> 
+			<if test="null != createDate and ''!= createDate">
+			and create_date = #{createDate}
+			</if> 
+			<if test="null != updateDate and ''!= updateDate">
+			and update_date = #{updateDate}
+			</if> 
+		</where>
+		order by create_date desc limit 1;
+	</select>
+	
+	<!-- 列表查询 -->
+	<select id="select" parameterType="Map" resultMap="resultMap">
+ 		select 
+				log_id
+				,log_type
+				,operator
+				,request_ip
+				,request_method
+				,request_params
+				,method_describle
+				,exception_code
+				,exception_detail
+				,create_date
+				,update_date
+ 		 from t_admin_log
+ 		<where>
+ 			<if test="null != logType ">
+			log_type = #{logType}
+			</if>
+			<if test="null != operator and ''!= operator">
+			and operator = #{operator}
+			</if> 
+			<if test="null != requestIp and ''!= requestIp">
+			and request_ip = #{requestIp}
+			</if> 
+			<if test="null != requestMethod and ''!= requestMethod">
+			and request_method = #{requestMethod}
+			</if> 
+			<if test="null != requestParams and ''!= requestParams">
+			and request_params = #{requestParams}
+			</if> 
+			<if test="null != methodDescrible and ''!= methodDescrible">
+			and method_describle = #{methodDescrible}
+			</if> 
+			<if test="null != exceptionCode and ''!= exceptionCode">
+			and exception_code = #{exceptionCode}
+			</if> 
+			<if test="null != exceptionDetail and ''!= exceptionDetail">
+			and exception_detail = #{exceptionDetail}
+			</if> 
+			<if test="null != createDate and ''!= createDate">
+			and create_date = #{createDate}
+			</if> 
+			<if test="null != updateDate and ''!= updateDate">
+			and update_date = #{updateDate}
+			</if> 
+ 		</where>
+ 		order by create_date desc;
+ 	</select>
+ 	
+ 	<!-- 分页查找 -->
+	<select id="findByPage" parameterType="Map" resultMap="resultMap">
+		select 
+				log_id
+				,log_type
+				,operator
+				,request_ip
+				,request_method
+				,request_params
+				,method_describle
+				,exception_code
+				,exception_detail
+				,create_date
+				,update_date
+ 		 from t_admin_log
+ 		<where>
+ 			<if test="null != logVo.logId ">
+			log_id = #{logVo.logId} 
+			</if>	
+			<if test="null != logVo.logType ">
+			and log_type = #{logVo.logType}
+			</if> 
+			<if test="null != logVo.operator and ''!= logVo.operator">
+			and operator = #{logVo.operator}
+			</if> 
+			<if test="null != logVo.requestIp and ''!= logVo.requestIp">
+			and request_ip = #{logVo.requestIp}
+			</if> 
+			<if test="null != logVo.requestMethod and ''!= logVo.requestMethod">
+			and request_method = #{logVo.requestMethod}
+			</if> 
+			<if test="null != logVo.requestParams and ''!= logVo.requestParams">
+			and request_params = #{logVo.requestParams}
+			</if> 
+			<if test="null != logVo.methodDescrible and ''!= logVo.methodDescrible">
+			and method_describle = #{logVo.methodDescrible}
+			</if> 
+			<if test="null != logVo.exceptionCode and ''!= logVo.exceptionCode">
+			and exception_code = #{logVo.exceptionCode}
+			</if> 
+			<if test="null != logVo.exceptionDetail and ''!= logVo.exceptionDetail">
+			and exception_detail = #{logVo.exceptionDetail}
+			</if> 
+			<if test="null != logVo.createDate and ''!= logVo.createDate">
+			and create_date = #{logVo.createDate}
+			</if> 
+			<if test="null != logVo.updateDate and ''!= logVo.updateDate">
+			and update_date = #{logVo.updateDate}
+			</if> 
+ 		</where>
+ 		order by sort_id ,create_date desc   
+ 		<if test="null != page and '' != page and null != page.begin and '' != page.begin and null !=page.limit  and '' != page.limit">
+ 		 limit ${page.begin} , ${page.limit};
+ 		 </if>
+	</select>
+	
+	<!-- 分页查找数量 -->
+	<select id="findByPageCount" parameterType="Map" resultType="Integer">
+		select count(1)  from t_admin_log
+ 		<where>
+ 			<if test="null != logVo.logId ">
+			log_id = #{logVo.logId} 
+			</if>	
+			<if test="null != logVo.logType ">
+			and log_type = #{logVo.logType}
+			</if> 
+			<if test="null != logVo.operator and ''!= logVo.operator">
+			and operator = #{logVo.operator}
+			</if> 
+			<if test="null != logVo.requestIp and ''!= logVo.requestIp">
+			and request_ip = #{logVo.requestIp}
+			</if> 
+			<if test="null != logVo.requestMethod and ''!= logVo.requestMethod">
+			and request_method = #{logVo.requestMethod}
+			</if> 
+			<if test="null != logVo.requestParams and ''!= logVo.requestParams">
+			and request_params = #{logVo.requestParams}
+			</if> 
+			<if test="null != logVo.methodDescrible and ''!= logVo.methodDescrible">
+			and method_describle = #{logVo.methodDescrible}
+			</if> 
+			<if test="null != logVo.exceptionCode and ''!= logVo.exceptionCode">
+			and exception_code = #{logVo.exceptionCode}
+			</if> 
+			<if test="null != logVo.exceptionDetail and ''!= logVo.exceptionDetail">
+			and exception_detail = #{logVo.exceptionDetail}
+			</if> 
+			<if test="null != logVo.createDate and ''!= logVo.createDate">
+			and create_date = #{logVo.createDate}
+			</if> 
+			<if test="null != logVo.updateDate and ''!= logVo.updateDate">
+			and update_date = #{logVo.updateDate}
+			</if> 
+ 		</where>
+ 		order by create_date desc ;
+	</select>
+
+</mapper>

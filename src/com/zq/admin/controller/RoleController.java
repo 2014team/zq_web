@@ -21,7 +21,7 @@ import com.zq.admin.service.RoleService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.entity.JsonResult;
 import com.zq.common.util.GsonUtil;
-import com.zq.common.util.StringUtil;
+import com.zq.common.util.ToolsUtil;
 
 /**
  * @ClassName: RoleController
@@ -54,8 +54,8 @@ public class RoleController {
 
 		JsonResult result = new JsonResult();
 
-		roleVo.setCategoryId(StringUtil.trim(categoryIdArr));
-		roleVo.setRightId(StringUtil.trim(rightIdArr));
+		roleVo.setCategoryId(ToolsUtil.trim(categoryIdArr));
+		roleVo.setRightId(ToolsUtil.trim(rightIdArr));
 
 		// 参数验证
 		String errMsg = roleService.checkParam(roleVo);
@@ -159,8 +159,8 @@ public class RoleController {
 
 		JsonResult result = new JsonResult();
 
-		roleVo.setCategoryId(StringUtil.trim(categoryIdArr));
-		roleVo.setRightId(StringUtil.trim(rightIdArr));
+		roleVo.setCategoryId(ToolsUtil.trim(categoryIdArr));
+		roleVo.setRightId(ToolsUtil.trim(rightIdArr));
 
 		// 验证参数
 		Integer roleId = roleVo.getRoleId();

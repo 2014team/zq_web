@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zq.admin.annotation.AdminServiceLog;
 import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.dao.MenuDao;
 import com.zq.admin.dao.RoleDao;
@@ -19,7 +20,6 @@ import com.zq.admin.domain.dto.MenuTreeDto;
 import com.zq.admin.domain.entity.Menu;
 import com.zq.admin.domain.entity.Role;
 import com.zq.admin.domain.vo.MenuVo;
-import com.zq.admin.log.LogAnnotation;
 import com.zq.admin.service.MenuService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.service.impl.BaseServiceImpl;
@@ -139,7 +139,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param jsonResult
 	 * @return
 	 */
-	@LogAnnotation(operateType="qwwwwwwwwwwww")
+	@AdminServiceLog(description="分页查询查单")
 	@Override
 	public AdminResultByPage findByPage(MenuVo menuVo, AdminResultByPage jsonResult) {
 
