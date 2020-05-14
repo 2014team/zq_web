@@ -17,6 +17,7 @@ import com.zq.admin.constant.MenuTypeEnum;
 import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.domain.dto.MenuDto;
 import com.zq.admin.domain.vo.MenuVo;
+import com.zq.admin.log.LogAnnotation;
 import com.zq.admin.service.MenuService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.entity.JsonResult;
@@ -151,8 +152,9 @@ public class MenuController {
 	 * @return
 	 */
 	@ResponseBody
+	@LogAnnotation(operateType="888888")
 	@RequestMapping(value = "/admin/center/menu/list", method = { RequestMethod.POST,RequestMethod.GET })
-	public AdminResultByPage list(MenuVo menuVo, HttpServletRequest request) {
+	public AdminResultByPage getList(MenuVo menuVo, HttpServletRequest request) {
 
 		Integer page = Integer.valueOf(request.getParameter("page"));
 		Integer limit = Integer.valueOf(request.getParameter("limit"));

@@ -19,6 +19,7 @@ import com.zq.admin.domain.dto.MenuTreeDto;
 import com.zq.admin.domain.entity.Menu;
 import com.zq.admin.domain.entity.Role;
 import com.zq.admin.domain.vo.MenuVo;
+import com.zq.admin.log.LogAnnotation;
 import com.zq.admin.service.MenuService;
 import com.zq.common.entity.AdminResultByPage;
 import com.zq.common.service.impl.BaseServiceImpl;
@@ -138,6 +139,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param jsonResult
 	 * @return
 	 */
+	@LogAnnotation(operateType="qwwwwwwwwwwww")
 	@Override
 	public AdminResultByPage findByPage(MenuVo menuVo, AdminResultByPage jsonResult) {
 

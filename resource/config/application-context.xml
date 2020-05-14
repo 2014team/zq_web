@@ -22,6 +22,9 @@
 	<context:component-scan base-package="com.zq">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan> 
+	 
+    
+    
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -67,7 +70,7 @@
 	</tx:advice>
 
 	<aop:config>                                                  
-		<aop:pointcut id="servicePointcut" expression="execution(* com.zq.*.service.*.*(..))" />
+		<aop:pointcut id="servicePointcut" expression="execution(* com.zq.*.controller.*.*(..)) or execution(* com.zq.*.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut" />
 	</aop:config>
 
