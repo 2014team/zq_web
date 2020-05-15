@@ -160,7 +160,7 @@
  		</#list>
  		</where>
  		order by sort_id ,create_date desc   
- 		<if test="null != page and '' != page and null != page.begin and '' != page.begin and null !=page.limit  and '' != page.limit">
+ 		<if test="null != page and '' != page and null != page.begin and null !=page.limit ">
  		 limit ${"$"}{page.begin} , ${"$"}{page.limit};
  		 </if>
 	</select>

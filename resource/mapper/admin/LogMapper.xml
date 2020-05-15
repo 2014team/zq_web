@@ -236,15 +236,12 @@
 			<if test="null != logVo.exceptionDetail and ''!= logVo.exceptionDetail">
 			and exception_detail = #{logVo.exceptionDetail}
 			</if> 
-			<if test="null != logVo.createDate and ''!= logVo.createDate">
-			and create_date = #{logVo.createDate}
-			</if> 
-			<if test="null != logVo.updateDate and ''!= logVo.updateDate">
-			and update_date = #{logVo.updateDate}
-			</if> 
+			<if test="logVo.startDate != null and '' != logVo.startDate and logVo.endDate != null and '' != logVo.endDate">
+				<![CDATA[and create_date >= #{logVo.startDate} and create_date <= #{logVo.endDate}]]>
+			</if>
  		</where>
- 		order by sort_id ,create_date desc   
- 		<if test="null != page and '' != page and null != page.begin and '' != page.begin and null !=page.limit  and '' != page.limit">
+ 		order by create_date desc   
+ 		<if test="null != page and '' != page and null != page.begin and null !=page.limit ">
  		 limit ${page.begin} , ${page.limit};
  		 </if>
 	</select>
@@ -280,12 +277,9 @@
 			<if test="null != logVo.exceptionDetail and ''!= logVo.exceptionDetail">
 			and exception_detail = #{logVo.exceptionDetail}
 			</if> 
-			<if test="null != logVo.createDate and ''!= logVo.createDate">
-			and create_date = #{logVo.createDate}
-			</if> 
-			<if test="null != logVo.updateDate and ''!= logVo.updateDate">
-			and update_date = #{logVo.updateDate}
-			</if> 
+			<if test="logVo.startDate != null and '' != logVo.startDate and logVo.endDate != null and '' != logVo.endDate">
+				<![CDATA[and create_date >= #{logVo.startDate} and create_date <= #{logVo.endDate}]]>
+			</if>
  		</where>
  		order by create_date desc ;
 	</select>

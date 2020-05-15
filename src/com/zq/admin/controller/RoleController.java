@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zq.admin.annotation.AdminControllerLog;
 import com.zq.admin.domain.dto.MenuTreeDto;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.vo.RoleVo;
@@ -46,6 +47,7 @@ public class RoleController {
 	 * @param roleVo
 	 * @return
 	 */
+	@AdminControllerLog(description="角色保存")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/role/save", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult save(	RoleVo roleVo,
@@ -90,6 +92,7 @@ public class RoleController {
 	 * @param roleId
 	 * @return
 	 */
+	@AdminControllerLog(description="角色删除")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/role/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult delete(Integer roleId) {
@@ -121,6 +124,7 @@ public class RoleController {
 	 * @param roleIdArr
 	 * @return
 	 */
+	@AdminControllerLog(description="角色批量删除")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/role/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult deleteByIdArr(@RequestParam("roleIdArr[]") Integer[] roleIdArr) {
@@ -151,6 +155,7 @@ public class RoleController {
 	 * @param roleVo
 	 * @return
 	 */
+	@AdminControllerLog(description="角色修改")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/role/update", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult update(	RoleVo roleVo,
@@ -200,6 +205,7 @@ public class RoleController {
 	 * @param roleVo
 	 * @return
 	 */
+	@AdminControllerLog(description="角色更新状态")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/role/validFlag", method = { RequestMethod.POST, RequestMethod.GET })
 	public JsonResult validFlag(RoleVo roleVo) {
@@ -237,6 +243,7 @@ public class RoleController {
 	 * @param request
 	 * @return
 	 */
+	@AdminControllerLog(description="角色分页查找")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/role/list", method = { RequestMethod.POST })
 	public AdminResultByPage list(RoleVo roleVo, HttpServletRequest request) {
@@ -258,6 +265,7 @@ public class RoleController {
 	 * @date 2020年04月30日 14:04:25
 	 * @return
 	 */
+	@AdminControllerLog(description="角色列表")
 	@RequestMapping(value = "/admin/center/role/list/ui", method = { RequestMethod.GET })
 	public String toList() {
 
@@ -273,6 +281,7 @@ public class RoleController {
 	 * @param request
 	 * @return
 	 */
+	@AdminControllerLog(description="角色编辑")
 	@RequestMapping(value = "/admin/center/role/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer roleId, HttpServletRequest request) {
 
@@ -293,6 +302,7 @@ public class RoleController {
 	 * @param roleId
 	 * @return
 	 */
+	@AdminControllerLog(description="角色获取单个权限")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/role/get", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult get(Integer roleId) {
@@ -316,6 +326,7 @@ public class RoleController {
 	 * @param roleId
 	 * @return
 	 */
+	@AdminControllerLog(description="角色获取权限列表")
 	@RequestMapping(value = "/admin/center/role/right", method = { RequestMethod.GET, RequestMethod.POST })
 	public String right(Integer roleId, HttpServletRequest request) {
 
@@ -339,6 +350,7 @@ public class RoleController {
 	 * @param menuIdArr
 	 * @return
 	 */
+	@AdminControllerLog(description="角色权限设置保存")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/role/right/save", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult saveRight(RoleVo roleVo,

@@ -81,6 +81,30 @@
 	                </ul>
 	            </li>  
              </r:auth> 
+             
+             
+              <r:auth menuName="日志管理"> 
+	            <li>
+	                <a href="javascript:;">
+	                    <i class="iconfont" style="font-size: 20px;">&#xe60e;</i>
+	                    <cite>日志管理</cite>
+	                    <i class="iconfont nav_right">&#xe602;</i>
+	                </a>
+	                
+	                <ul class="sub-menu">
+	               
+	                <r:auth menuName="日志列表" menuUrl="/admin/center/log/list/ui"> 	
+	                    <li>
+	                        <a _href="/admin/center/log/list/ui">
+	                            <i class="iconfont">&#xe602;</i>
+	                            <cite>日志列表</cite>
+	                        </a>
+	                    </li >
+	                 </r:auth>
+	                 
+	                </ul>
+	            </li>  
+             </r:auth> 
                 
                 </ul>
             </li> 
@@ -97,7 +121,7 @@
           </ul>
           <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='/admin/center/menu/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='/admin/center/log/list/ui' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
           </div>
         </div>

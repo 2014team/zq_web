@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zq.admin.annotation.AdminServiceLog;
 import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.dao.RoleDao;
 import com.zq.admin.dao.UserDao;
@@ -45,6 +46,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userVo
 	 * @return
 	 */
+	@AdminServiceLog(description="用户保存")
 	@Override
 	public boolean saveUser(UserVo userVo) {
 		// UserVo转User
@@ -64,6 +66,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userId
 	 * @return
 	 */
+	@AdminServiceLog(description="用户删除")
 	@Override
 	public boolean deleteUser(Integer userId) {
 		Integer result = userDao.delete(userId);
@@ -81,6 +84,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userIdArr
 	 * @return
 	 */
+	@AdminServiceLog(description="用户批量删除")
 	@Override
 	public int deleteByBatch(Integer[] userIdArr) {
 		List<Integer> userIdList = Arrays.asList(userIdArr);
@@ -95,6 +99,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userVo
 	 * @return
 	 */
+	@AdminServiceLog(description="用户修改")
 	@Override
 	public boolean updateUser(UserVo userVo) {
 		// UserVo转User
@@ -114,6 +119,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userId
 	 * @return
 	 */
+	@AdminServiceLog(description="用户根据userId获取用户")
 	@Override
 	public UserDto getUser(Integer userId) {
 		UserDto dto = null;
@@ -133,6 +139,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param jsonResult
 	 * @return
 	 */
+	@AdminServiceLog(description="用户分页查找")
 	@Override
 	public AdminResultByPage findByPage(UserVo userVo, AdminResultByPage jsonResult) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -166,6 +173,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userVo
 	 * @return
 	 */
+	@AdminServiceLog(description="用户登录")
 	@Override
 	public UserDto login(UserVo userVo) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -188,6 +196,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userVo
 	 * @return
 	 */
+	@AdminServiceLog(description="用户参数验证")
 	@Override
 	public String checkParam(UserVo userVo) {
 		String userName = userVo.getUserName();
@@ -231,6 +240,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userVo
 	 * @return
 	 */
+	@AdminServiceLog(description="用户登录参数验证")
 	@Override
 	public String checkLoginParam(UserVo userVo) {
 		String userName = userVo.getUserName();
@@ -253,6 +263,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userVo
 	 * @return
 	 */
+	@AdminServiceLog(description="用户唯一性验证")
 	@Override
 	public String checkUnique(UserVo UserVo) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -284,6 +295,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Integer> implements U
 	 * @param userVo
 	 * @return
 	 */
+	@AdminServiceLog(description="用户更新状态")
 	@Override
 	public boolean updateValidFlag(UserVo userVo) {
 		Integer userId = userVo.getUserId();

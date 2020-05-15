@@ -103,7 +103,7 @@ public class ${table.className?cap_first}ServiceImpl extends BaseServiceImpl<${t
 
 	/**
 	 * @Title: get${table.className?cap_first}
-	 * @Description: 根据${table.className?uncap_first}Id获取用户
+	 * @Description: 根据${table.className?uncap_first}Id获取${description}
 	 * @author ${author}
 	 * @date ${dateTime}
 	 * @param ${table.className?uncap_first}Id

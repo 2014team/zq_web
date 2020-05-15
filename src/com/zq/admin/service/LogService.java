@@ -12,27 +12,7 @@ import com.zq.common.entity.AdminResultByPage;
  * @author zhuzq
  * @date 2020年05月14日 22:04:07
  */
-public interface LogService extends BaseService<Log,Integer>{
-
-	/**
-	 * @Title: saveLog
-	 * @Description: 保存
-	 * @author zhuzq
-	 * @date 2020年05月14日 22:04:07
-	 * @param logVo
-	 * @return
-	 */
-	public boolean saveLog(LogVo logVo);
-
-	/**
-	 * @Title: deleteLog
-	 * @Description: 删除
-	 * @author zhuzq
-	 * @date 2020年05月14日 22:04:07
-	 * @param logId
-	 * @return
-	 */
-	public boolean deleteLog(Integer logId);
+public interface LogService extends BaseService<Log, Integer> {
 
 	/**
 	 * @Title: deleteByBatch
@@ -43,16 +23,6 @@ public interface LogService extends BaseService<Log,Integer>{
 	 * @return
 	 */
 	public int deleteByBatch(Integer[] logIdArr);
-
-	/**
-	 * @Title: updateLog
-	 * @Description: 修改
-	 * @author zhuzq
-	 * @date 2020年05月14日 22:04:07
-	 * @param logVo
-	 * @return
-	 */
-	public boolean updateLog(LogVo logVo);
 
 	/**
 	 * @Title: getLog
@@ -74,25 +44,5 @@ public interface LogService extends BaseService<Log,Integer>{
 	 * @return
 	 */
 	public AdminResultByPage findByPage(LogVo logVo, AdminResultByPage jsonResult);
-
-	/**
-	 * @Title: checkParam
-	 * @Description: 参数验证
-	 * @author zhuzq
-	 * @date 2020年05月14日 22:04:07
-	 * @param logVo
-	 * @return
-	 */
-	public String checkParam(LogVo logVo);
-
-	/**
-	 * @Title: checkUnique
-	 * @Description: 唯一性验证
-	 * @author zhuzq
-	 * @date 2020年05月14日 22:04:07
-	 * @param logVo
-	 * @return
-	 */
-	public String checkUnique(LogVo logVo);
 
 }

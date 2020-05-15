@@ -33,7 +33,12 @@ var admin_url_map = {
 	'admin/CENTER/MENU/EDIT': {url: '/admin/center/menu/edit', isUsed: true, desc: '菜单编辑'},
 	'admin/CENTER/MENU/LIST': {url: '/admin/center/menu/list', isUsed: true, desc: '菜单列表'},
 	'admin/CENTER/MENU/BATCH/DELETE': {url: '/admin/center/menu/batch/delete', isUsed: true, desc: '菜单批量删除'},
-	'admin/CENTER/MENU/VALIDFLAG': {url: '/admin/center/menu/validFlag', isUsed: true, desc: '菜单状态修改'}
+	'admin/CENTER/MENU/VALIDFLAG': {url: '/admin/center/menu/validFlag', isUsed: true, desc: '菜单状态修改'},
+	
+	//日志
+	'admin/CENTER/LOG/DETAIL': {url: '/admin/center/log/detail', isUsed: true, desc: '日志详情'},
+	'admin/CENTER/LOG/LIST': {url: '/admin/center/log/list', isUsed: true, desc: '日志列表'},
+	'admin/CENTER/LOG/BATCH/DELETE': {url: '/admin/center/log/batch/delete', isUsed: true, desc: '日志批量删除'},
 
 }
 

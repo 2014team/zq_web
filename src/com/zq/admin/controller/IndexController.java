@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zq.admin.annotation.AdminControllerAfterLog;
 import com.zq.admin.domain.dto.UserDto;
 import com.zq.admin.domain.vo.UserVo;
 import com.zq.admin.service.RightService;
@@ -30,6 +31,7 @@ public class IndexController {
 	@Autowired
 	private RightService rightService;
 
+	
 	@RequestMapping(value = "/admin/index", method = { RequestMethod.GET, RequestMethod.POST })
 	public String index(HttpServletRequest request) {
 		UserDto userDto = SessionUtil.getSessionUser(request);
@@ -58,6 +60,7 @@ public class IndexController {
 	 * @param request
 	 * @return
 	 */
+	@AdminControllerAfterLog(description="登录")
 	@ResponseBody
 	@RequestMapping(value = "/admin/login/submit", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult loginSubmit(UserVo userVo, HttpServletRequest request) {

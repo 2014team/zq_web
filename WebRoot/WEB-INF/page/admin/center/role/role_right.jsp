@@ -19,7 +19,7 @@
   
 <script>   
 
-const RIGHT_SAVE = getAminUrl('admin/ROLE/RIGHT/SAVE');
+const RIGHT_SAVE = getAminUrl('admin/CENTER/ROLE/RIGHT/SAVE');
 layui.use(['tree', 'util', 'form'], function(){
   var tree = layui.tree
   ,layer = layui.layer
@@ -65,8 +65,8 @@ layui.use(['tree', 'util', 'form'], function(){
 			 if (result.code == 200) { //这个是从后台取回来的状态值
 				layer.msg(result.msg, {
 					icon : 1,
-					time : 1000
-				});
+					time : 2000
+				},function(){x_admin_close()});
 			}else{
 				layer.msg(result.msg, {
 					icon : 2,

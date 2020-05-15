@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zq.admin.annotation.AdminControllerLog;
 import com.zq.admin.constant.ValidFlagEnum;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.dto.UserDto;
@@ -45,6 +46,7 @@ public class UserController {
 	 * @param userVo
 	 * @return
 	 */
+	@AdminControllerLog(description="用户保存")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/user/save", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult save(UserVo userVo) {
@@ -82,6 +84,7 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
+	@AdminControllerLog(description="用户删除")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/user/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult delete(Integer userId) {
@@ -111,6 +114,7 @@ public class UserController {
 	 * @param userIdArr
 	 * @return
 	 */
+	@AdminControllerLog(description="用户批量删除")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/user/batch/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult deleteByIdArr(@RequestParam("userIdArr[]") Integer[] userIdArr) {
@@ -139,6 +143,7 @@ public class UserController {
 	 * @param userVo
 	 * @return
 	 */
+	@AdminControllerLog(description="用户修改")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/user/update", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult update(UserVo userVo) {
@@ -181,6 +186,7 @@ public class UserController {
 	 * @param userVo
 	 * @return
 	 */
+	@AdminControllerLog(description="用户更新状态")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/user/validFlag", method = { RequestMethod.POST })
 	public JsonResult validFlag(UserVo userVo) {
@@ -216,6 +222,7 @@ public class UserController {
 	 * @param request
 	 * @return
 	 */
+	@AdminControllerLog(description="用户分页查找")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/user/list", method = { RequestMethod.POST })
 	public AdminResultByPage list(UserVo userVo, HttpServletRequest request) {
@@ -237,6 +244,7 @@ public class UserController {
 	 * @date 2020年4月23日 下午1:41:16
 	 * @return
 	 */
+	@AdminControllerLog(description="用户列表")
 	@RequestMapping(value = "/admin/center/user/list/ui", method = { RequestMethod.GET })
 	public String toList(HttpServletRequest request) {
 		Map<String, Object> paramMap = null;
@@ -254,6 +262,7 @@ public class UserController {
 	 * @param request
 	 * @return
 	 */
+	@AdminControllerLog(description="用户编辑")
 	@RequestMapping(value = "/admin/center/user/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer userId, HttpServletRequest request) {
 		// 编辑,为空新增
@@ -278,6 +287,7 @@ public class UserController {
 	 * @param userId
 	 * @return
 	 */
+	@AdminControllerLog(description="用户查找")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/user/get", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult get(Integer userId) {

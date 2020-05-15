@@ -47,6 +47,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param menuVo
 	 * @return
 	 */
+	@AdminServiceLog(description="菜单保存")
 	@Override
 	public boolean saveMenu(MenuVo menuVo) {
 
@@ -67,6 +68,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param menuId
 	 * @return
 	 */
+	@AdminServiceLog(description="菜单删除")
 	@Override
 	public boolean deleteMenu(Integer menuId) {
 
@@ -85,6 +87,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param menuIdArr
 	 * @return
 	 */
+	@AdminServiceLog(description="菜单批量删除")
 	@Override
 	public int deleteByBatch(Integer[] menuIdArr) {
 
@@ -100,6 +103,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param menuVo
 	 * @return
 	 */
+	@AdminServiceLog(description="菜单修改")
 	@Override
 	public boolean updateMenu(MenuVo menuVo) {
 
@@ -114,12 +118,13 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 
 	/**
 	 * @Title: getMenu
-	 * @Description: 根据menuId获取用户
+	 * @Description: 根据menuId获取菜单
 	 * @author zhuzq
 	 * @date 2020年05月04日 13:39:51
 	 * @param menuId
 	 * @return
 	 */
+	@AdminServiceLog(description="根据menuId获取菜单")
 	@Override
 	public MenuDto getMenu(Integer menuId) {
 
@@ -139,7 +144,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param jsonResult
 	 * @return
 	 */
-	@AdminServiceLog(description="分页查询查单")
+	@AdminServiceLog(description="查单分页查询")
 	@Override
 	public AdminResultByPage findByPage(MenuVo menuVo, AdminResultByPage jsonResult) {
 
@@ -181,6 +186,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param menuVo
 	 * @return
 	 */
+	@AdminServiceLog(description="菜单参数验证")
 	@Override
 	public String checkParam(MenuVo menuVo) {
 
@@ -219,6 +225,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @param menuVo
 	 * @return
 	 */
+	@AdminServiceLog(description="菜单唯一性验证")
 	@Override
 	public String checkUnique(MenuVo MenuVo) {
 
@@ -352,6 +359,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 	 * @date 2020年5月6日 上午11:08:39
 	 * @return
 	 */
+	@AdminServiceLog(description="菜单查询列表")
 	@Override
 	public List<MenuDto> selectList(Map<String, Object> paramMap) {
 		List<MenuDto> menuDtoList = null;
@@ -366,6 +374,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 		return menuDtoList;
 	}
 
+	@AdminServiceLog(description="菜单获取树形列表")
 	@Override
 	public List<MenuTreeDto> getMenuTree() {
 
@@ -419,6 +428,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Integer> implements M
 		return result;
 	}
 
+	@AdminServiceLog(description="根据角色ID获取菜单")
 	@Override
 	public String getMenuIds(Integer roleId) {
 

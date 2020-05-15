@@ -42,6 +42,7 @@ public class MenuController {
 	 * @param menuVo
 	 * @return
 	 */
+	@AdminControllerLog(description="菜单保存")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/menu/save", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult save(MenuVo menuVo) {
@@ -79,6 +80,7 @@ public class MenuController {
 	 * @param menuId
 	 * @return
 	 */
+	@AdminControllerLog(description="菜单删除")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/menu/delete", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult delete(Integer menuId) {
@@ -108,6 +110,7 @@ public class MenuController {
 	 * @param menuVo
 	 * @return
 	 */
+	@AdminControllerLog(description="菜单修改")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/menu/update", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult update(MenuVo menuVo) {
@@ -152,7 +155,7 @@ public class MenuController {
 	 * @return
 	 */
 	//此处为记录AOP拦截Controller记录用户操作  
-	@AdminControllerLog(description="分页查询查单")
+	@AdminControllerLog(description="菜单分页查询")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/menu/list", method = { RequestMethod.POST,RequestMethod.GET })
 	public AdminResultByPage list(MenuVo menuVo, HttpServletRequest request) {
@@ -174,6 +177,7 @@ public class MenuController {
 	 * @date 2020年05月04日 13:39:50
 	 * @return
 	 */
+	@AdminControllerLog(description="菜单列表")
 	@RequestMapping(value = "/admin/center/menu/list/ui", method = { RequestMethod.GET })
 	public String toList() {
 		return "/admin/center/menu/menu_list";
@@ -188,6 +192,7 @@ public class MenuController {
 	 * @param request
 	 * @return
 	 */
+	@AdminControllerLog(description="菜单编辑")
 	@RequestMapping(value = "/admin/center/menu/edit", method = { RequestMethod.GET, RequestMethod.POST })
 	public String edit(Integer menuId, HttpServletRequest request) {
 		
@@ -226,6 +231,7 @@ public class MenuController {
 	* @param rightId
 	* @return
 	*/
+	@AdminControllerLog(description="菜单查找")
 	@ResponseBody
 	@RequestMapping(value = "/admin/center/menu/get", method = { RequestMethod.GET, RequestMethod.POST })
 	public JsonResult get(Integer menuId) {

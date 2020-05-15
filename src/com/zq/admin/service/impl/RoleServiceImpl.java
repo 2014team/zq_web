@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zq.admin.annotation.AdminServiceLog;
 import com.zq.admin.dao.RoleDao;
 import com.zq.admin.domain.dto.RoleDto;
 import com.zq.admin.domain.entity.Role;
@@ -40,6 +41,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param roleVo
 	 * @return
 	 */
+	@AdminServiceLog(description="角色保存")
 	@Override
 	public boolean saveRole(RoleVo roleVo) {
 		// RoleVo转Role
@@ -59,6 +61,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param roleId
 	 * @return
 	 */
+	@AdminServiceLog(description="角色删除")
 	@Override
 	public boolean deleteRole(Integer roleId) {
 		Integer result = roleDao.delete(roleId);
@@ -76,6 +79,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param roleIdArr
 	 * @return
 	 */
+	@AdminServiceLog(description="角色批量删除")
 	@Override
 	public int deleteByBatch(Integer[] roleIdArr) {
 		List<Integer> roleIdList = Arrays.asList(roleIdArr);
@@ -90,6 +94,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param roleVo
 	 * @return
 	 */
+	@AdminServiceLog(description="角色修改")
 	@Override
 	public boolean updateRole(RoleVo roleVo) {
 		// RoleVo转Role
@@ -109,6 +114,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param roleId
 	 * @return
 	 */
+	@AdminServiceLog(description="角色根据roleId获取用户")
 	@Override
 	public RoleDto getRole(Integer roleId) {
 		RoleDto roleDTO = null;
@@ -127,6 +133,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param jsonResult
 	 * @return
 	 */
+	@AdminServiceLog(description="角色分页查找")
 	@Override
 	public AdminResultByPage findByPage(RoleVo roleVo, AdminResultByPage jsonResult) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -160,6 +167,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param roleVo
 	 * @return
 	 */
+	@AdminServiceLog(description="角色参数验证")
 	@Override
 	public String checkParam(RoleVo roleVo) {
 		String roleName = roleVo.getRoleName();
@@ -195,6 +203,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param roleVo
 	 * @return
 	 */
+	@AdminServiceLog(description="角色唯一性验证")
 	@Override
 	public String checkUnique(RoleVo RoleVo) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -271,6 +280,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param roleVo
 	 * @return
 	 */
+	@AdminServiceLog(description="角色更新状态")
 	@Override
 	public boolean updateValidFlag(RoleVo roleVo) {
 		Integer roleId = roleVo.getRoleId();
@@ -295,6 +305,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @date 2020年5月3日 下午2:32:59
 	 * @return
 	 */
+	@AdminServiceLog(description="角色获取列表")
 	@Override
 	public List<RoleDto> selectList(Map<String, Object> paramMap) {
 		List<RoleDto> roleDtoList = null;
@@ -318,6 +329,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Integer> implements R
 	 * @param menuIdArr
 	 * @return
 	 */
+	@AdminServiceLog(description="角色保存权限")
 	@Override
 	public boolean saveRight(Integer roleId, Integer[] menuIdArr) {
 		Role role = roleDao.get(roleId);
