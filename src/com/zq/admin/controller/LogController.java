@@ -90,7 +90,6 @@ public class LogController {
 	 * @date 2020年05月14日 22:04:07
 	 * @return
 	 */
-	@AdminControllerLog(description="日志列表")
 	@RequestMapping(value = "/admin/center/log/list/ui", method = { RequestMethod.GET })
 	public String toList() {
 		return "/admin/center/log/log_list";

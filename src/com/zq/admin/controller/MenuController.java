@@ -177,7 +177,6 @@ public class MenuController {
 	 * @date 2020年05月04日 13:39:50
 	 * @return
 	 */
-	@AdminControllerLog(description="菜单列表")
 	@RequestMapping(value = "/admin/center/menu/list/ui", method = { RequestMethod.GET })
 	public String toList() {
 		return "/admin/center/menu/menu_list";

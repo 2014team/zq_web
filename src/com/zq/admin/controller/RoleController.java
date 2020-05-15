@@ -265,10 +265,8 @@ public class RoleController {
 	 * @date 2020年04月30日 14:04:25
 	 * @return
 	 */
-	@AdminControllerLog(description="角色列表")
 	@RequestMapping(value = "/admin/center/role/list/ui", method = { RequestMethod.GET })
 	public String toList() {
-
 		return "/admin/center/role/role_list";
 	}
 
