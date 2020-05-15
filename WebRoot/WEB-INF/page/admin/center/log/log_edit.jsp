@@ -38,6 +38,16 @@
                     </div>
                 </div>
                 
+                <div class="layui-form-item">
+                    <label for="name" class="layui-form-label">
+              请求方法名
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" readonly="readonly"
+                        autocomplete="off" class="layui-input" maxlength="10" value="${logDto.requestMethod}">
+                    </div>
+                </div>
+                
                  <div class="layui-form-item layui-form-text">
                     <label for="desc" class="layui-form-label">
                        异常详情
