@@ -14,7 +14,7 @@ public class ConfigListener implements ApplicationListener<ContextRefreshedEvent
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		if (null == event.getApplicationContext().getParent()) {
 			LogUtil.logInfo("系统开始初始化配置文件");
-			PropertiesUtil.init("/config/shebaotong.properties");
+			//PropertiesUtil.init("");
 		}
 	}
 

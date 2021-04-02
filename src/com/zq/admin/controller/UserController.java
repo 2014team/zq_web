@@ -1,5 +1,6 @@
 package com.zq.admin.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,6 +126,7 @@ public class UserController {
 			return result;
 		}
 		// 删除
+		List<Integer> userIdList = Arrays.asList(userIdArr);
 		Integer delete = userService.deleteByBatch(userIdArr);
 		if (null != delete && delete > 0) {
 			result.success();
